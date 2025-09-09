@@ -230,6 +230,8 @@ class TableEditor {
             <td class="editable-cell" data-field="timestamp" data-id="${newSequence}">0.0-3.0</td>
             <td class="editable-cell" data-field="original_text" data-id="${newSequence}"></td>
             <td class="editable-cell" data-field="translated_text" data-id="${newSequence}"></td>
+            <td class="audio-cell"><span class="text-muted">-</span></td>
+            <td class="audio-cell"><span class="text-muted">-</span></td>
             <td class="editable-cell" data-field="speed" data-id="${newSequence}">1.0</td>
             <td class="editable-cell" data-field="voice_id" data-id="${newSequence}"></td>
             <td class="action-buttons">

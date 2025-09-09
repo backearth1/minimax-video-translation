@@ -28,10 +28,14 @@ class ASRProcessor:
             
             self.logger.log("INFO", f"开始ASR语音识别: {audio_path}")
             
+            # 将配置的原语言转换为Whisper语言代码
+            language_code = self._get_whisper_language_code(self.config.source_language)
+            self.logger.log("INFO", f"使用语言代码进行ASR识别: {self.config.source_language} -> {language_code}")
+            
             # 使用Whisper进行识别
             result = self.model.transcribe(
                 audio_path,
-                language='zh',  # 中文识别
+                language=language_code,
                 word_timestamps=True,  # 启用词级时间戳
                 verbose=False
             )
@@ -244,3 +248,50 @@ class ASRProcessor:
         except Exception as e:
             self.logger.log("ERROR", f"音频处理失败: {str(e)}")
             return []
+    
+    def _get_whisper_language_code(self, language_name: str) -> str:
+        """将配置的语言名称转换为Whisper语言代码"""
+        language_mapping = {
+            "中文": "zh",
+            "粤语": "yue", 
+            "英语": "en",
+            "西班牙语": "es",
+            "法语": "fr",
+            "俄语": "ru",
+            "德语": "de",
+            "葡萄牙语": "pt",
+            "阿拉伯语": "ar",
+            "意大利语": "it",
+            "日语": "ja",
+            "韩语": "ko",
+            "印尼语": "id",
+            "越南语": "vi",
+            "土耳其语": "tr",
+            "荷兰语": "nl",
+            "乌克兰语": "uk",
+            "泰语": "th",
+            "波兰语": "pl",
+            "罗马尼亚语": "ro",
+            "希腊语": "el",
+            "捷克语": "cs",
+            "芬兰语": "fi",
+            "印地语": "hi",
+            "保加利亚语": "bg",
+            "丹麦语": "da",
+            "希伯来语": "he",
+            "马来语": "ms",
+            "波斯语": "fa",
+            "斯洛伐克语": "sk",
+            "瑞典语": "sv",
+            "克罗地亚语": "hr",
+            "菲律宾语": "tl",
+            "匈牙利语": "hu",
+            "挪威语": "no",
+            "斯洛文尼亚语": "sl",
+            "加泰罗尼亚语": "ca",
+            "尼诺斯克语": "nn",
+            "泰米尔语": "ta",
+            "阿非利卡语": "af"
+        }
+        
+        return language_mapping.get(language_name, "zh")  # 默认返回中文

@@ -1,0 +1,6 @@
+temp/*.mp4
+temp/*.wav
+temp/*.mp3
+__pycache__/
+*/__pycache__/
+*.log

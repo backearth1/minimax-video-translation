@@ -20,6 +20,7 @@ from modules.voice_clone_service import VoiceCloneService
 from modules.tts_service import TTSService
 from modules.alignment_optimizer import AlignmentOptimizer
 from modules.audio_mixer import AudioMixer
+from modules.audio_preprocessor import AudioPreprocessor
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'video-translator-secret-key-2024'
@@ -35,6 +36,7 @@ logger_service = LoggerService()
 
 # 初始化处理模块
 video_processor = VideoProcessor(logger_service)
+audio_preprocessor = AudioPreprocessor(logger_service)
 asr_processor = ASRProcessor(config, logger_service)
 translation_service = TranslationService(config, rate_limiter, logger_service)
 voice_clone_service = VoiceCloneService(config, rate_limiter, logger_service)
@@ -121,22 +123,57 @@ def start_processing():
                     project_data.set_processing_status("error", "音频提取失败", 5)
                     return
                 
-                audio_path = audio_result["audio_path"]
-                project_data.set_processing_status("processing", "ASR语音识别中...", 15)
+                original_audio_path = audio_result["audio_path"]
                 
-                # 步骤2: ASR识别和切分 (15% → 35%)
+                # 步骤1.5: 人声分离 (15% → 25%)
+                logger_service.log("INFO", "正在进行人声背景音分离...")
+                project_data.set_processing_status("processing", "人声背景音分离中...", 15)
+                
+                # 检查是否启用人声分离功能
+                if config.enable_voice_extraction:
+                    # 分析音频内容，判断是否需要人声分离
+                    analysis_result = audio_preprocessor.analyze_audio_content(original_audio_path)
+                    
+                    if analysis_result["success"] and analysis_result.get("needs_voice_extraction", False):
+                        logger_service.log("INFO", f"检测到需要人声分离: {', '.join(analysis_result['reasons'])}")
+                        
+                        # 执行人声背景音分离
+                        separation_result = audio_preprocessor.extract_voice(original_audio_path)
+                        
+                        if separation_result["success"]:
+                            # 使用分离出的人声进行后续处理
+                            audio_path = separation_result["voice_path"]
+                            project_data.background_audio_path = separation_result["background_path"]  # 保存背景音路径
+                            logger_service.log("INFO", f"人声分离成功，人声文件: {audio_path}")
+                            logger_service.log("INFO", f"背景音文件: {separation_result['background_path']}")
+                        else:
+                            logger_service.log("WARNING", f"人声分离失败: {separation_result['error']}，使用原始音频")
+                            audio_path = original_audio_path
+                            project_data.background_audio_path = None
+                    else:
+                        logger_service.log("INFO", "音频无需人声分离，直接使用原始音频")
+                        audio_path = original_audio_path
+                        project_data.background_audio_path = None
+                else:
+                    logger_service.log("INFO", "人声分离功能已禁用，直接使用原始音频")
+                    audio_path = original_audio_path
+                    project_data.background_audio_path = None
+                
+                project_data.set_processing_status("processing", "ASR语音识别中...", 25)
+                
+                # 步骤2: ASR识别和切分 (25% → 40%)
                 logger_service.log("INFO", "正在进行ASR语音识别和智能切分...")
                 segments = asr_processor.process_audio(audio_path)
                 
                 if not segments:
                     logger_service.log("ERROR", "ASR处理失败，未检测到语音片段")
-                    project_data.set_processing_status("error", "ASR处理失败", 15)
+                    project_data.set_processing_status("error", "ASR处理失败", 25)
                     return
                 
                 project_data.update_segments(segments)
-                project_data.set_processing_status("processing", "开始逐句翻译...", 35)
+                project_data.set_processing_status("processing", "开始逐句翻译...", 40)
                 
-                # 步骤3: 逐句处理 (35% → 95%)
+                # 步骤3: 逐句处理 (40% → 95%)
                 total_segments = len(segments)
                 for i, segment in enumerate(segments):
                     try:
@@ -145,7 +182,7 @@ def start_processing():
                         original_audio_path = segment["original_audio_path"]
                         
                         # 更新进度
-                        progress = 35 + int((i / total_segments) * 60)
+                        progress = 40 + int((i / total_segments) * 55)
                         project_data.set_processing_status("processing", f"处理第{sequence}句...", progress)
                         
                         # 3.1 翻译
@@ -397,6 +434,39 @@ def regenerate_segment(segment_id):
         logger_service.log("INFO", f"重新生成第{segment_id}句...")
         return jsonify({"status": "success", "message": f"第{segment_id}句重新生成完成"})
     except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+@app.route('/api/audio/<path:audio_path>')
+def serve_audio(audio_path):
+    try:
+        # 解码URL编码的路径
+        import urllib.parse
+        decoded_path = urllib.parse.unquote(audio_path)
+        
+        # 确保路径是相对于工作目录的
+        if not decoded_path.startswith('./'):
+            decoded_path = './' + decoded_path
+        
+        # 检查文件是否存在
+        if not os.path.exists(decoded_path):
+            logger_service.log("WARNING", f"音频文件不存在: {decoded_path}")
+            return jsonify({"status": "error", "message": "音频文件不存在"}), 404
+        
+        # 根据文件扩展名确定MIME类型
+        file_ext = os.path.splitext(decoded_path)[1].lower()
+        if file_ext == '.wav':
+            mimetype = 'audio/wav'
+        elif file_ext == '.mp3':
+            mimetype = 'audio/mpeg'
+        elif file_ext == '.m4a':
+            mimetype = 'audio/mp4'
+        else:
+            mimetype = 'audio/mpeg'  # 默认类型
+        
+        return send_file(decoded_path, mimetype=mimetype)
+        
+    except Exception as e:
+        logger_service.log("ERROR", f"音频文件服务失败: {str(e)}")
         return jsonify({"status": "error", "message": str(e)}), 500
 
 @app.errorhandler(404)

@@ -13,6 +13,9 @@ class ConfigModel:
         self.max_segment_duration = 8.0
         self.silence_threshold = 0.3
         
+        # 音频预处理配置
+        self.enable_voice_extraction = True  # 是否启用人声背景音分离
+        
         # 支持的语言列表
         self.supported_languages = [
             "中文", "粤语", "英语", "西班牙语", "法语", "俄语", "德语", "葡萄牙语",
@@ -56,6 +59,7 @@ class ConfigModel:
             "min_segment_duration": self.min_segment_duration,
             "max_segment_duration": self.max_segment_duration,
             "silence_threshold": self.silence_threshold,
+            "enable_voice_extraction": self.enable_voice_extraction,
             "supported_languages": self.supported_languages,
             "tts_models": self.tts_models,
             "asr_split_modes": self.asr_split_modes

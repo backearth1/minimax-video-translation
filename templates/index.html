@@ -52,6 +52,7 @@
                                     <button type="button" class="btn btn-primary btn-sm d-block" id="saveConfig">
                                         <i class="fas fa-save"></i> 保存配置
                                     </button>
+                                    <small class="text-muted d-block mt-1" id="configStatus">配置会自动保存</small>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -249,18 +250,20 @@
                             <table class="table table-bordered table-hover" id="segmentTable">
                                 <thead class="table-dark sticky-top">
                                     <tr>
-                                        <th style="width: 5%">#</th>
-                                        <th style="width: 12%">时间戳</th>
-                                        <th style="width: 25%">原文本</th>
-                                        <th style="width: 25%">翻译文本</th>
-                                        <th style="width: 8%">速度</th>
-                                        <th style="width: 10%">Voice_ID</th>
-                                        <th style="width: 15%">操作</th>
+                                        <th style="width: 4%">#</th>
+                                        <th style="width: 10%">时间戳</th>
+                                        <th style="width: 20%">原文本</th>
+                                        <th style="width: 20%">翻译文本</th>
+                                        <th style="width: 10%">原始音频</th>
+                                        <th style="width: 10%">合成音频</th>
+                                        <th style="width: 6%">速度</th>
+                                        <th style="width: 8%">Voice_ID</th>
+                                        <th style="width: 12%">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody id="segmentTableBody">
                                     <tr>
-                                        <td colspan="7" class="text-center text-muted">暂无数据，请上传视频开始处理</td>
+                                        <td colspan="9" class="text-center text-muted">暂无数据，请上传视频开始处理</td>
                                     </tr>
                                 </tbody>
                             </table>

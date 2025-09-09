@@ -63,6 +63,9 @@ class VideoTranslatorApp {
             this.saveConfig();
         });
         
+        // 自动保存配置 - 监听配置项变化
+        this.bindAutoSaveEvents();
+        
         // 视频上传
         document.getElementById('uploadBtn').addEventListener('click', () => {
             this.uploadVideo();
@@ -112,8 +115,43 @@ class VideoTranslatorApp {
         });
     }
     
+    // 绑定自动保存事件
+    bindAutoSaveEvents() {
+        const configFields = [
+            'apiEndpoint', 'groupId', 'apiKey', 'sourceLanguage', 'targetLanguage',
+            'asrModel', 'ttsModel', 'asrSplitMode', 'minDuration', 'maxDuration', 'silenceThreshold'
+        ];
+        
+        configFields.forEach(fieldId => {
+            const element = document.getElementById(fieldId);
+            if (element) {
+                // 对于下拉框使用change事件，对于输入框使用blur事件
+                const eventType = element.tagName === 'SELECT' ? 'change' : 'blur';
+                element.addEventListener(eventType, () => {
+                    this.autoSaveConfig();
+                });
+            }
+        });
+    }
+    
+    // 自动保存配置（延迟保存，避免频繁调用）
+    autoSaveConfig() {
+        // 清除之前的定时器
+        if (this.autoSaveTimer) {
+            clearTimeout(this.autoSaveTimer);
+        }
+        
+        // 显示保存中状态
+        this.updateConfigStatus('保存中...', 'text-warning');
+        
+        // 延迟500ms保存，避免用户快速切换时频繁保存
+        this.autoSaveTimer = setTimeout(() => {
+            this.saveConfig(true); // 传入true表示自动保存，不显示成功提示
+        }, 500);
+    }
+    
     // 保存配置
-    async saveConfig() {
+    async saveConfig(isAutoSave = false) {
         const configData = {
             api_endpoint: document.getElementById('apiEndpoint').value,
             group_id: document.getElementById('groupId').value,
@@ -140,15 +178,43 @@ class VideoTranslatorApp {
             const result = await response.json();
             if (result.status === 'success') {
                 this.config = configData;
-                this.addLog('INFO', '配置保存成功');
-                this.showNotification('配置保存成功', 'success');
+                if (!isAutoSave) {
+                    this.addLog('INFO', '配置保存成功');
+                    this.showNotification('配置保存成功', 'success');
+                } else {
+                    this.addLog('DEBUG', '配置已自动保存');
+                }
+                this.updateConfigStatus('已保存', 'text-success');
             } else {
                 this.addLog('ERROR', '配置保存失败: ' + result.message);
-                this.showNotification('配置保存失败: ' + result.message, 'error');
+                if (!isAutoSave) {
+                    this.showNotification('配置保存失败: ' + result.message, 'error');
+                }
+                this.updateConfigStatus('保存失败', 'text-danger');
             }
         } catch (error) {
             this.addLog('ERROR', '配置保存异常: ' + error.message);
-            this.showNotification('配置保存异常', 'error');
+            if (!isAutoSave) {
+                this.showNotification('配置保存异常', 'error');
+            }
+            this.updateConfigStatus('保存异常', 'text-danger');
+        }
+    }
+    
+    // 更新配置状态指示器
+    updateConfigStatus(text, className = '') {
+        const statusElement = document.getElementById('configStatus');
+        if (statusElement) {
+            statusElement.textContent = text;
+            statusElement.className = `text-muted d-block mt-1 ${className}`;
+            
+            // 3秒后恢复为默认状态
+            if (className !== '') {
+                setTimeout(() => {
+                    statusElement.textContent = '配置会自动保存';
+                    statusElement.className = 'text-muted d-block mt-1';
+                }, 3000);
+            }
         }
     }
     
@@ -320,7 +386,7 @@ class VideoTranslatorApp {
         const tbody = document.getElementById('segmentTableBody');
         
         if (segments.length === 0) {
-            tbody.innerHTML = '<tr><td colspan=\"7\" class=\"text-center text-muted\">暂无数据</td></tr>';
+            tbody.innerHTML = '<tr><td colspan=\"9\" class=\"text-center text-muted\">暂无数据</td></tr>';
             return;
         }
         
@@ -333,6 +399,12 @@ class VideoTranslatorApp {
                 <td class=\"editable-cell\" data-field=\"timestamp\" data-id=\"${segment.sequence}\">${segment.timestamp}</td>
                 <td class=\"editable-cell\" data-field=\"original_text\" data-id=\"${segment.sequence}\">${segment.original_text}</td>
                 <td class=\"editable-cell\" data-field=\"translated_text\" data-id=\"${segment.sequence}\">${segment.translated_text}</td>
+                <td class=\"audio-cell\">
+                    ${segment.original_audio_path ? `<audio controls style="width: 100%;"><source src="/api/audio/${encodeURIComponent(segment.original_audio_path)}" type="audio/wav">不支持音频播放</audio>` : '<span class="text-muted">-</span>'}
+                </td>
+                <td class=\"audio-cell\">
+                    ${segment.translated_audio_path ? `<audio controls style="width: 100%;"><source src="/api/audio/${encodeURIComponent(segment.translated_audio_path)}" type="audio/mpeg">不支持音频播放</audio>` : '<span class="text-muted">-</span>'}
+                </td>
                 <td class=\"editable-cell\" data-field=\"speed\" data-id=\"${segment.sequence}\">${segment.speed}</td>
                 <td class=\"editable-cell\" data-field=\"voice_id\" data-id=\"${segment.sequence}\">${segment.voice_id}</td>
                 <td class=\"action-buttons\">
@@ -426,7 +498,7 @@ class VideoTranslatorApp {
     // 重置数据
     resetData() {
         if (confirm('确定要重置所有数据吗？此操作不可撤销。')) {
-            document.getElementById('segmentTableBody').innerHTML = '<tr><td colspan=\"7\" class=\"text-center text-muted\">暂无数据</td></tr>';
+            document.getElementById('segmentTableBody').innerHTML = '<tr><td colspan=\"9\" class=\"text-center text-muted\">暂无数据</td></tr>';
             document.getElementById('segmentCount').textContent = '0';
             document.getElementById('progressBar').style.width = '0%';
             document.getElementById('progressBar').textContent = '0%';
