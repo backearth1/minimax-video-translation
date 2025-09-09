@@ -76,6 +76,11 @@ class VideoTranslatorApp {
             this.startProcessing();
         });
         
+        // 开始专业AI处理
+        document.getElementById('startProfessionalProcessing').addEventListener('click', () => {
+            this.startProfessionalProcessing();
+        });
+        
         // 导入SRT
         document.getElementById('importSrt').addEventListener('click', () => {
             document.getElementById('srtFileInput').click();
@@ -100,6 +105,11 @@ class VideoTranslatorApp {
         // 清空日志
         document.getElementById('clearLogs').addEventListener('click', () => {
             this.clearLogs();
+        });
+        
+        // 检查AI模型状态
+        document.getElementById('checkModels').addEventListener('click', () => {
+            this.checkModelsStatus();
         });
         
         // 人工合成
@@ -267,6 +277,7 @@ class VideoTranslatorApp {
                 
                 // 启用开始处理按钮
                 document.getElementById('startProcessing').disabled = false;
+                document.getElementById('startProfessionalProcessing').disabled = false;
             } else {
                 this.addLog('ERROR', '视频上传失败: ' + result.message);
                 this.showNotification('视频上传失败: ' + result.message, 'error');
@@ -321,8 +332,60 @@ class VideoTranslatorApp {
             this.isProcessing = false;
         } finally {
             if (!this.isProcessing) {
-                startBtn.innerHTML = '<i class=\"fas fa-rocket\"></i> 开始自动翻译';
+                startBtn.innerHTML = '<i class=\"fas fa-rocket\"></i> 标准翻译';
                 startBtn.disabled = false;
+            }
+        }
+    }
+    
+    // 开始专业AI处理
+    async startProfessionalProcessing() {
+        if (this.isProcessing) {
+            this.showNotification('正在处理中，请稍候...', 'info');
+            return;
+        }
+        
+        // 验证配置
+        if (!this.config.group_id || !this.config.api_key) {
+            this.showNotification('请先配置Group ID和API Key', 'warning');
+            return;
+        }
+        
+        this.isProcessing = true;
+        const startBtn = document.getElementById('startProfessionalProcessing');
+        startBtn.innerHTML = '<span class=\"loading\"></span>专业AI处理中...';
+        startBtn.disabled = true;
+        
+        // 禁用标准处理按钮
+        document.getElementById('startProcessing').disabled = true;
+        
+        try {
+            const response = await fetch('/api/process/professional', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            const result = await response.json();
+            if (result.status === 'success') {
+                this.addLog('INFO', '🚀 专业AI翻译处理已开始');
+                this.showNotification('专业AI处理已开始，使用Demucs+Whisper+pyannote', 'info');
+                this.startProgressMonitoring();
+            } else {
+                this.addLog('ERROR', '专业处理启动失败: ' + result.message);
+                this.showNotification('专业处理启动失败: ' + result.message, 'error');
+                this.isProcessing = false;
+            }
+        } catch (error) {
+            this.addLog('ERROR', '专业处理启动异常: ' + error.message);
+            this.showNotification('专业处理启动异常', 'error');
+            this.isProcessing = false;
+        } finally {
+            if (!this.isProcessing) {
+                startBtn.innerHTML = '<i class=\"fas fa-star\"></i> 专业AI翻译';
+                startBtn.disabled = false;
+                document.getElementById('startProcessing').disabled = false;
             }
         }
     }
@@ -341,8 +404,11 @@ class VideoTranslatorApp {
                         this.isProcessing = false;
                         
                         const startBtn = document.getElementById('startProcessing');
-                        startBtn.innerHTML = '<i class=\"fas fa-rocket\"></i> 开始自动翻译';
+                        const professionalBtn = document.getElementById('startProfessionalProcessing');
+                        startBtn.innerHTML = '<i class=\"fas fa-rocket\"></i> 标准翻译';
                         startBtn.disabled = false;
+                        professionalBtn.innerHTML = '<i class=\"fas fa-star\"></i> 专业AI翻译';
+                        professionalBtn.disabled = false;
                         
                         if (data.processing_status === 'completed') {
                             this.addLog('INFO', '自动翻译处理完成');
@@ -377,8 +443,40 @@ class VideoTranslatorApp {
             this.updateSegmentTable(data.segments);
         }
         
+        // 更新背景音频预览
+        this.updateBackgroundAudio(data);
+        
         // 更新统计信息
         document.getElementById('segmentCount').textContent = data.segment_count || 0;
+    }
+    
+    // 更新背景音频预览
+    updateBackgroundAudio(data) {
+        const backgroundSection = document.getElementById('backgroundAudioSection');
+        const backgroundPlayer = document.getElementById('backgroundAudioPlayer');
+        const backgroundStatus = document.getElementById('backgroundAudioStatus');
+        
+        if (data.background_audio_available && data.background_audio_path) {
+            // 显示背景音频区域
+            backgroundSection.style.display = 'block';
+            
+            // 设置音频源
+            const audioSrc = `/api/audio/${encodeURIComponent(data.background_audio_path)}`;
+            backgroundPlayer.src = audioSrc;
+            
+            // 更新状态
+            backgroundStatus.innerHTML = '<span class="text-success"><i class="fas fa-check-circle"></i> 已提取</span>';
+            
+            this.addLog('DEBUG', `背景音频已加载: ${data.background_audio_path}`);
+        } else if (data.background_audio_path) {
+            // 背景音频路径存在但文件不存在
+            backgroundSection.style.display = 'block';
+            backgroundStatus.innerHTML = '<span class="text-warning"><i class="fas fa-exclamation-triangle"></i> 提取中...</span>';
+        } else {
+            // 没有背景音频
+            backgroundSection.style.display = 'none';
+            backgroundStatus.innerHTML = '<span class="text-muted"><i class="fas fa-minus-circle"></i> 未提取</span>';
+        }
     }
     
     // 更新片段表格
@@ -512,6 +610,46 @@ class VideoTranslatorApp {
         }
     }
     
+    // 检查AI模型状态
+    async checkModelsStatus() {
+        try {
+            this.addLog('INFO', '正在检查AI模型状态...');
+            const checkBtn = document.getElementById('checkModels');
+            checkBtn.innerHTML = '<span class="loading"></span>检查中...';
+            checkBtn.disabled = true;
+            
+            const response = await fetch('/api/models/status');
+            const result = await response.json();
+            
+            if (result.status === 'success') {
+                this.addLog('INFO', 'AI模型状态检查完成，详细信息请查看上方日志');
+                this.showNotification('模型状态检查完成', 'success');
+                
+                // 显示简要状态
+                const models = result.models;
+                let statusSummary = '';
+                for (const [modelType, info] of Object.entries(models)) {
+                    const status = info.available ? '✅ 已就绪' : '❌ 需下载';
+                    statusSummary += `${info.description}: ${status}\\n`;
+                }
+                
+                if (statusSummary) {
+                    this.addLog('INFO', `📋 模型状态概览:\\n${statusSummary}`);
+                }
+            } else {
+                this.addLog('ERROR', '模型状态检查失败: ' + result.message);
+                this.showNotification('模型状态检查失败', 'error');
+            }
+        } catch (error) {
+            this.addLog('ERROR', 'AI模型状态检查异常: ' + error.message);
+            this.showNotification('模型状态检查异常', 'error');
+        } finally {
+            const checkBtn = document.getElementById('checkModels');
+            checkBtn.innerHTML = '<i class="fas fa-search"></i> 检查AI模型';
+            checkBtn.disabled = false;
+        }
+    }
+    
     // 人工合成
     manualSynthesize() {
         this.addLog('INFO', '开始人工音频合成...');
@@ -521,8 +659,8 @@ class VideoTranslatorApp {
     // 显示翻译后的视频预览
     async showTranslatedVideoPreview() {
         try {
-            // 创建一个临时URL来预览翻译后的视频
-            const response = await fetch('/api/download/video');
+            // 使用专用的预览接口
+            const response = await fetch('/api/video/preview');
             if (response.ok) {
                 const blob = await response.blob();
                 const videoUrl = URL.createObjectURL(blob);
@@ -544,10 +682,13 @@ class VideoTranslatorApp {
                     translatedVideo.previousSrc = videoUrl;
                 });
             } else {
-                this.addLog('WARNING', '无法加载翻译后视频预览');
+                const errorText = await response.text();
+                this.addLog('WARNING', `无法加载翻译后视频预览: ${response.status}`);
+                console.error('Preview error:', errorText);
             }
         } catch (error) {
             this.addLog('ERROR', '加载视频预览失败: ' + error.message);
+            console.error('Preview exception:', error);
         }
     }
     

@@ -196,9 +196,20 @@
                         <h5 class="mb-0"><i class="fas fa-play"></i> 自动翻译控制</h5>
                     </div>
                     <div class="card-body">
-                        <button type="button" class="btn btn-success btn-lg mb-3" id="startProcessing">
-                            <i class="fas fa-rocket"></i> 开始自动翻译
-                        </button>
+                        <div class="btn-group mb-3" role="group">
+                            <button type="button" class="btn btn-success btn-lg" id="startProcessing">
+                                <i class="fas fa-rocket"></i> 标准翻译
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg" id="startProfessionalProcessing">
+                                <i class="fas fa-star"></i> 专业AI翻译
+                            </button>
+                        </div>
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <strong>标准翻译:</strong> 快速处理，适合简单场景<br>
+                                <strong>专业AI翻译:</strong> Demucs+Whisper+pyannote，质量更高
+                            </small>
+                        </div>
                         <div class="mb-2">
                             <label class="form-label">进度:</label>
                             <div class="progress mb-1">
@@ -222,6 +233,9 @@
                             <button type="button" class="btn btn-outline-primary" id="exportSrt">
                                 <i class="fas fa-save"></i> 保存SRT
                             </button>
+                            <button type="button" class="btn btn-outline-info" id="checkModels">
+                                <i class="fas fa-search"></i> 检查AI模型
+                            </button>
                         </div>
                         <div class="btn-group">
                             <button type="button" class="btn btn-outline-warning" id="manualSynth">
@@ -232,6 +246,31 @@
                             </button>
                         </div>
                         <input type="file" id="srtFileInput" accept=".srt" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 背景音频预览区 -->
+        <div class="row mb-3" id="backgroundAudioSection" style="display: none;">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0"><i class="fas fa-music"></i> 背景音频预览</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">提取的背景音:</label>
+                                <audio id="backgroundAudioPlayer" controls style="width: 100%;">
+                                    您的浏览器不支持音频播放
+                                </audio>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">背景音状态:</label>
+                                <div id="backgroundAudioStatus" class="text-muted">未提取</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

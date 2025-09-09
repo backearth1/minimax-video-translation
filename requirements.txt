@@ -21,6 +21,11 @@ ffmpeg-python==0.2.0
 demucs==4.0.1
 openai-whisper==20231117
 
+# 声纹识别和说话人分离
+pyannote.audio==3.4.0
+torch>=1.9.0
+sklearn
+
 # SSL支持
 pyOpenSSL==23.3.0
 cryptography==41.0.7
@@ -31,3 +36,9 @@ pandas==2.0.3
 # 日志和配置
 python-dotenv==1.0.0
 PyYAML==6.0.1
+
+# 系统监控
+psutil==5.9.8
+
+# 专业音频处理增强模型
+whisper-timestamped==1.14.2

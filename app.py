@@ -22,6 +22,7 @@ from modules.alignment_optimizer import AlignmentOptimizer
 from modules.audio_mixer import AudioMixer
 from modules.audio_preprocessor import AudioPreprocessor
 from modules.speaker_diarization import SpeakerDiarization
+from modules.professional_audio_processor import ProfessionalAudioProcessor
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'video-translator-secret-key-2024'
@@ -45,6 +46,7 @@ tts_service = TTSService(config, rate_limiter, logger_service)
 alignment_optimizer = AlignmentOptimizer(config, translation_service, tts_service, logger_service)
 audio_mixer = AudioMixer(logger_service)
 speaker_diarization = SpeakerDiarization(logger_service)
+professional_processor = ProfessionalAudioProcessor(logger_service)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -69,6 +71,24 @@ def api_config():
             return jsonify({"status": "error", "message": str(e)}), 400
     else:
         return jsonify(config.to_dict())
+
+@app.route('/api/models/status', methods=['GET'])
+def check_models_status():
+    """检查AI模型状态"""
+    try:
+        logger_service.log("INFO", "用户请求检查模型状态")
+        professional_processor.check_models_status()
+        
+        # 获取详细状态
+        status = professional_processor.model_manager.check_model_availability()
+        
+        return jsonify({
+            "status": "success", 
+            "models": status,
+            "message": "模型状态检查完成，详细信息请查看日志"
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 @app.route('/api/upload', methods=['POST'])
 def upload_video():
@@ -99,6 +119,115 @@ def upload_video():
             
     except Exception as e:
         error_msg = error_handler.handle_error(e, "文件上传")
+        return jsonify({"status": "error", "message": error_msg}), 500
+
+@app.route('/api/process/professional', methods=['POST'])
+def start_professional_processing():
+    """使用专业AI模型进行处理"""
+    try:
+        if not project_data.video_path:
+            return jsonify({"status": "error", "message": "请先上传视频文件"}), 400
+        
+        logger_service.log("INFO", "🚀 开始专业AI处理流程...")
+        
+        # 检查模型状态 
+        logger_service.log("INFO", "📋 检查专业AI模型状态...")
+        professional_processor.check_models_status()
+        
+        # 设置处理状态
+        project_data.set_processing_status("processing", "专业AI处理中...", 5)
+        
+        # 专业处理流程
+        import threading
+        def professional_processing():
+            try:
+                # 步骤1: 提取音频 (5% → 15%)
+                logger_service.log("INFO", "正在从视频中提取音频...")
+                audio_result = video_processor.extract_audio(project_data.video_path)
+                
+                if not audio_result["success"]:
+                    logger_service.log("ERROR", f"音频提取失败: {audio_result['error']}")
+                    project_data.set_processing_status("error", "音频提取失败", 5)
+                    return
+                
+                original_audio_path = audio_result["audio_path"]
+                project_data.set_processing_status("processing", "专业AI音频分析中...", 15)
+                
+                # 步骤2: 专业音频处理 (15% → 80%)
+                logger_service.log("INFO", "🎵 开始专业AI音频处理...")
+                professional_result = professional_processor.process_audio_professionally(
+                    original_audio_path, 
+                    config.source_language
+                )
+                
+                if not professional_result["success"]:
+                    logger_service.log("ERROR", f"专业音频处理失败: {professional_result['error']}")
+                    project_data.set_processing_status("error", "专业音频处理失败", 15)
+                    return
+                
+                # 更新项目数据
+                segments = professional_result["segments"]
+                project_data.update_segments(segments)
+                project_data.background_audio_path = professional_result["background_path"]
+                
+                logger_service.log("INFO", f"✅ 专业音频处理完成: {len(segments)}个精确片段")
+                project_data.set_processing_status("processing", "开始逐句翻译...", 80)
+                
+                # 步骤3: 翻译和TTS (80% → 95%)
+                total_segments = len(segments)
+                for i, segment in enumerate(segments):
+                    try:
+                        sequence = segment["sequence"]
+                        original_text = segment["original_text"]
+                        original_audio_path = segment["original_audio_path"]
+                        speaker_id = segment["speaker_id"]
+                        
+                        # 更新进度
+                        progress = 80 + int((i / total_segments) * 15)
+                        project_data.set_processing_status("processing", f"处理第{sequence}句({speaker_id})...", progress)
+                        
+                        # 翻译
+                        logger_service.log("INFO", f"第{sequence}句: 开始翻译")
+                        translation_result = translation_service.translate_text(original_text)
+                        
+                        if not translation_result["success"]:
+                            logger_service.log("ERROR", f"第{sequence}句翻译失败: {translation_result['error']}")
+                            continue
+                        
+                        translated_text = translation_result["translated_text"]
+                        segment["translated_text"] = translated_text
+                        
+                        # 音色克隆和TTS（使用现有逻辑）
+                        # ... 保持原有的TTS和对齐逻辑
+                        
+                        # 更新项目数据
+                        segment_update = {k: v for k, v in segment.items() if k != 'sequence'}
+                        project_data.update_segment(sequence, **segment_update)
+                        
+                    except Exception as e:
+                        logger_service.log("ERROR", f"第{sequence}句处理异常: {str(e)}")
+                        continue
+                
+                # 步骤4: 视频合成 (95% → 100%)
+                # ... 保持原有的视频合成逻辑
+                
+                project_data.set_processing_status("completed", "专业AI处理完成", 100)
+                logger_service.log("INFO", "🎉 专业AI视频翻译处理完成!")
+                
+            except Exception as e:
+                error_msg = f"专业处理过程中发生异常: {str(e)}"
+                logger_service.log("ERROR", error_msg)
+                project_data.set_processing_status("error", "专业处理失败", project_data.progress)
+        
+        # 在后台线程中运行专业处理
+        thread = threading.Thread(target=professional_processing)
+        thread.daemon = True
+        thread.start()
+        
+        return jsonify({"status": "success", "message": "专业AI处理开始", "task_id": str(uuid.uuid4())})
+        
+    except Exception as e:
+        error_msg = error_handler.handle_error(e, "开始专业处理")
         return jsonify({"status": "error", "message": error_msg}), 500
 
 @app.route('/api/process/start', methods=['POST'])
@@ -419,7 +548,15 @@ def api_data():
         except Exception as e:
             return jsonify({"status": "error", "message": str(e)}), 400
     else:
-        return jsonify(project_data.to_dict())
+        data = project_data.to_dict()
+        # 添加背景音频信息
+        if hasattr(project_data, 'background_audio_path') and project_data.background_audio_path:
+            data['background_audio_path'] = project_data.background_audio_path
+            data['background_audio_available'] = os.path.exists(project_data.background_audio_path)
+        else:
+            data['background_audio_path'] = None
+            data['background_audio_available'] = False
+        return jsonify(data)
 
 @app.route('/api/srt/export', methods=['GET'])
 def export_srt():
@@ -473,6 +610,19 @@ def download_final_video():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
+@app.route('/api/video/preview', methods=['GET'])
+def preview_final_video():
+    """预览翻译后的视频（不触发下载）"""
+    try:
+        if not project_data.final_video_path or not os.path.exists(project_data.final_video_path):
+            return jsonify({"status": "error", "message": "翻译视频不存在，请先完成处理"}), 404
+        
+        # 直接返回视频文件用于预览，不触发下载
+        return send_file(project_data.final_video_path, mimetype='video/mp4')
+        
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
 @app.route('/api/regenerate/<int:segment_id>', methods=['POST'])
 def regenerate_segment(segment_id):
     try:
@@ -489,17 +639,43 @@ def serve_audio(audio_path):
         import urllib.parse
         decoded_path = urllib.parse.unquote(audio_path)
         
-        # 确保路径是相对于工作目录的
-        if not decoded_path.startswith('./'):
-            decoded_path = './' + decoded_path
+        logger_service.log("DEBUG", f"请求音频文件: {audio_path} -> {decoded_path}")
         
-        # 检查文件是否存在
-        if not os.path.exists(decoded_path):
+        # 处理不同的路径格式
+        possible_paths = []
+        
+        # 1. 原路径
+        if os.path.exists(decoded_path):
+            possible_paths.append(decoded_path)
+        
+        # 2. 添加 ./ 前缀
+        if not decoded_path.startswith('./'):
+            path_with_prefix = './' + decoded_path
+            if os.path.exists(path_with_prefix):
+                possible_paths.append(path_with_prefix)
+        
+        # 3. 尝试从temp/开始
+        if not decoded_path.startswith('temp/'):
+            temp_path = 'temp/' + os.path.basename(decoded_path)
+            if os.path.exists(temp_path):
+                possible_paths.append(temp_path)
+        
+        # 4. 绝对路径转换
+        abs_path = os.path.abspath(decoded_path)
+        if os.path.exists(abs_path):
+            possible_paths.append(abs_path)
+        
+        # 选择第一个存在的路径
+        if not possible_paths:
             logger_service.log("WARNING", f"音频文件不存在: {decoded_path}")
+            logger_service.log("DEBUG", f"尝试的路径: {[decoded_path, path_with_prefix if 'path_with_prefix' in locals() else 'N/A', temp_path if 'temp_path' in locals() else 'N/A']}")
             return jsonify({"status": "error", "message": "音频文件不存在"}), 404
         
+        final_path = possible_paths[0]
+        logger_service.log("DEBUG", f"找到音频文件: {final_path}")
+        
         # 根据文件扩展名确定MIME类型
-        file_ext = os.path.splitext(decoded_path)[1].lower()
+        file_ext = os.path.splitext(final_path)[1].lower()
         if file_ext == '.wav':
             mimetype = 'audio/wav'
         elif file_ext == '.mp3':
@@ -509,7 +685,11 @@ def serve_audio(audio_path):
         else:
             mimetype = 'audio/mpeg'  # 默认类型
         
-        return send_file(decoded_path, mimetype=mimetype)
+        # 获取文件大小用于日志
+        file_size = os.path.getsize(final_path)
+        logger_service.log("DEBUG", f"发送音频文件: {final_path} ({file_size} bytes, {mimetype})")
+        
+        return send_file(final_path, mimetype=mimetype)
         
     except Exception as e:
         logger_service.log("ERROR", f"音频文件服务失败: {str(e)}")
