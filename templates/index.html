@@ -90,40 +90,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label class="form-label">ASR切分:</label>
-                                    <select class="form-select form-select-sm" id="asrSplitMode">
-                                        <option value="保守模式">保守模式</option>
-                                        <option value="平衡模式" selected>平衡模式</option>
-                                        <option value="激进模式">激进模式</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">最小时长:</label>
-                                    <select class="form-select form-select-sm" id="minDuration">
-                                        <option value="1.5" selected>1.5s</option>
-                                        <option value="2.0">2.0s</option>
-                                        <option value="2.5">2.5s</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">最大时长:</label>
-                                    <select class="form-select form-select-sm" id="maxDuration">
-                                        <option value="6">6s</option>
-                                        <option value="8" selected>8s</option>
-                                        <option value="10">10s</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">静音阈值:</label>
-                                    <select class="form-select form-select-sm" id="silenceThreshold">
-                                        <option value="0.2">0.2s</option>
-                                        <option value="0.3" selected>0.3s</option>
-                                        <option value="0.5">0.5s</option>
-                                    </select>
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -197,13 +163,13 @@
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
-                            <button type="button" class="btn btn-primary btn-lg w-100" id="startProfessionalProcessing">
+                            <button type="button" class="btn btn-primary" id="startProfessionalProcessing">
                                 <i class="fas fa-star"></i> 开始AI翻译
                             </button>
                         </div>
                         <div class="mb-2">
                             <small class="text-muted">
-                                <strong>AI翻译:</strong> 使用Demucs+Whisper+pyannote专业模型，确保最佳翻译质量
+                                <strong>AI翻译:</strong> 使用专业AI模型，确保最佳翻译质量
                             </small>
                         </div>
                         <div class="mb-2">
@@ -252,7 +218,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h6 class="mb-0"><i class="fas fa-music"></i> 音频预览 (Demucs分离)</h6>
+                        <h6 class="mb-0"><i class="fas fa-music"></i> 音频预览</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -293,14 +259,6 @@
                                 </audio>
                                 <canvas id="finalMixedWaveform" width="400" height="60" class="border mt-2" style="width: 100%; height: 60px;"></canvas>
                                 <div id="finalMixedStatus" class="text-muted mt-1">未混合</div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <small class="text-info">
-                                    <i class="fas fa-info-circle"></i> 
-                                    使用Demucs技术分离人声和背景音，波形图显示音频内容分析
-                                </small>
                             </div>
                         </div>
                     </div>

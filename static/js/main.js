@@ -37,10 +37,6 @@ class VideoTranslatorApp {
         document.getElementById('targetLanguage').value = this.config.target_language || '英语';
         document.getElementById('asrModel').value = this.config.asr_model || 'whisper-base';
         document.getElementById('ttsModel').value = this.config.tts_model || 'speech-2.5-hd-preview';
-        document.getElementById('asrSplitMode').value = this.config.asr_split_mode || '平衡模式';
-        document.getElementById('minDuration').value = this.config.min_segment_duration || 1.5;
-        document.getElementById('maxDuration').value = this.config.max_segment_duration || 8.0;
-        document.getElementById('silenceThreshold').value = this.config.silence_threshold || 0.3;
         
         // 填充目标语言选项
         if (this.config.supported_languages) {
@@ -129,7 +125,7 @@ class VideoTranslatorApp {
     bindAutoSaveEvents() {
         const configFields = [
             'apiEndpoint', 'groupId', 'apiKey', 'sourceLanguage', 'targetLanguage',
-            'asrModel', 'ttsModel', 'asrSplitMode', 'minDuration', 'maxDuration', 'silenceThreshold'
+            'asrModel', 'ttsModel'
         ];
         
         configFields.forEach(fieldId => {
@@ -169,11 +165,7 @@ class VideoTranslatorApp {
             source_language: document.getElementById('sourceLanguage').value,
             target_language: document.getElementById('targetLanguage').value,
             asr_model: document.getElementById('asrModel').value,
-            tts_model: document.getElementById('ttsModel').value,
-            asr_split_mode: document.getElementById('asrSplitMode').value,
-            min_segment_duration: parseFloat(document.getElementById('minDuration').value),
-            max_segment_duration: parseFloat(document.getElementById('maxDuration').value),
-            silence_threshold: parseFloat(document.getElementById('silenceThreshold').value)
+            tts_model: document.getElementById('ttsModel').value
         };
         
         try {
@@ -446,19 +438,111 @@ class VideoTranslatorApp {
         // 清空画布
         ctx.clearRect(0, 0, width, height);
         
-        // 绘制简化的波形图（模拟）
+        // 绘制中心线
+        ctx.strokeStyle = '#e0e0e0';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        const centerY = height / 2;
+        ctx.moveTo(0, centerY);
+        ctx.lineTo(width, centerY);
+        ctx.stroke();
+        
+        // 添加标签
+        ctx.fillStyle = '#666';
+        ctx.font = '10px Arial';
+        ctx.fillText('音频波形', 5, 15);
+        
+        // 尝试使用Web Audio API分析真实音频数据
+        if (audioElement.crossOrigin !== 'anonymous') {
+            audioElement.crossOrigin = 'anonymous';
+        }
+        
+        try {
+            // 创建音频上下文
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const source = audioContext.createMediaElementSource(audioElement);
+            const analyser = audioContext.createAnalyser();
+            
+            analyser.fftSize = 256;
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            
+            source.connect(analyser);
+            analyser.connect(audioContext.destination);
+            
+            // 当音频播放时绘制波形
+            const drawRealWaveform = () => {
+                analyser.getByteFrequencyData(dataArray);
+                
+                ctx.clearRect(0, 0, width, height);
+                
+                // 绘制中心线
+                ctx.strokeStyle = '#e0e0e0';
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(0, centerY);
+                ctx.lineTo(width, centerY);
+                ctx.stroke();
+                
+                // 绘制频谱数据
+                ctx.strokeStyle = '#007bff';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                
+                const sliceWidth = width / bufferLength;
+                let x = 0;
+                
+                for (let i = 0; i < bufferLength; i++) {
+                    const v = dataArray[i] / 128.0;
+                    const y = centerY + (v * height / 4 * (Math.random() > 0.5 ? 1 : -1));
+                    
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                    
+                    x += sliceWidth;
+                }
+                
+                ctx.stroke();
+                
+                // 添加标签
+                ctx.fillStyle = '#666';
+                ctx.font = '10px Arial';
+                ctx.fillText('实时音频波形', 5, 15);
+                
+                if (!audioElement.paused) {
+                    requestAnimationFrame(drawRealWaveform);
+                }
+            };
+            
+            // 监听音频播放事件
+            audioElement.addEventListener('play', () => {
+                audioContext.resume().then(() => {
+                    drawRealWaveform();
+                });
+            });
+            
+        } catch (error) {
+            // 如果Web Audio API失败，绘制静态波形图
+            this.drawStaticWaveform(ctx, width, height, centerY);
+        }
+    }
+    
+    // 绘制静态波形图作为后备方案
+    drawStaticWaveform(ctx, width, height, centerY) {
         ctx.strokeStyle = '#007bff';
         ctx.lineWidth = 1;
         ctx.beginPath();
         
-        const centerY = height / 2;
         const segments = 100;
-        
         for (let i = 0; i < segments; i++) {
             const x = (i / segments) * width;
-            // 生成模拟波形数据
-            const amplitude = Math.random() * 0.8 + 0.2;
-            const y = centerY + (Math.sin(i * 0.1) * amplitude * (height / 4));
+            // 生成更真实的波形数据
+            const frequency = 0.1 + Math.random() * 0.05;
+            const amplitude = (0.3 + Math.random() * 0.5) * Math.exp(-i / segments);
+            const y = centerY + (Math.sin(i * frequency) * amplitude * (height / 3));
             
             if (i === 0) {
                 ctx.moveTo(x, y);
@@ -468,19 +552,6 @@ class VideoTranslatorApp {
         }
         
         ctx.stroke();
-        
-        // 绘制中心线
-        ctx.strokeStyle = '#e0e0e0';
-        ctx.lineWidth = 0.5;
-        ctx.beginPath();
-        ctx.moveTo(0, centerY);
-        ctx.lineTo(width, centerY);
-        ctx.stroke();
-        
-        // 添加标签
-        ctx.fillStyle = '#666';
-        ctx.font = '10px Arial';
-        ctx.fillText('音频波形', 5, 15);
     }
     
     // 更新片段表格
