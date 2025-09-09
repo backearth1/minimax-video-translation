@@ -319,7 +319,11 @@ class ProfessionalAudioProcessor:
             
             # 合并非人声部分作为背景音
             background_path = os.path.join(output_dir, f"{audio_name}_background.wav")
-            self._merge_background_tracks(background_paths, background_path)
+            background_success = self._merge_background_tracks(background_paths, background_path)
+            
+            if not background_success:
+                self.logger.log("WARNING", "背景音轨合并失败，将使用空背景音")
+                background_path = None
             
             # 转换人声为WAV格式用于后续处理
             vocals_wav_path = os.path.join(output_dir, f"{audio_name}_vocals.wav")
@@ -340,30 +344,64 @@ class ProfessionalAudioProcessor:
         except Exception as e:
             return {"success": False, "error": f"Demucs 处理异常: {str(e)}"}
     
-    def _merge_background_tracks(self, track_paths: List[str], output_path: str):
-        """合并背景音轨"""
+    def _merge_background_tracks(self, track_paths: List[str], output_path: str) -> bool:
+        """合并背景音轨（drums + bass + other）"""
         try:
             existing_tracks = [p for p in track_paths if os.path.exists(p)]
+            self.logger.log("INFO", f"找到{len(existing_tracks)}个背景音轨文件")
+            
             if not existing_tracks:
-                return
+                self.logger.log("WARNING", "没有找到背景音轨文件")
+                return False
+            
+            # 确保输出目录存在
+            os.makedirs(os.path.dirname(output_path), exist_ok=True)
             
             # 使用 ffmpeg 混合所有背景音轨
-            input_args = []
-            for track in existing_tracks:
-                input_args.extend(["-i", track])
+            if len(existing_tracks) == 1:
+                # 只有一个轨道，直接转换格式
+                cmd = ["ffmpeg", "-i", existing_tracks[0], "-ac", "2", "-ar", "44100", "-y", output_path]
+                self.logger.log("INFO", f"单轨道转换: {existing_tracks[0]}")
+            else:
+                # 多个轨道，需要混合
+                input_args = []
+                for track in existing_tracks:
+                    input_args.extend(["-i", track])
+                    self.logger.log("INFO", f"添加背景音轨: {track}")
+                
+                # 修复filter_complex语法
+                filter_inputs = "".join([f"[{i}:a]" for i in range(len(existing_tracks))])
+                filter_complex = f"{filter_inputs}amix=inputs={len(existing_tracks)}:duration=longest"
+                
+                cmd = ["ffmpeg"] + input_args + [
+                    "-filter_complex", filter_complex,
+                    "-ac", "2", "-ar", "44100",
+                    "-y", output_path
+                ]
             
-            filter_complex = "+".join([f"[{i}:a]" for i in range(len(existing_tracks))])
+            self.logger.log("INFO", f"执行ffmpeg命令: {' '.join(cmd)}")
+            result = subprocess.run(cmd, capture_output=True, timeout=120, text=True)
             
-            cmd = ["ffmpeg"] + input_args + [
-                "-filter_complex", f"{filter_complex}amix=inputs={len(existing_tracks)}:duration=longest",
-                "-ac", "2", "-ar", "44100",
-                "-y", output_path
-            ]
+            if result.returncode == 0:
+                if os.path.exists(output_path):
+                    file_size = os.path.getsize(output_path)
+                    self.logger.log("INFO", f"背景音轨合并成功: {output_path} ({file_size} bytes)")
+                    return True
+                else:
+                    self.logger.log("ERROR", "ffmpeg成功但背景音文件未生成")
+                    return False
+            else:
+                self.logger.log("ERROR", f"ffmpeg失败 (返回码: {result.returncode})")
+                self.logger.log("ERROR", f"stderr: {result.stderr}")
+                self.logger.log("ERROR", f"stdout: {result.stdout}")
+                return False
             
-            subprocess.run(cmd, capture_output=True, timeout=60)
-            
+        except subprocess.TimeoutExpired:
+            self.logger.log("ERROR", "背景音轨合并超时")
+            return False
         except Exception as e:
-            self.logger.log("WARNING", f"背景音轨合并失败: {str(e)}")
+            self.logger.log("ERROR", f"背景音轨合并异常: {str(e)}")
+            return False
     
     def _convert_to_wav(self, input_path: str, output_path: str):
         """转换音频为WAV格式"""
