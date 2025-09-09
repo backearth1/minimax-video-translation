@@ -203,6 +203,12 @@ class VoiceCloneService:
         timestamp = int(time.time())
         return f"voice_{segment_id}_{timestamp}"
     
+    def generate_voice_id_for_speaker(self, speaker_id: str, sequence: int) -> str:
+        """为特定说话人生成音色ID"""
+        timestamp = int(time.time())
+        # 使用说话人ID作为前缀，确保同一说话人使用一致的音色
+        return f"voice_{speaker_id}_seq{sequence}_{timestamp}"
+    
     def get_language_boost_from_target_language(self, target_language: str) -> str:
         """根据目标语言获取language_boost参数"""
         language_map = {

@@ -228,6 +228,7 @@ class TableEditor {
         row.innerHTML = `
             <td>${newSequence}</td>
             <td class="editable-cell" data-field="timestamp" data-id="${newSequence}">0.0-3.0</td>
+            <td class="speaker-cell"><span class="badge bg-secondary">未知</span></td>
             <td class="editable-cell" data-field="original_text" data-id="${newSequence}"></td>
             <td class="editable-cell" data-field="translated_text" data-id="${newSequence}"></td>
             <td class="audio-cell"><span class="text-muted">-</span></td>

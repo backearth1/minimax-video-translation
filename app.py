@@ -21,6 +21,7 @@ from modules.tts_service import TTSService
 from modules.alignment_optimizer import AlignmentOptimizer
 from modules.audio_mixer import AudioMixer
 from modules.audio_preprocessor import AudioPreprocessor
+from modules.speaker_diarization import SpeakerDiarization
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'video-translator-secret-key-2024'
@@ -43,6 +44,7 @@ voice_clone_service = VoiceCloneService(config, rate_limiter, logger_service)
 tts_service = TTSService(config, rate_limiter, logger_service)
 alignment_optimizer = AlignmentOptimizer(config, translation_service, tts_service, logger_service)
 audio_mixer = AudioMixer(logger_service)
+speaker_diarization = SpeakerDiarization(logger_service)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -171,10 +173,23 @@ def start_processing():
                     return
                 
                 project_data.update_segments(segments)
-                project_data.set_processing_status("processing", "开始逐句翻译...", 40)
                 
-                # 步骤3: 逐句处理 (40% → 95%)
-                total_segments = len(segments)
+                # 步骤2.5: 说话人分离 (40% → 42%)
+                project_data.set_processing_status("processing", "说话人身份识别中...", 40)
+                logger_service.log("INFO", "开始说话人身份识别...")
+                
+                # 执行说话人分离分析
+                segments_with_speakers = speaker_diarization.batch_analyze_segments(segments)
+                project_data.update_segments(segments_with_speakers)
+                
+                # 保存说话人特征档案
+                speaker_diarization.save_speaker_profiles()
+                
+                project_data.set_processing_status("processing", "开始逐句翻译...", 42)
+                
+                # 步骤3: 逐句处理 (42% → 95%)
+                total_segments = len(segments_with_speakers)
+                segments = segments_with_speakers  # 使用包含说话人信息的片段
                 for i, segment in enumerate(segments):
                     try:
                         sequence = segment["sequence"]
@@ -182,8 +197,9 @@ def start_processing():
                         original_audio_path = segment["original_audio_path"]
                         
                         # 更新进度
-                        progress = 40 + int((i / total_segments) * 55)
-                        project_data.set_processing_status("processing", f"处理第{sequence}句...", progress)
+                        progress = 42 + int((i / total_segments) * 53)
+                        speaker_id = segment.get("speaker_id", "unknown")
+                        project_data.set_processing_status("processing", f"处理第{sequence}句({speaker_id})...", progress)
                         
                         # 3.1 翻译
                         logger_service.log("INFO", f"第{sequence}句: 开始翻译")
@@ -196,12 +212,19 @@ def start_processing():
                         translated_text = translation_result["translated_text"]
                         segment["translated_text"] = translated_text
                         
-                        # 3.2 音色克隆
-                        logger_service.log("INFO", f"第{sequence}句: 开始音色克隆")
-                        voice_id = voice_clone_service.generate_voice_id(sequence)
+                        # 3.2 智能音色克隆（基于说话人身份）
+                        speaker_id = segment.get("speaker_id", "unknown")
+                        logger_service.log("INFO", f"第{sequence}句({speaker_id}): 开始智能音色克隆")
+                        
+                        # 为当前说话人获取最佳代表音频
+                        representative_audio = speaker_diarization.get_speaker_representative_audio(speaker_id, segments)
+                        clone_audio_path = representative_audio if representative_audio else original_audio_path
+                        
+                        # 生成基于说话人的voice_id
+                        voice_id = voice_clone_service.generate_voice_id_for_speaker(speaker_id, sequence)
                         
                         clone_result = voice_clone_service.clone_voice_from_audio(
-                            original_audio_path, voice_id
+                            clone_audio_path, voice_id
                         )
                         
                         if clone_result["success"]:

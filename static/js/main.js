@@ -386,7 +386,7 @@ class VideoTranslatorApp {
         const tbody = document.getElementById('segmentTableBody');
         
         if (segments.length === 0) {
-            tbody.innerHTML = '<tr><td colspan=\"9\" class=\"text-center text-muted\">暂无数据</td></tr>';
+            tbody.innerHTML = '<tr><td colspan=\"10\" class=\"text-center text-muted\">暂无数据</td></tr>';
             return;
         }
         
@@ -397,6 +397,9 @@ class VideoTranslatorApp {
             row.innerHTML = `
                 <td>${segment.sequence}</td>
                 <td class=\"editable-cell\" data-field=\"timestamp\" data-id=\"${segment.sequence}\">${segment.timestamp}</td>
+                <td class=\"speaker-cell\">
+                    <span class=\"badge bg-secondary\">${segment.speaker_id || '未知'}</span>
+                </td>
                 <td class=\"editable-cell\" data-field=\"original_text\" data-id=\"${segment.sequence}\">${segment.original_text}</td>
                 <td class=\"editable-cell\" data-field=\"translated_text\" data-id=\"${segment.sequence}\">${segment.translated_text}</td>
                 <td class=\"audio-cell\">
@@ -498,7 +501,7 @@ class VideoTranslatorApp {
     // 重置数据
     resetData() {
         if (confirm('确定要重置所有数据吗？此操作不可撤销。')) {
-            document.getElementById('segmentTableBody').innerHTML = '<tr><td colspan=\"9\" class=\"text-center text-muted\">暂无数据</td></tr>';
+            document.getElementById('segmentTableBody').innerHTML = '<tr><td colspan=\"10\" class=\"text-center text-muted\">暂无数据</td></tr>';
             document.getElementById('segmentCount').textContent = '0';
             document.getElementById('progressBar').style.width = '0%';
             document.getElementById('progressBar').textContent = '0%';
@@ -525,8 +528,11 @@ class VideoTranslatorApp {
                 const videoUrl = URL.createObjectURL(blob);
                 
                 const translatedVideo = document.getElementById('translatedVideo');
+                const resultPlaceholder = document.getElementById('resultPlaceholder');
+                
                 translatedVideo.src = videoUrl;
                 translatedVideo.style.display = 'block';
+                resultPlaceholder.style.display = 'none';
                 
                 this.addLog('INFO', '翻译后视频预览已加载');
                 
