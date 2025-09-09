@@ -1,0 +1,1746 @@
+2025-09-09 15:03:27,427 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:07:39,413 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:08:33,100 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:08:56,578 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:08:56,908 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:08:56,937 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:08:57,126 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5555
+ * Running on https://10.11.17.19:5555
+2025-09-09 15:08:57,126 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-09 15:08:57,130 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:08:57,157 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:08:57,449 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:08:57,468 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:08:57,474 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:08:57,474 - werkzeug - INFO -  * Debugger PIN: 613-785-096
+2025-09-09 15:10:50,847 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:10:50] "GET / HTTP/1.1" 200 -
+2025-09-09 15:10:51,148 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:10:51] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-09-09 15:10:52,069 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:10:52] "GET /static/js/table-editor.js HTTP/1.1" 200 -
+2025-09-09 15:10:52,154 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:10:52] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-09-09 15:10:52,263 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:10:52] "GET /api/config HTTP/1.1" 200 -
+2025-09-09 15:10:53,032 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:10:53] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-09-09 15:10:55,250 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:10:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:10:58,745 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:10:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:01,755 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:11:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:04,751 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:11:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:07,791 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:11:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:10,860 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:11:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:13,262 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:11:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:16,779 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:11:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:19,767 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:11:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:22,769 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:11:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:25,781 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:11:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:28,749 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:11:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:31,795 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:11:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:34,772 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:11:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:37,800 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:11:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:40,761 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:11:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:43,766 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:11:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:46,774 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:11:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:49,785 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:11:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:52,771 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:11:52] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:55,776 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:11:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:11:58,748 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:11:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:01,772 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:04,755 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:07,766 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:10,793 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:13,723 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:16,780 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:12:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:19,783 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:22,734 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:12:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:25,754 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:28,775 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:31,768 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:34,838 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:37,769 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:12:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:40,719 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:43,759 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:12:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:46,770 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:49,768 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:12:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:52,861 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:52] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:53,534 - modules.logger_service - INFO - [INFO] 视频文件上传成功: kouxing.mp4
+2025-09-09 15:12:53,534 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:12:53] "POST /api/upload HTTP/1.1" 200 -
+2025-09-09 15:12:55,959 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:12:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:12:56,480 - modules.logger_service - INFO - [INFO] 开始自动翻译处理...
+2025-09-09 15:12:56,480 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:12:56] "POST /api/process/start HTTP/1.1" 200 -
+2025-09-09 15:12:58,905 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:12:58] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:12:59,073 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:12:59] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:00,657 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:00] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:01,778 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:03,254 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:03] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:04,245 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:05,041 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:05] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:07,035 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:07] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:07,775 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:09,088 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:09] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:10,865 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:10] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:11,016 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:11] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:12,559 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:12] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:13,762 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:15,028 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:15] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:16,833 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:17,039 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:17] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:18,556 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:18] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:19,824 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:20,560 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:20] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:22,765 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:23,327 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:23] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:25,113 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:25] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:25,870 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:26,557 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:26] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:28,759 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:29,058 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:29] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:31,056 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:31] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:31,773 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:33,081 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:33] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:34,756 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:35,067 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:35] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:37,069 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:37] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:37,832 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:38,565 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:38] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:40,912 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:40] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:41,084 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:41] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:42,585 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:42] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:43,767 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:45,105 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:45] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:46,774 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:47,056 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:47] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:49,126 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:49] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:49,351 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:51,089 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:51] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:52,779 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:52] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:53,068 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:53] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:55,100 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:55] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:55,760 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:57,103 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:57] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:13:58,766 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:13:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:13:59,197 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:13:59] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:01,156 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:01] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:01,351 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:03,114 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:03] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:04,766 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:05,072 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:05] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:07,050 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:07] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:07,757 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:09,102 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:09] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:10,722 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:11,104 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:11] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:12,565 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:12] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:13,750 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:15,054 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:15] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:16,807 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:17,166 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:17] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:19,359 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:19] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:19,516 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:21,142 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:21] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:22,773 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:23,084 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:23] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:25,090 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:25] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:25,769 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:27,209 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:27] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:28,250 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:29,049 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:29] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:31,074 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:31] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:31,750 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:33,090 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:33] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:34,768 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:35,105 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:35] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:37,166 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:37] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:37,763 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:39,065 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:39] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:40,780 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:41,228 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:41] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:43,070 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:43] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:43,809 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:45,118 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:45] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:46,980 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:47,084 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:47] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:48,565 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:48] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:50,121 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:50] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:50,555 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:50] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:52,804 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:52] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:53,118 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:53] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:55,179 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:55] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:55,335 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:14:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:57,081 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:57] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:14:58,769 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:14:59,109 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:14:59] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:00,562 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:00] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:01,766 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:03,098 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:03] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:04,825 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:05,167 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:05] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:07,068 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:07] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:07,780 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:09,182 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:09] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:10,264 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:11,070 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:11] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:13,053 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:13] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:13,790 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:15,049 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:15] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:16,796 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:17,075 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:17] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:19,048 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:19] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:19,872 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:20,566 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:20] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:22,764 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:23,051 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:23] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:25,045 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:25] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:25,825 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:27,076 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:27] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:28,727 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:29,027 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:29] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:30,561 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:30] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:31,809 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:33,067 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:33] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:34,739 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:35,076 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:35] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:36,557 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:36] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:37,760 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:39,085 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:39] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:40,787 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:41,114 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:41] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:43,076 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:43] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:43,753 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:45,054 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:45] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:46,772 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:47,071 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:47] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:49,102 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:49] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:49,797 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:51,108 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:51] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:52,792 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:52] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:53,102 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:53] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:55,100 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:55] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:55,778 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:57,287 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:15:57] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:15:58,257 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:15:59,090 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:15:59] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:16:01,053 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:16:01] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:16:01,726 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:16:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:16:03,110 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:16:03] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:16:04,754 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:16:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:16:05,079 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:16:05] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:16:06,556 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:16:06] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:16:07,766 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:16:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:18:53,767 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:18:54,056 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:18:54,075 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:18:54,140 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5555
+ * Running on https://10.11.17.19:5555
+2025-09-09 15:18:54,140 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-09 15:18:54,141 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:18:54,167 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:18:54,459 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:18:54,477 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:18:54,483 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:18:54,484 - werkzeug - INFO -  * Debugger PIN: 593-075-588
+2025-09-09 15:19:10,982 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:19:10] "GET / HTTP/1.1" 200 -
+2025-09-09 15:19:11,618 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:11] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-09-09 15:19:11,668 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:11] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-09-09 15:19:12,082 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:19:12] "GET /static/js/table-editor.js HTTP/1.1" 200 -
+2025-09-09 15:19:12,739 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:19:12] "GET /api/config HTTP/1.1" 200 -
+2025-09-09 15:19:15,173 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:19:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:18,645 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:21,775 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:19:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:24,183 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:19:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:25,483 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:19:25] "[31m[1mPOST /api/process/start HTTP/1.1[0m" 400 -
+2025-09-09 15:19:28,012 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:30,182 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:33,679 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:36,714 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:39,935 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:42,167 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:45,668 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:48,717 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:51,740 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:55,132 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:19:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:19:58,096 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:19:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:01,162 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:20:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:04,107 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:20:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:07,143 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:20:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:10,111 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:20:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:13,080 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:20:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:16,093 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:20:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:19,131 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:20:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:22,146 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:20:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:25,278 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:20:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:28,091 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:20:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:31,262 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:20:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:34,092 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:20:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:37,088 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:20:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:40,090 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:20:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:43,170 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:20:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:45,591 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:20:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:49,144 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:20:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:20:52,134 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:20:52] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:06,258 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:06,389 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:09,684 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:12,715 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:15,707 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:21:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:18,684 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:21,659 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:21:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:24,676 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:27,691 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:21:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:30,655 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:21:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:33,692 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:21:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:36,715 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:39,644 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:42,736 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:45,175 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:48,699 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:51,674 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:21:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:54,740 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:21:57,647 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:21:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:00,480 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:00] "[31m[1mPOST /api/process/start HTTP/1.1[0m" 400 -
+2025-09-09 15:22:00,870 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:03,942 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:06,173 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:09,698 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:12,717 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:13,512 - modules.logger_service - INFO - [INFO] 视频文件上传成功: kouxing.mp4
+2025-09-09 15:22:13,512 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:13] "POST /api/upload HTTP/1.1" 200 -
+2025-09-09 15:22:15,708 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:16,263 - modules.logger_service - INFO - [INFO] 开始自动翻译处理...
+2025-09-09 15:22:16,264 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:16] "POST /api/process/start HTTP/1.1" 200 -
+2025-09-09 15:22:18,169 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:18,865 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:18] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:20,812 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:20] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:21,878 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:22,327 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:22] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:24,761 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:24,840 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:24] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:26,881 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:26] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:27,691 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:28,921 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:28] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:30,173 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:30,808 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:30] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:32,842 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:32] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:33,684 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:34,831 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:34] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:36,721 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:36,833 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:36] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:38,828 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:38] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:39,678 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:40,844 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:40] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:42,699 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:42,833 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:42] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:44,792 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:44] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:45,664 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:47,179 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:47] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:48,612 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:49,114 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:49] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:51,125 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:51] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:52,120 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:52] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:53,195 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:53] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:55,061 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:55,152 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:55] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:57,179 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:22:57] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:22:57,594 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:22:59,154 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:22:59] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:01,130 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:01,175 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:01] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:03,335 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:03] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:03,598 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:05,067 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:05] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:07,145 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:07,193 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:07] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:09,103 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:09] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:10,078 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:11,112 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:11] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:13,099 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:13,145 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:13] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:15,246 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:15] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:15,597 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:17,161 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:17] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:19,111 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:19,311 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:19] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:20,604 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:20] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:22,098 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:23,089 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:23] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:25,126 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:25,183 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:25] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:27,099 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:27] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:28,078 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:29,121 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:29] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:31,179 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:31,372 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:31] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:33,190 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:33] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:34,093 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:35,102 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:35] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:37,126 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:37,181 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:37] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:39,290 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:39] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:39,596 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:41,123 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:41] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:43,084 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:23:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:23:43,157 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:43] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:45,142 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:45] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:23:46,099 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:23:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:24:15,114 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:24:15] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:24:15,163 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:24:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:25:15,138 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:25:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:25:15,191 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:25:15] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:25:58,366 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:25:58] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:25:58,417 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:25:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:25:58,523 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:25:58] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:00,701 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:00,836 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:00] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:02,831 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:02] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:03,664 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:04,832 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:04] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:06,680 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:06,848 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:06] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:08,317 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:08] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:09,695 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:10,845 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:10] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:12,688 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:12,833 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:12] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:14,610 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:14] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:16,089 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:17,094 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:17] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:19,088 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:19,172 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:19] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:21,241 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:21] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:21,599 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:23,185 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:23] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:24,603 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:25,123 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:25] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:27,125 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:27] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:28,159 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:29,176 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:29] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:31,129 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:31,374 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:31] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:32,611 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:32] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:34,240 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:34,596 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:34] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:37,170 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:37,256 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:37] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:39,229 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:39] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:39,597 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:41,113 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:41] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:43,145 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:43,198 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:43] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:45,191 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:45] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:46,139 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:47,094 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:47] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:49,203 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:49,256 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:49] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:51,110 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:51] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:52,119 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:52] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:53,344 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:53] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:54,614 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:55,176 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:55] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:57,115 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:26:57] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:26:58,096 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:26:59,135 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:26:59] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:27:01,101 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:27:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:27:01,171 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:27:01] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:27:03,116 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:27:03] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:27:04,129 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:27:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:27:05,165 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:27:05] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:27:07,170 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:27:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:27:07,221 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:27:07] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:27:09,104 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:27:09] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:27:10,128 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:27:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:27:11,111 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:27:11] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:27:13,108 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:27:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:27:13,185 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:27:13] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:27:15,106 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:27:15] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:28:15,136 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:28:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:28:15,181 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:28:15] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:29:15,138 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:29:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:29:15,189 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:29:15] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:15,169 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:15,255 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:15] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:21,683 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:21,747 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:21] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:22,890 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:22] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:24,181 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:24,825 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:24] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:26,812 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:26] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:27,710 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:28,803 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:28] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:30,683 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:30,871 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:30] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:32,784 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:32] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:33,698 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:34,825 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:34] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:36,715 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:36,828 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:36] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:38,838 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:38] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:39,673 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:40,787 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:40] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:42,639 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:42,803 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:42] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:44,329 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:44] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:45,673 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:47,177 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:47] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:48,183 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:48,815 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:48] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:50,803 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:50] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:51,745 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:52,319 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:52] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:54,646 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:54,929 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:54] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:56,330 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:56] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:30:57,662 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:30:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:30:58,845 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:30:58] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:31:01,011 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:31:01] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:31:01,133 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:31:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:31:02,324 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:31:02] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:31:03,695 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:31:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:31:04,829 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:31:04] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:31:06,734 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:31:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:31:06,830 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:31:06] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:31:08,870 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:31:08] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:31:09,769 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:31:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:31:10,332 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:31:10] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:31:12,766 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:31:12] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:31:12,820 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:31:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:31:14,277 - werkzeug - INFO -  * Detected change in '/home/Devin/minimax-video-translation/video_translator/app.py', reloading
+2025-09-09 15:31:14,346 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:31:14,375 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:31:14,670 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:31:14,693 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:31:14,699 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:31:14,699 - werkzeug - INFO -  * Debugger PIN: 593-075-588
+2025-09-09 15:32:19,025 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:32:19,312 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:32:19,331 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:32:19,426 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5555
+ * Running on https://10.11.17.19:5555
+2025-09-09 15:32:19,427 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-09 15:32:19,427 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:32:19,454 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:32:19,746 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:32:19,766 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:32:19,772 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:32:19,773 - werkzeug - INFO -  * Debugger PIN: 593-075-588
+2025-09-09 15:32:32,391 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:32:32] "GET / HTTP/1.1" 200 -
+2025-09-09 15:32:32,583 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:32:32] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-09-09 15:32:33,001 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:32:33] "GET /static/js/table-editor.js HTTP/1.1" 200 -
+2025-09-09 15:32:33,061 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:32:33] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-09-09 15:32:33,243 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:32:33] "GET /api/config HTTP/1.1" 200 -
+2025-09-09 15:32:36,771 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:32:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:32:39,734 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:32:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:32:42,740 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:32:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:32:43,317 - modules.logger_service - INFO - [INFO] 视频文件上传成功: kouxing.mp4
+2025-09-09 15:32:43,318 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:32:43] "POST /api/upload HTTP/1.1" 200 -
+2025-09-09 15:32:45,247 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:32:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:32:48,365 - modules.logger_service - INFO - [INFO] 开始自动翻译处理...
+2025-09-09 15:32:48,366 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:32:48] "POST /api/process/start HTTP/1.1" 200 -
+2025-09-09 15:32:48,724 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:32:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:32:50,368 - modules.logger_service - INFO - [INFO] 音频提取完成
+2025-09-09 15:32:50,952 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:32:50] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:32:51,718 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:32:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:32:52,915 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:32:52] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:32:53,371 - modules.logger_service - INFO - [INFO] ASR识别完成，检测到3个语音片段
+2025-09-09 15:32:54,914 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:32:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:32:55,002 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:32:55] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:32:55,373 - modules.logger_service - INFO - [INFO] 第1句翻译完成
+2025-09-09 15:32:56,944 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:32:56] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:32:57,757 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:32:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:32:58,377 - modules.logger_service - INFO - [INFO] 第1句音色克隆完成
+2025-09-09 15:32:58,377 - modules.logger_service - INFO - [INFO] 第1句TTS合成完成
+2025-09-09 15:32:58,935 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:32:58] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:33:00,377 - modules.logger_service - INFO - [INFO] 第1句5步对齐优化完成
+2025-09-09 15:33:00,726 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:00,899 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:00] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:33:01,379 - modules.logger_service - INFO - [INFO] 所有片段处理完成，正在合成最终视频...
+2025-09-09 15:33:01,379 - modules.logger_service - INFO - [INFO] 视频翻译处理完成!
+2025-09-09 15:33:02,419 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:33:02] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:33:03,776 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:33:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:06,768 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:09,759 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:12,760 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:15,743 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:18,796 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:33:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:21,754 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:25,013 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:27,253 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:30,750 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:33:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:33,751 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:33:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:36,754 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:33:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:39,766 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:42,771 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:46,158 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:48,251 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:33:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:51,751 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:54,798 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:33:57,754 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:33:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:34:00,754 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:34:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:34:03,753 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:34:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:34:06,761 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:34:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:39:34,533 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:39:34,824 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:39:38,327 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:39:38,408 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5555
+ * Running on https://10.11.17.19:5555
+2025-09-09 15:39:38,408 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-09 15:39:38,409 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:39:38,436 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:39:38,729 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:39:40,153 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:39:40,158 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:39:40,159 - werkzeug - INFO -  * Debugger PIN: 593-075-588
+2025-09-09 15:39:51,582 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:39:51] "GET / HTTP/1.1" 200 -
+2025-09-09 15:39:52,211 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:39:52] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-09-09 15:39:52,258 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:39:52] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-09-09 15:39:52,314 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:39:52] "GET /static/js/table-editor.js HTTP/1.1" 200 -
+2025-09-09 15:39:52,925 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:39:52] "GET /api/config HTTP/1.1" 200 -
+2025-09-09 15:39:55,919 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:39:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:39:58,883 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:39:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:00,559 - modules.logger_service - INFO - [INFO] 视频文件上传成功: kouxing.mp4
+2025-09-09 15:40:00,560 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:00] "POST /api/upload HTTP/1.1" 200 -
+2025-09-09 15:40:01,950 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:04,887 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:05,189 - modules.logger_service - INFO - [INFO] 开始自动翻译处理...
+2025-09-09 15:40:05,189 - modules.logger_service - INFO - [INFO] 正在从视频中提取音频...
+2025-09-09 15:40:05,190 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:05] "POST /api/process/start HTTP/1.1" 200 -
+2025-09-09 15:40:05,190 - modules.logger_service - INFO - [INFO] 开始提取音频: /home/Devin/minimax-video-translation/video_translator/temp/fc79c82f-64a8-4412-b6ab-aeac6c934000_2e398f77-45e1-4175-9c4d-f583f1515653_kouxing.mp4
+2025-09-09 15:40:05,649 - modules.logger_service - INFO - [INFO] 音频提取成功: 时长6.98s, 大小0.23MB
+2025-09-09 15:40:05,650 - modules.logger_service - INFO - [INFO] 正在进行ASR语音识别和智能切分...
+2025-09-09 15:40:05,650 - modules.logger_service - INFO - [INFO] 加载Whisper模型...
+2025-09-09 15:40:06,939 - modules.logger_service - INFO - [INFO] Whisper模型加载完成
+2025-09-09 15:40:06,940 - modules.logger_service - INFO - [INFO] 开始ASR语音识别: ./temp/fc79c82f-64a8-4412-b6ab-aeac6c934000_2e398f77-45e1-4175-9c4d-f583f1515653_kouxing_audio.wav
+2025-09-09 15:40:07,792 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:07] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:07,888 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:09,798 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:09] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:10,899 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:11,703 - modules.logger_service - INFO - [INFO] ASR识别完成，检测到2个原始片段
+2025-09-09 15:40:11,703 - modules.logger_service - INFO - [INFO] 开始智能切分语音片段...
+2025-09-09 15:40:11,823 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:11] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:12,699 - modules.logger_service - ERROR - [ERROR] 提取音频片段失败: No module named 'pkg_resources'
+2025-09-09 15:40:12,700 - modules.logger_service - ERROR - [ERROR] 提取音频片段失败: No module named 'pkg_resources'
+2025-09-09 15:40:12,700 - modules.logger_service - INFO - [INFO] 智能切分完成，优化后得到2个片段
+2025-09-09 15:40:12,700 - modules.logger_service - INFO - [INFO] 第1句: 开始翻译
+2025-09-09 15:40:13,839 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:13,905 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:13] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:14,374 - modules.logger_service - INFO - [API] LLM翻译 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.67s)
+2025-09-09 15:40:14,375 - modules.logger_service - INFO - [INFO] 第1句: 开始音色克隆
+2025-09-09 15:40:14,376 - modules.logger_service - INFO - [INFO] 上传音频文件进行音色克隆: voice_1_1757403614
+2025-09-09 15:40:14,376 - modules.logger_service - ERROR - [ERROR] 第1句音色克隆失败: 音频文件不存在
+2025-09-09 15:40:14,376 - modules.logger_service - INFO - [INFO] 第1句: 开始TTS合成
+2025-09-09 15:40:15,254 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:15] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:16,070 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.69s) (Trace-ID: 050f0cde97e648319ad1947e08dc236a)
+2025-09-09 15:40:16,421 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_1_translated.mp3
+2025-09-09 15:40:16,424 - modules.logger_service - INFO - [INFO] 第1句: 开始5步时间戳对齐
+2025-09-09 15:40:16,425 - modules.logger_service - INFO - [INFO] 开始第1句5步时间戳对齐优化...
+2025-09-09 15:40:16,425 - modules.logger_service - INFO - [ALIGN] 第1句对齐第1步(静音裁剪检查): 开始处理
+2025-09-09 15:40:16,883 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:17,762 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:17] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:18,158 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.73s) (Trace-ID: 050f0ce10b2cdd543e2b6d456b1e2ae0)
+2025-09-09 15:40:18,477 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_1_step1.mp3
+2025-09-09 15:40:18,536 - modules.logger_service - INFO - [ALIGN] 第1句对齐第2步(文本优化): 开始优化翻译文本
+2025-09-09 15:40:19,737 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:19] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:19,925 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:20,012 - modules.logger_service - INFO - [API] LLM文本优化 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.48s)
+2025-09-09 15:40:21,108 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.09s) (Trace-ID: 050f0ce4dc14ac1042d77307e623c2c9)
+2025-09-09 15:40:21,259 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:21] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:21,626 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_1_step2.mp3
+2025-09-09 15:40:21,684 - modules.logger_service - INFO - [ALIGN] 第1句对齐第2步(文本优化): 成功! 优化后时长3.24s ≤ 目标时长3.76s
+2025-09-09 15:40:21,685 - modules.logger_service - INFO - [INFO] 第1句对齐优化成功
+2025-09-09 15:40:21,685 - modules.logger_service - ERROR - [ERROR] 第1句处理异常: ProjectData.update_segment() got multiple values for argument 'sequence'
+2025-09-09 15:40:21,685 - modules.logger_service - INFO - [INFO] 第2句: 开始翻译
+2025-09-09 15:40:23,053 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:23] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:23,249 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:23] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:24,931 - modules.logger_service - INFO - [API] LLM翻译 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 3.25s)
+2025-09-09 15:40:24,933 - modules.logger_service - INFO - [INFO] 第2句: 开始音色克隆
+2025-09-09 15:40:24,933 - modules.logger_service - INFO - [INFO] 上传音频文件进行音色克隆: voice_2_1757403624
+2025-09-09 15:40:24,933 - modules.logger_service - ERROR - [ERROR] 第2句音色克隆失败: 音频文件不存在
+2025-09-09 15:40:24,933 - modules.logger_service - INFO - [INFO] 第2句: 开始TTS合成
+2025-09-09 15:40:25,792 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:25] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:25,974 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:25,976 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.04s) (Trace-ID: 050f0ce9c29ba280ed476008701171eb)
+2025-09-09 15:40:26,212 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_translated.mp3
+2025-09-09 15:40:26,215 - modules.logger_service - INFO - [INFO] 第2句: 开始5步时间戳对齐
+2025-09-09 15:40:26,215 - modules.logger_service - INFO - [INFO] 开始第2句5步时间戳对齐优化...
+2025-09-09 15:40:26,215 - modules.logger_service - INFO - [ALIGN] 第2句对齐第1步(静音裁剪检查): 开始处理
+2025-09-09 15:40:27,255 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:27] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:28,907 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:29,560 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.34s) (Trace-ID: 050f0cec94898703931426288b6095be)
+2025-09-09 15:40:29,747 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:29] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:29,949 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_step1.mp3
+2025-09-09 15:40:30,010 - modules.logger_service - INFO - [ALIGN] 第2句对齐第2步(文本优化): 开始优化翻译文本
+2025-09-09 15:40:31,318 - modules.logger_service - INFO - [API] LLM文本优化 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.31s)
+2025-09-09 15:40:31,765 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:31] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:31,979 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:33,031 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.71s) (Trace-ID: 050f0cefa85303c730f08e1fa11bc0a2)
+2025-09-09 15:40:33,248 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:33] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:33,533 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_step2.mp3
+2025-09-09 15:40:33,592 - modules.logger_service - INFO - [ALIGN] 第2句对齐第2步(文本优化): 成功! 优化后时长1.98s ≤ 目标时长1.98s
+2025-09-09 15:40:33,592 - modules.logger_service - INFO - [INFO] 第2句对齐优化成功
+2025-09-09 15:40:33,592 - modules.logger_service - ERROR - [ERROR] 第2句处理异常: ProjectData.update_segment() got multiple values for argument 'sequence'
+2025-09-09 15:40:33,592 - modules.logger_service - INFO - [INFO] 开始音频拼接和视频合成...
+2025-09-09 15:40:33,592 - modules.logger_service - INFO - [INFO] 🎉 视频翻译处理完成!
+2025-09-09 15:40:34,920 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:35,759 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:35] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:40:37,905 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:40,925 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:44,014 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:44] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:46,409 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:49,936 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:53,008 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:53] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:55,926 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:40:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:40:59,047 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:40:59] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:01,412 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:41:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:04,916 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:41:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:07,901 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:41:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:10,876 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:41:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:13,939 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:41:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:16,939 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:41:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:19,921 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:41:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:22,945 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:41:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:25,922 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:41:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:29,295 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:41:29] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:31,404 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:41:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:34,905 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:41:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:37,916 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:41:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:40,904 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:41:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:43,930 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:41:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:46,929 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:41:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:49,936 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:41:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:53,126 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:41:53] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:55,408 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:41:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:41:58,932 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:41:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:01,943 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:42:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:04,903 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:42:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:07,938 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:42:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:10,899 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:42:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:13,906 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:42:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:16,951 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:42:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:19,952 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:42:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:22,879 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:42:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:26,037 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:42:26] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:28,408 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:42:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:31,855 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:42:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:34,848 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:42:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:37,865 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:42:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:40,826 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:42:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:43,852 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:42:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:42:43,944 - werkzeug - INFO -  * Detected change in '/home/Devin/minimax-video-translation/video_translator/app.py', reloading
+2025-09-09 15:42:44,920 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:42:44,949 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:42:45,248 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:42:46,635 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:42:46,641 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:42:46,642 - werkzeug - INFO -  * Debugger PIN: 593-075-588
+2025-09-09 15:43:26,163 - werkzeug - INFO -  * Detected change in '/home/Devin/minimax-video-translation/video_translator/app.py', reloading
+2025-09-09 15:43:26,588 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:43:26,615 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:43:26,920 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:43:28,333 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:43:28,340 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:43:28,341 - werkzeug - INFO -  * Debugger PIN: 593-075-588
+2025-09-09 15:43:31,464 - werkzeug - INFO -  * Detected change in '/home/Devin/minimax-video-translation/video_translator/app.py', reloading
+2025-09-09 15:43:31,900 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:43:31,930 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:43:32,243 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:43:33,629 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:43:33,635 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:43:33,636 - werkzeug - INFO -  * Debugger PIN: 593-075-588
+2025-09-09 15:43:46,875 - werkzeug - INFO -  * Detected change in '/home/Devin/minimax-video-translation/video_translator/app.py', reloading
+2025-09-09 15:43:47,308 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:43:47,337 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:43:47,618 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:43:49,016 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:43:49,022 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:43:49,023 - werkzeug - INFO -  * Debugger PIN: 593-075-588
+2025-09-09 15:43:54,211 - werkzeug - INFO -  * Detected change in '/home/Devin/minimax-video-translation/video_translator/models/project_data.py', reloading
+2025-09-09 15:43:54,648 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:43:54,676 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:43:54,968 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:43:56,398 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:43:56,404 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:43:56,405 - werkzeug - INFO -  * Debugger PIN: 593-075-588
+2025-09-09 15:44:16,732 - werkzeug - INFO -  * Detected change in '/home/Devin/minimax-video-translation/video_translator/app.py', reloading
+2025-09-09 15:44:17,175 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:44:17,203 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:44:17,496 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:44:18,908 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:44:18,914 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:44:18,915 - werkzeug - INFO -  * Debugger PIN: 593-075-588
+2025-09-09 15:45:16,409 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:45:16,701 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:45:18,376 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:45:18,436 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5555
+ * Running on https://10.11.17.19:5555
+2025-09-09 15:45:18,437 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-09 15:45:18,437 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:45:18,464 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:45:18,754 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:45:20,148 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:45:20,154 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:45:20,154 - werkzeug - INFO -  * Debugger PIN: 593-075-588
+2025-09-09 15:45:28,542 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:45:28] "GET / HTTP/1.1" 200 -
+2025-09-09 15:45:29,077 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:45:29] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-09-09 15:45:29,138 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:45:29] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-09-09 15:45:29,188 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:45:29] "GET /static/js/table-editor.js HTTP/1.1" 200 -
+2025-09-09 15:45:29,682 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:45:29] "GET /api/config HTTP/1.1" 200 -
+2025-09-09 15:45:32,714 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:45:32] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:45:35,691 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:45:35] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:45:38,732 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:45:38] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:45:39,451 - modules.logger_service - INFO - [INFO] 视频文件上传成功: kouxing.mp4
+2025-09-09 15:45:39,451 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:45:39] "POST /api/upload HTTP/1.1" 200 -
+2025-09-09 15:45:41,734 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:45:41] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:45:44,327 - modules.logger_service - INFO - [INFO] 开始自动翻译处理...
+2025-09-09 15:45:44,327 - modules.logger_service - INFO - [INFO] 正在从视频中提取音频...
+2025-09-09 15:45:44,327 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:45:44] "POST /api/process/start HTTP/1.1" 200 -
+2025-09-09 15:45:44,328 - modules.logger_service - INFO - [INFO] 开始提取音频: /home/Devin/minimax-video-translation/video_translator/temp/1fc987d1-338a-4e55-9ba8-38b29ca422fa_042959f2-54ae-4952-a734-060c2b4013a8_kouxing.mp4
+2025-09-09 15:45:44,496 - modules.logger_service - INFO - [INFO] 音频提取成功: 时长6.98s, 大小0.23MB
+2025-09-09 15:45:44,496 - modules.logger_service - INFO - [INFO] 正在进行ASR语音识别和智能切分...
+2025-09-09 15:45:44,496 - modules.logger_service - INFO - [INFO] 加载Whisper模型...
+2025-09-09 15:45:44,739 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:45:44] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:45:45,735 - modules.logger_service - INFO - [INFO] Whisper模型加载完成
+2025-09-09 15:45:45,735 - modules.logger_service - INFO - [INFO] 开始ASR语音识别: ./temp/1fc987d1-338a-4e55-9ba8-38b29ca422fa_042959f2-54ae-4952-a734-060c2b4013a8_kouxing_audio.wav
+2025-09-09 15:45:46,387 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:45:46] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:45:47,698 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:45:47] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:45:48,844 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:45:48] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:45:50,487 - modules.logger_service - INFO - [INFO] ASR识别完成，检测到2个原始片段
+2025-09-09 15:45:50,487 - modules.logger_service - INFO - [INFO] 开始智能切分语音片段...
+2025-09-09 15:45:50,762 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:45:50] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:45:50,875 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:45:50] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:45:52,381 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:45:52] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:45:53,678 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:45:53] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:45:54,798 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:45:54] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:45:56,726 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:45:56] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:45:56,832 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:45:56] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:45:58,470 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:45:58] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:45:59,701 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:45:59] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:00,620 - modules.logger_service - INFO - [INFO] 智能切分完成，优化后得到2个片段
+2025-09-09 15:46:00,620 - modules.logger_service - INFO - [INFO] 第1句: 开始翻译
+2025-09-09 15:46:00,798 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:00] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:46:02,523 - modules.logger_service - INFO - [API] LLM翻译 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.90s)
+2025-09-09 15:46:02,524 - modules.logger_service - INFO - [INFO] 第1句: 开始音色克隆
+2025-09-09 15:46:02,525 - modules.logger_service - INFO - [INFO] 上传音频文件进行音色克隆: voice_1_1757403962
+2025-09-09 15:46:02,677 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:02] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:02,812 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:02] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:46:03,127 - modules.logger_service - INFO - [API] 音频文件上传 API调用: https://api.minimax.chat/v1/files/upload?GroupId=1747179187841536150 (耗时: 0.60s)
+2025-09-09 15:46:03,128 - modules.logger_service - INFO - [INFO] 执行音色克隆: voice_1_1757403962
+2025-09-09 15:46:04,380 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:04] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:46:05,683 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:05] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:06,101 - modules.logger_service - INFO - [API] 音色克隆 API调用: https://api.minimax.chat/v1/voice_clone?GroupId=1747179187841536150 (耗时: 0.97s)
+2025-09-09 15:46:06,102 - modules.logger_service - INFO - [INFO] 第1句: 开始TTS合成
+2025-09-09 15:46:06,829 - modules.logger_service - ERROR - [ERROR] TTS合成失败: API响应中未找到音频数据
+2025-09-09 15:46:06,830 - modules.logger_service - ERROR - [ERROR] 第1句TTS合成失败: API响应中未找到音频数据
+2025-09-09 15:46:06,831 - modules.logger_service - INFO - [INFO] 第2句: 开始翻译
+2025-09-09 15:46:06,833 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:06] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:46:08,099 - modules.logger_service - INFO - [API] LLM翻译 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.27s)
+2025-09-09 15:46:08,101 - modules.logger_service - INFO - [INFO] 第2句: 开始音色克隆
+2025-09-09 15:46:08,101 - modules.logger_service - INFO - [INFO] 上传音频文件进行音色克隆: voice_2_1757403968
+2025-09-09 15:46:08,416 - modules.logger_service - INFO - [API] 音频文件上传 API调用: https://api.minimax.chat/v1/files/upload?GroupId=1747179187841536150 (耗时: 0.31s)
+2025-09-09 15:46:08,418 - modules.logger_service - INFO - [INFO] 执行音色克隆: voice_2_1757403968
+2025-09-09 15:46:08,699 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:08] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:08,790 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:08] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:46:10,402 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:10] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:46:11,440 - modules.logger_service - INFO - [API] 音色克隆 API调用: https://api.minimax.chat/v1/voice_clone?GroupId=1747179187841536150 (耗时: 1.02s)
+2025-09-09 15:46:11,441 - modules.logger_service - INFO - [INFO] 第2句: 开始TTS合成
+2025-09-09 15:46:11,737 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:11] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:12,082 - modules.logger_service - ERROR - [ERROR] TTS合成失败: API响应中未找到音频数据
+2025-09-09 15:46:12,084 - modules.logger_service - ERROR - [ERROR] 第2句TTS合成失败: API响应中未找到音频数据
+2025-09-09 15:46:12,084 - modules.logger_service - INFO - [INFO] 开始音频拼接和视频合成...
+2025-09-09 15:46:12,084 - modules.logger_service - INFO - [INFO] 开始拼接2个音频片段...
+2025-09-09 15:46:12,085 - modules.logger_service - WARNING - [WARNING] 第1句使用静音: 3.76s
+2025-09-09 15:46:12,085 - modules.logger_service - WARNING - [WARNING] 第2句使用静音: 1.98s
+2025-09-09 15:46:12,095 - modules.logger_service - INFO - [INFO] 音频拼接完成: 总时长5.74s, 大小0.48MB
+2025-09-09 15:46:12,095 - modules.logger_service - INFO - [INFO] 开始合并音频和视频...
+2025-09-09 15:46:12,199 - modules.logger_service - INFO - [INFO] 音视频合并成功: ./temp/final_translated_video.mp4 (1.03MB)
+2025-09-09 15:46:12,199 - modules.logger_service - INFO - [INFO] 最终视频已生成: ./temp/final_translated_video.mp4
+2025-09-09 15:46:12,199 - modules.logger_service - INFO - [INFO] 🎉 视频翻译处理完成!
+2025-09-09 15:46:12,827 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:12] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:46:14,752 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:14] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:17,780 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:17] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:20,696 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:20] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:23,832 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:23] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:26,689 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:26] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:29,713 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:29] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:32,698 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:32] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:35,687 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:35] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:38,730 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:38] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:41,955 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:41] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:44,261 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:44] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:47,729 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:47] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:50,705 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:50] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:53,704 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:46:53] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:56,702 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:56] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:46:59,794 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:46:59] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:47:02,267 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:47:02] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:47:05,748 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:47:05] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:47:08,724 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:47:08] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:54:38,575 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:54:38,895 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:54:40,256 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:54:40,343 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5555
+ * Running on https://10.11.17.19:5555
+2025-09-09 15:54:40,343 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-09 15:54:40,343 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 15:54:40,371 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:54:40,674 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:54:42,060 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:54:42,069 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 15:54:42,069 - werkzeug - INFO -  * Debugger PIN: 613-785-096
+2025-09-09 15:55:44,432 - __main__ - INFO - 创建必要目录完成
+2025-09-09 15:55:44,726 - __main__ - INFO - 依赖检查通过
+2025-09-09 15:55:46,079 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 15:56:06,500 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:06] "GET / HTTP/1.1" 200 -
+2025-09-09 15:56:07,037 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:07] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-09-09 15:56:07,078 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:07] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-09-09 15:56:07,127 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:07] "GET /static/js/table-editor.js HTTP/1.1" 200 -
+2025-09-09 15:56:07,957 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:07] "GET /api/config HTTP/1.1" 200 -
+2025-09-09 15:56:10,993 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:13,972 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:14,782 - modules.logger_service - INFO - [INFO] 视频文件上传成功: kouxing.mp4
+2025-09-09 15:56:14,782 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:14] "POST /api/upload HTTP/1.1" 200 -
+2025-09-09 15:56:17,006 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:17] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:19,236 - modules.logger_service - INFO - [INFO] 开始自动翻译处理...
+2025-09-09 15:56:19,236 - modules.logger_service - INFO - [INFO] 正在从视频中提取音频...
+2025-09-09 15:56:19,237 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:19] "POST /api/process/start HTTP/1.1" 200 -
+2025-09-09 15:56:19,237 - modules.logger_service - INFO - [INFO] 开始提取音频: /home/Devin/minimax-video-translation/video_translator/temp/9a4cfd57-af1c-47a8-9465-9a9c0cba5b63_3289d51f-d4d2-4f66-b596-d8a00760f0a7_kouxing.mp4
+2025-09-09 15:56:19,408 - modules.logger_service - INFO - [INFO] 音频提取成功: 时长6.98s, 大小0.23MB
+2025-09-09 15:56:19,408 - modules.logger_service - INFO - [INFO] 正在进行ASR语音识别和智能切分...
+2025-09-09 15:56:19,408 - modules.logger_service - INFO - [INFO] 加载Whisper模型...
+2025-09-09 15:56:19,975 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:20,642 - modules.logger_service - INFO - [INFO] Whisper模型加载完成
+2025-09-09 15:56:20,642 - modules.logger_service - INFO - [INFO] 开始ASR语音识别: ./temp/9a4cfd57-af1c-47a8-9465-9a9c0cba5b63_3289d51f-d4d2-4f66-b596-d8a00760f0a7_kouxing_audio.wav
+2025-09-09 15:56:21,826 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:21] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:23,050 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:23] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:23,760 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:23] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:24,324 - modules.logger_service - INFO - [INFO] ASR识别完成，检测到2个原始片段
+2025-09-09 15:56:24,324 - modules.logger_service - INFO - [INFO] 开始智能切分语音片段...
+2025-09-09 15:56:25,224 - modules.logger_service - INFO - [INFO] 智能切分完成，优化后得到2个片段
+2025-09-09 15:56:25,225 - modules.logger_service - INFO - [INFO] 第1句: 开始翻译
+2025-09-09 15:56:25,733 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:25] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:26,013 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:26] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:27,103 - modules.logger_service - INFO - [API] LLM翻译 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.88s) (Trace-ID: 050f10a94c261396f4b944969720ce63)
+2025-09-09 15:56:27,104 - modules.logger_service - INFO - [INFO] 第1句: 开始音色克隆和TTS合成
+2025-09-09 15:56:27,105 - modules.logger_service - INFO - [INFO] 上传音频文件进行音色克隆: voice_1_1757404587
+2025-09-09 15:56:27,663 - modules.logger_service - INFO - [API] 音频文件上传 API调用: https://api.minimax.chat/v1/files/upload?GroupId=1747179187841536150 (耗时: 0.56s) (Trace-ID: 050f10ab60d00fa6f65a39d2d7ef8798)
+2025-09-09 15:56:27,665 - modules.logger_service - INFO - [INFO] 执行音色克隆: voice_1_1757404587
+2025-09-09 15:56:27,728 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:27] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:28,981 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:29,736 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:29] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:30,663 - modules.logger_service - INFO - [API] 音色克隆 API调用: https://api.minimax.chat/v1/voice_clone?GroupId=1747179187841536150 (耗时: 1.00s) (Trace-ID: 050f10ad148772e95fccb9586b409e34)
+2025-09-09 15:56:30,664 - modules.logger_service - ERROR - [ERROR] 音色克隆响应中未找到音频数据
+2025-09-09 15:56:30,665 - modules.logger_service - WARNING - [WARNING] 第1句音色克隆失败，使用标准TTS: 音色克隆响应中未找到音频数据
+2025-09-09 15:56:31,806 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:31] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:31,977 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:32,312 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.65s) (Trace-ID: 050f10afc9db2f3ab89602c24e913761)
+2025-09-09 15:56:33,384 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_1_translated.mp3
+2025-09-09 15:56:33,386 - modules.logger_service - INFO - [INFO] 第1句: 开始5步时间戳对齐
+2025-09-09 15:56:33,387 - modules.logger_service - INFO - [INFO] 开始第1句5步时间戳对齐优化...
+2025-09-09 15:56:33,387 - modules.logger_service - INFO - [ALIGN] 第1句对齐第1步(静音裁剪检查): 开始处理
+2025-09-09 15:56:33,744 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:33] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:35,029 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.64s) (Trace-ID: 050f10b18f27e504ded5be96294df5ae)
+2025-09-09 15:56:35,053 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:35] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:35,397 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_1_step1.mp3
+2025-09-09 15:56:35,751 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:35] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:37,746 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:37] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:38,026 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:38] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:39,724 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:39] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:40,307 - modules.logger_service - INFO - [ALIGN] 第1句对齐第1步(静音裁剪检查): 时长超限: 实际时长5.32s > 目标时长3.76s
+2025-09-09 15:56:40,308 - modules.logger_service - INFO - [ALIGN] 第1句对齐第2步(文本优化): 开始优化翻译文本
+2025-09-09 15:56:40,991 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:41,751 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:41] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:41,955 - modules.logger_service - INFO - [API] LLM文本优化 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.65s)
+2025-09-09 15:56:43,176 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.22s) (Trace-ID: 050f10ba5f82fce85b176b9af9234280)
+2025-09-09 15:56:43,708 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_1_step2.mp3
+2025-09-09 15:56:43,712 - modules.logger_service - INFO - [ALIGN] 第1句对齐第2步(文本优化): 成功! 优化后时长2.98s ≤ 目标时长3.76s
+2025-09-09 15:56:43,712 - modules.logger_service - INFO - [INFO] 第1句对齐优化成功
+2025-09-09 15:56:43,712 - modules.logger_service - INFO - [INFO] 第2句: 开始翻译
+2025-09-09 15:56:43,749 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:43] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:44,019 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:44] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:45,380 - modules.logger_service - INFO - [API] LLM翻译 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.67s) (Trace-ID: 050f10bb83380616d8fd243a92247d40)
+2025-09-09 15:56:45,382 - modules.logger_service - INFO - [INFO] 第2句: 开始音色克隆和TTS合成
+2025-09-09 15:56:45,382 - modules.logger_service - INFO - [INFO] 上传音频文件进行音色克隆: voice_2_1757404605
+2025-09-09 15:56:45,744 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:45] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:45,919 - modules.logger_service - INFO - [API] 音频文件上传 API调用: https://api.minimax.chat/v1/files/upload?GroupId=1747179187841536150 (耗时: 0.54s) (Trace-ID: 050f10bdbb07a3e8f91076f28da4d354)
+2025-09-09 15:56:45,921 - modules.logger_service - INFO - [INFO] 执行音色克隆: voice_2_1757404605
+2025-09-09 15:56:46,962 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:47,736 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:47] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:48,626 - modules.logger_service - INFO - [API] 音色克隆 API调用: https://api.minimax.chat/v1/voice_clone?GroupId=1747179187841536150 (耗时: 0.70s) (Trace-ID: 050f10c0014faabe9fd85626dd3d3b3e)
+2025-09-09 15:56:48,626 - modules.logger_service - ERROR - [ERROR] 音色克隆响应中未找到音频数据
+2025-09-09 15:56:48,628 - modules.logger_service - WARNING - [WARNING] 第2句音色克隆失败，使用标准TTS: 音色克隆响应中未找到音频数据
+2025-09-09 15:56:49,744 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:49] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:49,811 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.18s) (Trace-ID: 050f10c0276be4b25befc90f981b3cfd)
+2025-09-09 15:56:50,024 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:50] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:50,097 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_translated.mp3
+2025-09-09 15:56:50,100 - modules.logger_service - INFO - [INFO] 第2句: 开始5步时间戳对齐
+2025-09-09 15:56:50,100 - modules.logger_service - INFO - [INFO] 开始第2句5步时间戳对齐优化...
+2025-09-09 15:56:50,100 - modules.logger_service - INFO - [ALIGN] 第2句对齐第1步(静音裁剪检查): 开始处理
+2025-09-09 15:56:51,736 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:51] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:53,059 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:53] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:53,341 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.24s) (Trace-ID: 050f10c465581b75e29ba04325e6dbc5)
+2025-09-09 15:56:53,737 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:53] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:53,865 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_step1.mp3
+2025-09-09 15:56:53,947 - modules.logger_service - INFO - [ALIGN] 第2句对齐第1步(静音裁剪检查): 时长超限: 实际时长3.67s > 目标时长1.98s
+2025-09-09 15:56:53,947 - modules.logger_service - INFO - [ALIGN] 第2句对齐第2步(文本优化): 开始优化翻译文本
+2025-09-09 15:56:55,084 - modules.logger_service - INFO - [API] LLM文本优化 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.14s)
+2025-09-09 15:56:55,737 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:55] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:55,954 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 0.87s) (Trace-ID: 050f10c78ec37a68a4d6c0795288197c)
+2025-09-09 15:56:56,021 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:56] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:56:56,229 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_step2.mp3
+2025-09-09 15:56:56,233 - modules.logger_service - INFO - [ALIGN] 第2句对齐第2步(文本优化): 成功! 优化后时长1.74s ≤ 目标时长1.98s
+2025-09-09 15:56:56,233 - modules.logger_service - INFO - [INFO] 第2句对齐优化成功
+2025-09-09 15:56:56,233 - modules.logger_service - INFO - [INFO] 开始音频拼接和视频合成...
+2025-09-09 15:56:56,233 - modules.logger_service - INFO - [INFO] 开始拼接2个音频片段...
+2025-09-09 15:56:56,238 - modules.logger_service - INFO - [INFO] 第1句音频: 2.98s → 3.76s
+2025-09-09 15:56:56,242 - modules.logger_service - INFO - [INFO] 第2句音频: 1.74s → 1.98s
+2025-09-09 15:56:56,252 - modules.logger_service - INFO - [INFO] 音频拼接完成: 总时长5.74s, 大小0.48MB
+2025-09-09 15:56:56,252 - modules.logger_service - INFO - [INFO] 开始合并音频和视频...
+2025-09-09 15:56:56,366 - modules.logger_service - INFO - [INFO] 音视频合并成功: ./temp/final_translated_video.mp4 (1.07MB)
+2025-09-09 15:56:56,366 - modules.logger_service - INFO - [INFO] 最终视频已生成: ./temp/final_translated_video.mp4
+2025-09-09 15:56:56,366 - modules.logger_service - INFO - [INFO] 🎉 视频翻译处理完成!
+2025-09-09 15:56:57,754 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:56:57] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:56:59,001 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:56:59] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:02,009 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:02] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:04,965 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:07,980 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:10,987 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:13,992 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:17,082 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:17] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:20,086 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:57:20] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:23,046 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:57:23] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:26,056 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:26] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:29,077 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:57:29] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:32,047 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:32] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:35,060 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:57:35] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:38,036 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:38] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:41,049 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:41] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:44,030 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:44] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:47,048 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:57:47] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:50,081 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:50] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:53,083 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:53] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:56,054 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:56] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:57:59,058 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:57:59] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:58:02,040 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:58:02] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:58:05,062 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:58:05] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:58:08,127 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:58:08] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:58:11,071 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:58:11] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:58:14,047 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:58:14] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:59:15,071 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:59:26,137 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:26] "GET / HTTP/1.1" 200 -
+2025-09-09 15:59:26,686 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:26] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-09-09 15:59:26,739 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:26] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-09-09 15:59:26,795 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:26] "GET /static/js/table-editor.js HTTP/1.1" 200 -
+2025-09-09 15:59:27,912 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:27] "GET /api/config HTTP/1.1" 200 -
+2025-09-09 15:59:30,916 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:59:33,916 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:59:35,813 - modules.logger_service - INFO - [INFO] 视频文件上传成功: kouxing.mp4
+2025-09-09 15:59:35,813 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:35] "POST /api/upload HTTP/1.1" 200 -
+2025-09-09 15:59:36,941 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:59:38,604 - modules.logger_service - INFO - [INFO] 开始自动翻译处理...
+2025-09-09 15:59:38,605 - modules.logger_service - INFO - [INFO] 正在从视频中提取音频...
+2025-09-09 15:59:38,605 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:38] "POST /api/process/start HTTP/1.1" 200 -
+2025-09-09 15:59:38,605 - modules.logger_service - INFO - [INFO] 开始提取音频: /home/Devin/minimax-video-translation/video_translator/temp/b469da97-3c47-4ed5-9291-5e2fda392396_3827c78d-d96d-403f-9131-b2e164e63e08_kouxing.mp4
+2025-09-09 15:59:38,771 - modules.logger_service - INFO - [INFO] 音频提取成功: 时长6.98s, 大小0.23MB
+2025-09-09 15:59:38,771 - modules.logger_service - INFO - [INFO] 正在进行ASR语音识别和智能切分...
+2025-09-09 15:59:38,771 - modules.logger_service - INFO - [INFO] 开始ASR语音识别: ./temp/b469da97-3c47-4ed5-9291-5e2fda392396_3827c78d-d96d-403f-9131-b2e164e63e08_kouxing_audio.wav
+2025-09-09 15:59:40,079 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:59:40,662 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:40] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:59:40,709 - modules.logger_service - INFO - [INFO] ASR识别完成，检测到2个原始片段
+2025-09-09 15:59:40,709 - modules.logger_service - INFO - [INFO] 开始智能切分语音片段...
+2025-09-09 15:59:40,719 - modules.logger_service - INFO - [INFO] 智能切分完成，优化后得到2个片段
+2025-09-09 15:59:40,719 - modules.logger_service - INFO - [INFO] 第1句: 开始翻译
+2025-09-09 15:59:42,451 - modules.logger_service - INFO - [API] LLM翻译 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.73s) (Trace-ID: 050f116d4a74c3bf03e8e91cc55c7bcc)
+2025-09-09 15:59:42,452 - modules.logger_service - INFO - [INFO] 第1句: 开始音色克隆和TTS合成
+2025-09-09 15:59:42,452 - modules.logger_service - INFO - [INFO] 上传音频文件进行音色克隆: voice_1_1757404782
+2025-09-09 15:59:42,840 - modules.logger_service - INFO - [API] 音频文件上传 API调用: https://api.minimax.chat/v1/files/upload?GroupId=1747179187841536150 (耗时: 0.39s) (Trace-ID: 050f116e6366fc31afdaf797afcc3058)
+2025-09-09 15:59:42,841 - modules.logger_service - INFO - [INFO] 执行音色克隆: voice_1_1757404782
+2025-09-09 15:59:42,939 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:59:43,107 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:43] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:59:44,668 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:44] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:59:45,772 - modules.logger_service - INFO - [API] 音色克隆 API调用: https://api.minimax.chat/v1/voice_clone?GroupId=1747179187841536150 (耗时: 0.93s) (Trace-ID: 050f1171118a21555093f29a19b65bf3)
+2025-09-09 15:59:45,772 - modules.logger_service - ERROR - [ERROR] 音色克隆响应中未找到音频数据
+2025-09-09 15:59:45,773 - modules.logger_service - WARNING - [WARNING] 第1句音色克隆失败，使用标准TTS: 音色克隆响应中未找到音频数据
+2025-09-09 15:59:45,919 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:59:47,034 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.26s) (Trace-ID: 050f1171a128e6dc3d473fd9d11f3924)
+2025-09-09 15:59:47,130 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:47] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:59:47,601 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_1_translated.mp3
+2025-09-09 15:59:47,604 - modules.logger_service - INFO - [INFO] 第1句: 开始5步时间戳对齐
+2025-09-09 15:59:47,604 - modules.logger_service - INFO - [INFO] 开始第1句5步时间戳对齐优化...
+2025-09-09 15:59:47,604 - modules.logger_service - INFO - [ALIGN] 第1句对齐第1步(静音裁剪检查): 开始处理
+2025-09-09 15:59:48,995 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:48] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:59:49,095 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:59:50,711 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:50] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:59:51,218 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.61s) (Trace-ID: 050f1175f87070081ee7f5ac28536b78)
+2025-09-09 15:59:51,466 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_1_step1.mp3
+2025-09-09 15:59:51,582 - modules.logger_service - INFO - [ALIGN] 第1句对齐第1步(静音裁剪检查): 时长超限: 实际时长5.57s > 目标时长3.76s
+2025-09-09 15:59:51,582 - modules.logger_service - INFO - [ALIGN] 第1句对齐第2步(文本优化): 开始优化翻译文本
+2025-09-09 15:59:51,947 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:59:53,104 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:53] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:59:53,128 - modules.logger_service - INFO - [API] LLM文本优化 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.54s)
+2025-09-09 15:59:54,076 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 0.95s) (Trace-ID: 050f1179bfef6d2e0f40d61cc74921a8)
+2025-09-09 15:59:54,939 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:59:55,112 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:55] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:59:56,349 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_1_step2.mp3
+2025-09-09 15:59:56,352 - modules.logger_service - INFO - [ALIGN] 第1句对齐第2步(文本优化): 成功! 优化后时长2.81s ≤ 目标时长3.76s
+2025-09-09 15:59:56,352 - modules.logger_service - INFO - [INFO] 第1句对齐优化成功
+2025-09-09 15:59:56,352 - modules.logger_service - INFO - [INFO] 第2句: 开始翻译
+2025-09-09 15:59:56,672 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 15:59:56] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 15:59:57,457 - modules.logger_service - INFO - [API] LLM翻译 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.10s) (Trace-ID: 050f117c5478732d9bd727955e09a7a5)
+2025-09-09 15:59:57,458 - modules.logger_service - INFO - [INFO] 第2句: 开始音色克隆和TTS合成
+2025-09-09 15:59:57,458 - modules.logger_service - INFO - [INFO] 上传音频文件进行音色克隆: voice_2_1757404797
+2025-09-09 15:59:57,949 - modules.logger_service - INFO - [API] 音频文件上传 API调用: https://api.minimax.chat/v1/files/upload?GroupId=1747179187841536150 (耗时: 0.49s) (Trace-ID: 050f117d87a43f9ca82f145b10f59fff)
+2025-09-09 15:59:57,950 - modules.logger_service - INFO - [INFO] 执行音色克隆: voice_2_1757404797
+2025-09-09 15:59:57,959 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 15:59:59,087 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 15:59:59] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:00:00,936 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:00:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:01,152 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:01] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:00:02,662 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:02] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:00:03,347 - modules.logger_service - INFO - [API] 音色克隆 API调用: https://api.minimax.chat/v1/voice_clone?GroupId=1747179187841536150 (耗时: 3.40s) (Trace-ID: 050f1180760d673f92dddec5a4139ba6)
+2025-09-09 16:00:03,347 - modules.logger_service - ERROR - [ERROR] 音色克隆响应中未找到音频数据
+2025-09-09 16:00:03,349 - modules.logger_service - WARNING - [WARNING] 第2句音色克隆失败，使用标准TTS: 音色克隆响应中未找到音频数据
+2025-09-09 16:00:03,929 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:04,496 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.15s) (Trace-ID: 050f11832c78d82b26969d43c5742e20)
+2025-09-09 16:00:04,979 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_translated.mp3
+2025-09-09 16:00:04,983 - modules.logger_service - INFO - [INFO] 第2句: 开始5步时间戳对齐
+2025-09-09 16:00:04,983 - modules.logger_service - INFO - [INFO] 开始第2句5步时间戳对齐优化...
+2025-09-09 16:00:04,983 - modules.logger_service - INFO - [ALIGN] 第2句对齐第1步(静音裁剪检查): 开始处理
+2025-09-09 16:00:05,121 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:05] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:00:07,105 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:00:07] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:00:07,153 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:00:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:08,043 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.06s) (Trace-ID: 050f11877321b4576ad41402c69957f5)
+2025-09-09 16:00:08,559 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_step1.mp3
+2025-09-09 16:00:08,636 - modules.logger_service - INFO - [ALIGN] 第2句对齐第1步(静音裁剪检查): 时长超限: 实际时长3.30s > 目标时长1.98s
+2025-09-09 16:00:08,636 - modules.logger_service - INFO - [ALIGN] 第2句对齐第2步(文本优化): 开始优化翻译文本
+2025-09-09 16:00:08,661 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:00:08] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:00:09,653 - modules.logger_service - INFO - [API] LLM文本优化 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.02s)
+2025-09-09 16:00:09,939 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:10,738 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.08s) (Trace-ID: 050f11893e327db8009e11433bb26dd1)
+2025-09-09 16:00:10,962 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_step2.mp3
+2025-09-09 16:00:10,965 - modules.logger_service - INFO - [ALIGN] 第2句对齐第2步(文本优化): 仍然超时: 优化后时长2.25s > 目标时长1.98s
+2025-09-09 16:00:10,965 - modules.logger_service - INFO - [ALIGN] 第2句对齐第3步(首次速度调整): 计算速度参数: 1.3
+2025-09-09 16:00:11,134 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:00:11] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:00:12,985 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:00:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:13,080 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:00:13] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:00:13,962 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.00s) (Trace-ID: 050f118d33d494c027d29b41de21f495)
+2025-09-09 16:00:14,614 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_step3.mp3
+2025-09-09 16:00:14,617 - modules.logger_service - INFO - [ALIGN] 第2句对齐第3步(首次速度调整): 成功! 加速后时长1.50s ≤ 目标时长1.98s
+2025-09-09 16:00:14,618 - modules.logger_service - INFO - [INFO] 第2句对齐优化成功
+2025-09-09 16:00:14,618 - modules.logger_service - INFO - [INFO] 开始音频拼接和视频合成...
+2025-09-09 16:00:14,618 - modules.logger_service - INFO - [INFO] 开始拼接2个音频片段...
+2025-09-09 16:00:14,623 - modules.logger_service - INFO - [INFO] 第1句音频: 2.81s → 3.76s
+2025-09-09 16:00:14,627 - modules.logger_service - INFO - [INFO] 第2句音频: 1.50s → 1.98s
+2025-09-09 16:00:14,637 - modules.logger_service - INFO - [INFO] 音频拼接完成: 总时长5.74s, 大小0.48MB
+2025-09-09 16:00:14,637 - modules.logger_service - INFO - [INFO] 开始合并音频和视频...
+2025-09-09 16:00:14,751 - modules.logger_service - INFO - [INFO] 音视频合并成功: ./temp/final_translated_video.mp4 (1.07MB)
+2025-09-09 16:00:14,751 - modules.logger_service - INFO - [INFO] 最终视频已生成: ./temp/final_translated_video.mp4
+2025-09-09 16:00:14,751 - modules.logger_service - INFO - [INFO] 🎉 视频翻译处理完成!
+2025-09-09 16:00:15,051 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:15,108 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:15] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:00:15,975 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:00:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:18,923 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:21,904 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:24,931 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:00:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:27,939 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:30,929 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:33,955 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:00:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:36,927 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:00:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:39,942 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:42,926 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:45,896 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:48,939 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:51,993 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:00:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:54,943 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:00:57,931 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:00:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:00,937 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:01:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:03,924 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:01:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:06,944 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:01:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:09,930 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:01:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:12,922 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:01:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:15,027 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:01:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:15,918 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:01:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:18,973 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:01:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:21,911 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:01:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:24,947 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:01:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:27,915 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:01:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:30,918 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:01:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:33,942 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:01:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:36,914 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:01:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:39,928 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:01:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:42,938 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:01:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:45,937 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:01:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:48,933 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:01:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:51,921 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:01:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:54,940 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:01:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:01:57,938 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:01:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:00,933 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:02:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:03,928 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:02:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:07,371 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:02:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:09,608 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:02:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:13,097 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:02:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:15,065 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:02:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:16,051 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:02:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:19,083 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:02:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:22,065 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:02:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:25,298 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:02:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:27,606 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:02:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:31,150 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:02:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:34,024 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:02:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:37,070 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:02:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:40,097 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:02:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:43,068 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:02:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:46,062 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:02:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:49,202 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:02:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:51,613 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:02:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:54,948 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:02:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:02:58,075 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:02:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:01,071 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:04,036 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:03:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:07,068 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:10,068 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:13,049 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:15,052 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:16,299 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:19,049 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:22,055 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:25,048 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:28,054 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:31,082 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:34,076 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:03:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:39,618 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:03:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:43,079 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:46,161 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:49,042 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:52,098 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:03:52] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:03:55,035 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:03:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:04:15,064 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:04:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:04:15,574 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:04:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:05:15,229 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:05:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:05:16,051 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:05:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:06:15,104 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:06:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:06:15,585 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:06:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:07:15,215 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:07:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:07:15,322 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:07:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:08:16,213 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:08:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:08:16,288 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:08:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:15,102 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:09:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:15,765 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:09:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:22,306 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:09:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:22,893 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:09:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:25,117 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:09:25] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:27,497 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:09:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:31,168 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:09:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:33,489 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:09:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:37,037 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:09:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:40,484 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:09:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:42,503 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:09:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:46,263 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:09:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:48,486 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:09:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:52,118 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:09:52] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:54,493 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:09:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:09:58,273 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:09:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:10:00,493 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:10:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:10:04,030 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:10:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:10:06,960 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:10:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:10:10,099 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:10:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:10:12,490 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:10:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:10:15,258 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:10:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:10:17,035 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:10:17] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:10:18,497 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:10:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:10:21,977 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:10:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:10:22,037 - werkzeug - INFO -  * Detected change in '/home/Devin/minimax-video-translation/video_translator/modules/voice_clone_service.py', reloading
+2025-09-09 16:10:22,951 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 16:10:22,978 - __main__ - INFO - 创建必要目录完成
+2025-09-09 16:10:23,270 - __main__ - INFO - 依赖检查通过
+2025-09-09 16:10:24,640 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 16:10:24,645 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 16:10:24,646 - werkzeug - INFO -  * Debugger PIN: 613-785-096
+2025-09-09 16:11:30,462 - werkzeug - INFO -  * Detected change in '/home/Devin/minimax-video-translation/video_translator/modules/voice_clone_service.py', reloading
+2025-09-09 16:11:30,904 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 16:11:30,933 - __main__ - INFO - 创建必要目录完成
+2025-09-09 16:11:31,227 - __main__ - INFO - 依赖检查通过
+2025-09-09 16:11:32,670 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 16:11:32,676 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 16:11:32,676 - werkzeug - INFO -  * Debugger PIN: 613-785-096
+2025-09-09 16:11:42,874 - werkzeug - INFO -  * Detected change in '/home/Devin/minimax-video-translation/video_translator/modules/voice_clone_service.py', reloading
+2025-09-09 16:11:43,301 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 16:11:43,329 - __main__ - INFO - 创建必要目录完成
+2025-09-09 16:11:43,638 - __main__ - INFO - 依赖检查通过
+2025-09-09 16:11:45,015 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 16:11:45,021 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 16:11:45,022 - werkzeug - INFO -  * Debugger PIN: 613-785-096
+2025-09-09 16:11:56,238 - werkzeug - INFO -  * Detected change in '/home/Devin/minimax-video-translation/video_translator/modules/voice_clone_service.py', reloading
+2025-09-09 16:11:56,695 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 16:11:56,724 - __main__ - INFO - 创建必要目录完成
+2025-09-09 16:11:57,056 - __main__ - INFO - 依赖检查通过
+2025-09-09 16:11:58,440 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 16:11:58,446 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 16:11:58,446 - werkzeug - INFO -  * Debugger PIN: 613-785-096
+2025-09-09 16:12:19,800 - werkzeug - INFO -  * Detected change in '/home/Devin/minimax-video-translation/video_translator/app.py', reloading
+2025-09-09 16:12:20,235 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 16:12:20,265 - __main__ - INFO - 创建必要目录完成
+2025-09-09 16:12:20,586 - __main__ - INFO - 依赖检查通过
+2025-09-09 16:12:21,963 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 16:12:21,968 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 16:12:21,969 - werkzeug - INFO -  * Debugger PIN: 613-785-096
+2025-09-09 16:14:01,076 - __main__ - INFO - 创建必要目录完成
+2025-09-09 16:14:01,369 - __main__ - INFO - 依赖检查通过
+2025-09-09 16:14:02,760 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 16:15:43,435 - __main__ - INFO - 创建必要目录完成
+2025-09-09 16:15:43,728 - __main__ - INFO - 依赖检查通过
+2025-09-09 16:15:45,091 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 16:15:45,160 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5555
+ * Running on https://10.11.17.19:5555
+2025-09-09 16:15:45,160 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-09 16:15:45,161 - werkzeug - INFO -  * Restarting with stat
+2025-09-09 16:15:45,188 - __main__ - INFO - 创建必要目录完成
+2025-09-09 16:15:45,475 - __main__ - INFO - 依赖检查通过
+2025-09-09 16:15:46,885 - __main__ - INFO - 开始启动Flask应用...
+2025-09-09 16:15:46,891 - werkzeug - WARNING -  * Debugger is active!
+2025-09-09 16:15:46,891 - werkzeug - INFO -  * Debugger PIN: 139-660-191
+2025-09-09 16:15:58,717 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:15:58] "GET / HTTP/1.1" 200 -
+2025-09-09 16:15:59,457 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:15:59] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-09-09 16:15:59,586 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:15:59] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-09-09 16:15:59,635 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:15:59] "GET /static/js/table-editor.js HTTP/1.1" 200 -
+2025-09-09 16:16:00,488 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:00] "GET /api/config HTTP/1.1" 200 -
+2025-09-09 16:16:03,544 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:08,905 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:08] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:10,648 - modules.logger_service - INFO - [INFO] 视频文件上传成功: kouxing.mp4
+2025-09-09 16:16:10,649 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:10] "POST /api/upload HTTP/1.1" 200 -
+2025-09-09 16:16:10,715 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:12,675 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:13,800 - modules.logger_service - INFO - [INFO] 开始自动翻译处理...
+2025-09-09 16:16:13,801 - modules.logger_service - INFO - [INFO] 正在从视频中提取音频...
+2025-09-09 16:16:13,801 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:13] "POST /api/process/start HTTP/1.1" 200 -
+2025-09-09 16:16:13,801 - modules.logger_service - INFO - [INFO] 开始提取音频: /home/Devin/minimax-video-translation/video_translator/temp/e8d2e713-35c2-4658-94b1-9d7e796c3072_c9834779-9acf-44e1-a2fc-441f5ebda736_kouxing.mp4
+2025-09-09 16:16:13,965 - modules.logger_service - INFO - [INFO] 音频提取成功: 时长6.98s, 大小0.23MB
+2025-09-09 16:16:13,965 - modules.logger_service - INFO - [INFO] 正在进行ASR语音识别和智能切分...
+2025-09-09 16:16:13,965 - modules.logger_service - INFO - [INFO] 加载Whisper模型...
+2025-09-09 16:16:15,163 - modules.logger_service - INFO - [INFO] Whisper模型加载完成
+2025-09-09 16:16:15,163 - modules.logger_service - INFO - [INFO] 开始ASR语音识别: ./temp/e8d2e713-35c2-4658-94b1-9d7e796c3072_c9834779-9acf-44e1-a2fc-441f5ebda736_kouxing_audio.wav
+2025-09-09 16:16:15,758 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:16,532 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:16,646 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:16] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:18,470 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:18] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:18,572 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:18,812 - modules.logger_service - INFO - [INFO] ASR识别完成，检测到2个原始片段
+2025-09-09 16:16:18,813 - modules.logger_service - INFO - [INFO] 开始智能切分语音片段...
+2025-09-09 16:16:19,668 - modules.logger_service - INFO - [INFO] 智能切分完成，优化后得到2个片段
+2025-09-09 16:16:19,668 - modules.logger_service - INFO - [INFO] 第1句: 开始翻译
+2025-09-09 16:16:19,880 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:19] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:21,189 - modules.logger_service - INFO - [API] LLM翻译 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.52s) (Trace-ID: 050f15534474423db3ba18c3695e5d7b)
+2025-09-09 16:16:21,190 - modules.logger_service - INFO - [INFO] 第1句: 开始音色克隆
+2025-09-09 16:16:21,193 - modules.logger_service - INFO - [INFO] 原始音频时长: 3.76秒
+2025-09-09 16:16:21,193 - modules.logger_service - INFO - [INFO] 音频时长不足10.0秒，将复制3次
+2025-09-09 16:16:21,206 - modules.logger_service - INFO - [INFO] 扩展后音频时长: 11.28秒，保存到: ./temp/segment_1_original_extended.wav
+2025-09-09 16:16:21,206 - modules.logger_service - INFO - [INFO] 上传音频文件进行音色克隆: voice_1_1757405781
+2025-09-09 16:16:21,487 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:21,697 - modules.logger_service - INFO - [API] 音频文件上传 API调用: https://api.minimax.chat/v1/files/upload?GroupId=1747179187841536150 (耗时: 0.49s) (Trace-ID: 050f155561721d4a10f32c7b40588ce4)
+2025-09-09 16:16:21,698 - modules.logger_service - INFO - [INFO] 执行音色克隆: voice_1_1757405781
+2025-09-09 16:16:22,378 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:22] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:24,346 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:24] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:24,572 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:25,865 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:25] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:27,512 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:28,738 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:28] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:29,865 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:29] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:30,864 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:30,881 - modules.logger_service - INFO - [API] 音色克隆 API调用: https://api.minimax.chat/v1/voice_clone?GroupId=1747179187841536150 (耗时: 7.18s) (Trace-ID: 050f155800f95ec71633d7529889ada5)
+2025-09-09 16:16:30,882 - modules.logger_service - INFO - [INFO] 第1句音色克隆成功，开始TTS合成
+2025-09-09 16:16:31,870 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:31] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:32,673 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.79s) (Trace-ID: 050f155fa64b545980484bbe3246de75)
+2025-09-09 16:16:33,528 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_1_translated.mp3
+2025-09-09 16:16:33,531 - modules.logger_service - INFO - [INFO] 第1句使用克隆音色TTS合成成功
+2025-09-09 16:16:33,531 - modules.logger_service - INFO - [INFO] 第1句: 开始5步时间戳对齐
+2025-09-09 16:16:33,531 - modules.logger_service - INFO - [INFO] 开始第1句5步时间戳对齐优化...
+2025-09-09 16:16:33,532 - modules.logger_service - INFO - [ALIGN] 第1句对齐第1步(静音裁剪检查): 开始处理
+2025-09-09 16:16:34,103 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:34,150 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:34] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:34,975 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.44s) (Trace-ID: 050f1561d0f568c93254632ab3f0e30f)
+2025-09-09 16:16:36,467 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:36] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:36,617 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:37,323 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_1_step1.mp3
+2025-09-09 16:16:37,752 - modules.logger_service - INFO - [ALIGN] 第1句对齐第1步(静音裁剪检查): 时长超限: 实际时长5.76s > 目标时长3.76s
+2025-09-09 16:16:37,752 - modules.logger_service - INFO - [ALIGN] 第1句对齐第2步(文本优化): 开始优化翻译文本
+2025-09-09 16:16:38,642 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:38] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:38,858 - modules.logger_service - INFO - [API] LLM文本优化 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.11s)
+2025-09-09 16:16:39,117 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:39,906 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.05s) (Trace-ID: 050f15670a40347dddf348ac006b00ea)
+2025-09-09 16:16:40,164 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_1_step2.mp3
+2025-09-09 16:16:40,168 - modules.logger_service - INFO - [ALIGN] 第1句对齐第2步(文本优化): 成功! 优化后时长2.60s ≤ 目标时长3.76s
+2025-09-09 16:16:40,168 - modules.logger_service - INFO - [INFO] 第1句对齐优化成功
+2025-09-09 16:16:40,168 - modules.logger_service - INFO - [INFO] 第2句: 开始翻译
+2025-09-09 16:16:40,692 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:40] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:41,475 - modules.logger_service - INFO - [API] LLM翻译 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 1.31s) (Trace-ID: 050f15681b6a4687bc851d53543c148e)
+2025-09-09 16:16:41,477 - modules.logger_service - INFO - [INFO] 第2句: 开始音色克隆
+2025-09-09 16:16:41,479 - modules.logger_service - INFO - [INFO] 原始音频时长: 1.98秒
+2025-09-09 16:16:41,479 - modules.logger_service - INFO - [INFO] 音频时长不足10.0秒，将复制6次
+2025-09-09 16:16:41,492 - modules.logger_service - INFO - [INFO] 扩展后音频时长: 11.88秒，保存到: ./temp/segment_2_original_extended.wav
+2025-09-09 16:16:41,492 - modules.logger_service - INFO - [INFO] 上传音频文件进行音色克隆: voice_2_1757405801
+2025-09-09 16:16:41,858 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:41] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:41,987 - modules.logger_service - INFO - [API] 音频文件上传 API调用: https://api.minimax.chat/v1/files/upload?GroupId=1747179187841536150 (耗时: 0.49s) (Trace-ID: 050f1569d6456c02dc1277010e4ced84)
+2025-09-09 16:16:41,989 - modules.logger_service - INFO - [INFO] 执行音色克隆: voice_2_1757405801
+2025-09-09 16:16:42,566 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:44,593 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:44] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:45,041 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:47,258 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:47] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:47,907 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:47] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:48,030 - modules.logger_service - INFO - [API] 音色克隆 API调用: https://api.minimax.chat/v1/voice_clone?GroupId=1747179187841536150 (耗时: 4.04s) (Trace-ID: 050f156c459ae89703400b6bbb66c774)
+2025-09-09 16:16:48,032 - modules.logger_service - INFO - [INFO] 第2句音色克隆成功，开始TTS合成
+2025-09-09 16:16:49,522 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.49s) (Trace-ID: 050f15709c4aff18a718ee51500730ed)
+2025-09-09 16:16:49,809 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_translated.mp3
+2025-09-09 16:16:49,811 - modules.logger_service - INFO - [INFO] 第2句使用克隆音色TTS合成成功
+2025-09-09 16:16:49,812 - modules.logger_service - INFO - [INFO] 第2句: 开始5步时间戳对齐
+2025-09-09 16:16:49,812 - modules.logger_service - INFO - [INFO] 开始第2句5步时间戳对齐优化...
+2025-09-09 16:16:49,812 - modules.logger_service - INFO - [ALIGN] 第2句对齐第1步(静音裁剪检查): 开始处理
+2025-09-09 16:16:49,852 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:50,411 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:50] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:51,692 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:51,863 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:51] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:52,845 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 1.03s) (Trace-ID: 050f15741cda07ed78f66bf52b9f158e)
+2025-09-09 16:16:53,168 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_step1.mp3
+2025-09-09 16:16:53,247 - modules.logger_service - INFO - [ALIGN] 第2句对齐第1步(静音裁剪检查): 时长超限: 实际时长3.69s > 目标时长1.98s
+2025-09-09 16:16:53,247 - modules.logger_service - INFO - [ALIGN] 第2句对齐第2步(文本优化): 开始优化翻译文本
+2025-09-09 16:16:54,169 - modules.logger_service - INFO - [API] LLM文本优化 API调用: https://api.minimaxi.com/v1/text/chatcompletion_v2 (耗时: 0.92s)
+2025-09-09 16:16:54,668 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:54,881 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:54] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:56,009 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:16:56] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:57,211 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 3.04s) (Trace-ID: 050f15789949f99969674377476cdb2d)
+2025-09-09 16:16:57,426 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_step2.mp3
+2025-09-09 16:16:57,429 - modules.logger_service - INFO - [ALIGN] 第2句对齐第2步(文本优化): 仍然超时: 优化后时长2.68s > 目标时长1.98s
+2025-09-09 16:16:57,430 - modules.logger_service - INFO - [ALIGN] 第2句对齐第3步(首次速度调整): 计算速度参数: 1.6
+2025-09-09 16:16:57,985 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:16:58,052 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:16:58] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:16:58,406 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 0.98s) (Trace-ID: 050f157952e28be9219af808a9f86b61)
+2025-09-09 16:16:59,027 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_step3.mp3
+2025-09-09 16:16:59,031 - modules.logger_service - INFO - [ALIGN] 第2句对齐第3步(首次速度调整): 仍然超时: 加速后时长2.00s > 目标时长1.98s
+2025-09-09 16:16:59,031 - modules.logger_service - INFO - [ALIGN] 第2句对齐第4步(速度递增重试): 尝试速度参数: 2.0
+2025-09-09 16:17:00,667 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:17:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:00,715 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:17:00] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:17:01,868 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:01] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:17:01,879 - modules.logger_service - INFO - [API] TTS语音合成 API调用: https://api.minimax.chat/v1/t2a_v2?GroupId=1747179187841536150 (耗时: 0.85s) (Trace-ID: 050f157d1a66e50ab2a07b398f18cea5)
+2025-09-09 16:17:02,141 - modules.logger_service - INFO - [INFO] 音频文件已保存到: ./temp/segment_2_step4_2.0.mp3
+2025-09-09 16:17:02,144 - modules.logger_service - INFO - [ALIGN] 第2句对齐第4步(速度递增重试): 成功! 速度2.0时长1.28s ≤ 目标时长1.98s
+2025-09-09 16:17:02,145 - modules.logger_service - INFO - [INFO] 第2句对齐优化成功
+2025-09-09 16:17:02,145 - modules.logger_service - INFO - [INFO] 开始音频拼接和视频合成...
+2025-09-09 16:17:02,145 - modules.logger_service - INFO - [INFO] 开始拼接2个音频片段...
+2025-09-09 16:17:02,149 - modules.logger_service - INFO - [INFO] 第1句音频: 2.60s → 3.76s
+2025-09-09 16:17:02,152 - modules.logger_service - INFO - [INFO] 第2句音频: 1.28s → 1.98s
+2025-09-09 16:17:02,165 - modules.logger_service - INFO - [INFO] 音频拼接完成: 总时长5.74s, 大小0.48MB
+2025-09-09 16:17:02,165 - modules.logger_service - INFO - [INFO] 开始合并音频和视频...
+2025-09-09 16:17:02,273 - modules.logger_service - INFO - [INFO] 音视频合并成功: ./temp/final_translated_video.mp4 (1.07MB)
+2025-09-09 16:17:02,274 - modules.logger_service - INFO - [INFO] 最终视频已生成: ./temp/final_translated_video.mp4
+2025-09-09 16:17:02,274 - modules.logger_service - INFO - [INFO] 🎉 视频翻译处理完成!
+2025-09-09 16:17:03,895 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:17:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:04,008 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:17:04] "GET /api/data HTTP/1.1" 200 -
+2025-09-09 16:17:04,407 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:04] "GET /api/download/video HTTP/1.1" 200 -
+2025-09-09 16:17:06,117 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:17:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:09,318 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:17:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-09-09 16:17:09,649 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:12,595 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:14,649 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:14] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:15,510 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:18,713 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:21,047 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:24,529 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:27,559 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:17:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:30,834 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:17:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:33,023 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:17:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:36,912 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:39,025 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:42,561 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:45,639 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:48,134 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:17:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:51,582 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:17:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:56,103 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:56] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:17:57,018 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:17:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:01,392 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:18:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:03,030 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:18:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:06,677 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:10,115 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:12,031 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:18:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:15,399 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:15,745 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:18,901 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:21,025 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:24,540 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:27,768 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:18:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:30,025 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:18:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:34,402 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:36,091 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:18:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:39,798 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:43,106 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:45,022 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:48,970 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:51,036 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:18:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:54,705 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:18:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:18:57,036 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:18:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:00,515 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:19:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:03,891 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:19:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:06,078 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:19:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:09,569 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:19:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:12,568 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:19:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:15,271 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:19:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:15,642 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:19:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:18,714 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:19:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:21,039 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:19:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:24,666 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:19:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:27,709 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:19:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:30,579 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:19:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:33,646 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:19:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:36,123 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:19:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:40,088 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:19:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:42,034 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:19:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:45,655 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:19:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:48,027 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:19:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:51,719 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:19:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:54,027 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:19:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:19:57,513 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:19:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:00,590 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:20:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:03,658 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:20:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:06,984 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:20:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:09,032 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:20:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:12,909 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:20:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:14,622 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:20:14] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:15,833 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:20:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:18,067 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:20:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:21,766 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:20:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:24,028 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:20:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:27,613 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:20:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:30,672 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:20:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:33,065 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:20:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:36,758 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:20:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:39,020 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:20:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:42,517 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:20:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:45,680 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:20:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:48,737 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:20:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:51,024 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:20:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:54,687 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:20:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:20:57,498 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:20:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:00,587 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:21:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:03,681 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:21:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:06,026 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:21:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:09,592 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:21:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:12,696 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:21:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:14,626 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:21:14] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:15,508 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:21:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:18,975 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:21:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:21,024 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:21:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:24,579 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:21:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:27,669 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:21:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:30,023 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:21:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:33,654 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:21:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:36,022 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:21:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:39,715 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:21:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:42,024 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:21:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:45,487 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:21:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:48,664 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:21:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:51,026 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:21:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:54,675 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:21:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:21:57,680 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:21:57] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:00,030 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:03,673 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:22:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:06,043 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:09,851 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:22:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:12,052 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:15,089 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:15,674 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:22:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:18,805 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:21,043 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:24,693 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:22:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:27,595 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:30,027 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:33,068 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:33] "GET / HTTP/1.1" 200 -
+2025-09-09 16:22:33,123 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:22:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:33,689 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:33] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-09-09 16:22:33,813 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:22:33] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-09-09 16:22:33,880 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:33] "[36mGET /static/js/table-editor.js HTTP/1.1[0m" 304 -
+2025-09-09 16:22:34,910 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:22:34] "GET /api/config HTTP/1.1" 200 -
+2025-09-09 16:22:38,577 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:38] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:40,962 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:22:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:44,569 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:44] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:46,920 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:22:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:22:50,513 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:22:50] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:07,562 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:23:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:14,898 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:23:14] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:17,865 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:23:17] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:21,910 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:23:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:24,067 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:23:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:27,689 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:23:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:31,447 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:23:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:34,355 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:23:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:40,484 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:23:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:42,129 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:23:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:45,231 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:23:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:52,439 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:23:52] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:53,970 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:23:53] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:23:58,786 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:23:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:00,502 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:00] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:02,806 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:02] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:07,146 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:24:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:12,769 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:15,980 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:21,814 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:24,655 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:27,010 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:29,143 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:24:29] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:32,789 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:32] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:35,582 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:35] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:39,667 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:41,120 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:41] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:43,787 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:47,427 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:24:47] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:49,801 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:24:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:52,354 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:52] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:54,637 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:56,586 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:24:56] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:24:59,301 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:24:59] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:25:02,300 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:25:02] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:25:09,813 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:25:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:25:12,285 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:25:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:25:16,449 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:25:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:25:23,155 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:25:23] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:25:29,061 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:25:29] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:25:38,954 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:25:38] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:25:42,618 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:25:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:25:46,863 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:25:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:25:51,115 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:25:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:25:59,152 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:25:59] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:02,212 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:02] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:04,478 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:08,058 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:08] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:09,637 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:11,476 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:11] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:13,972 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:13] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:16,023 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:26:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:22,508 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:26:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:27,929 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:27] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:31,421 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:33,931 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:33] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:38,048 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:38] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:41,291 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:41] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:43,370 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:26:43] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:44,852 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:26:44] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:46,995 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:49,373 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:53,270 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:53] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:55,765 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:26:55] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:26:59,151 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:26:59] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:02,221 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:27:02] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:04,979 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:27:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:10,017 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:27:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:14,944 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:27:14] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:17,638 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:27:17] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:21,182 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:27:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:26,269 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:27:26] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:31,232 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:27:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:34,418 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:27:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:37,387 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:27:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:40,324 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:27:40] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:42,278 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:27:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:45,771 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:27:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:48,807 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:27:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:50,095 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:27:50] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:51,871 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:27:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:53,518 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:27:53] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:27:58,435 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:27:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:01,621 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:28:01] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:05,260 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:28:05] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:08,128 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:28:08] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:12,535 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:28:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:17,179 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:28:17] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:19,687 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:28:19] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:21,938 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:28:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:26,017 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:28:26] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:29,347 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:28:29] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:31,503 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:28:31] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:35,915 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:28:35] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:39,859 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:28:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:46,287 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:28:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:49,322 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:28:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:51,366 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:28:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:54,593 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:28:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:56,025 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:28:56] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:28:59,401 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:28:59] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:02,041 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:29:02] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:06,390 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:29:06] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:10,013 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:29:10] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:12,969 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:29:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:17,044 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:29:17] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:21,307 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:29:21] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:24,022 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:29:24] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:26,399 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:29:26] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:28,892 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:29:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:32,511 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:29:32] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:36,094 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:29:36] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:39,610 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:29:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:42,880 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:29:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:46,414 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:29:46] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:49,225 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:29:49] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:54,017 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:29:54] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:29:59,235 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:29:59] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:04,480 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:30:04] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:09,259 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:30:09] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:12,790 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:30:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:16,502 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:30:16] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:20,902 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:30:20] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:23,982 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:30:23] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:28,347 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:30:28] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:34,175 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:30:34] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:37,593 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:30:37] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:41,165 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:30:41] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:45,675 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:30:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:48,575 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:30:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:50,696 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:30:50] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:53,299 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:30:53] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:56,382 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:30:56] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:30:58,727 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:30:58] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:03,837 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:31:03] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:07,136 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:31:07] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:11,100 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:31:11] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:12,806 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:31:12] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:18,841 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:31:18] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:22,067 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:31:22] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:26,382 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:31:26] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:30,953 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:31:30] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:35,213 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:31:35] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:39,745 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:31:39] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:42,193 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:31:42] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:44,562 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:31:44] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:45,643 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:31:45] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:48,649 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:31:48] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:31:51,955 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:31:51] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:32:17,860 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:32:17] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:32:20,522 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:32:20] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:32:52,019 - utils.error_handler - ERROR - 错误发生在 文件上传: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+2025-09-09 16:32:52,020 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:32:52] "[35m[1mPOST /api/upload HTTP/1.1[0m" 500 -
+2025-09-09 16:32:52,024 - werkzeug - ERROR - Error on request:
+Traceback (most recent call last):
+  File "/home/Devin/minimax-video-translation/video_translator/.venv/lib/python3.10/site-packages/werkzeug/serving.py", line 364, in run_wsgi
+    execute(self.server.app)
+  File "/home/Devin/minimax-video-translation/video_translator/.venv/lib/python3.10/site-packages/werkzeug/serving.py", line 328, in execute
+    write(data)
+  File "/home/Devin/minimax-video-translation/video_translator/.venv/lib/python3.10/site-packages/werkzeug/serving.py", line 294, in write
+    self.end_headers()
+  File "/usr/lib/python3.10/http/server.py", line 535, in end_headers
+    self.flush_headers()
+  File "/usr/lib/python3.10/http/server.py", line 539, in flush_headers
+    self.wfile.write(b"".join(self._headers_buffer))
+  File "/usr/lib/python3.10/socketserver.py", line 826, in write
+    self._sock.sendall(b)
+  File "/usr/lib/python3.10/ssl.py", line 1266, in sendall
+    v = self.send(byte_view[count:])
+  File "/usr/lib/python3.10/ssl.py", line 1235, in send
+    return self._sslobj.write(data)
+ssl.SSLEOFError: EOF occurred in violation of protocol (_ssl.c:2426)
+2025-09-09 16:33:15,183 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:33:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:33:15,780 - werkzeug - INFO - 10.1.129.26 - - [09/Sep/2025 16:33:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:34:15,123 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:34:15] "GET /api/logs HTTP/1.1" 200 -
+2025-09-09 16:34:15,650 - werkzeug - INFO - 10.1.7.220 - - [09/Sep/2025 16:34:15] "GET /api/logs HTTP/1.1" 200 -

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频翻译测试平台 - 端口:5555</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- 标题栏 -->
+        <div class="row mb-3">
+            <div class="col">
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <h2 class="mb-0">视频翻译测试平台 - 端口:5555</h2>
+                    <a href="/admin" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-cog"></i> 运维后台
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 配置区 -->
+        <div class="row mb-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-cog"></i> 配置区</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="configForm">
+                            <div class="row mb-2">
+                                <div class="col-md-2">
+                                    <label class="form-label">接入点:</label>
+                                    <select class="form-select form-select-sm" id="apiEndpoint">
+                                        <option value="https://api.minimaxi.com">国内</option>
+                                        <option value="https://api.minimax.io">海外</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Group ID:</label>
+                                    <input type="text" class="form-control form-control-sm" id="groupId" placeholder="输入Group ID">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">API Key:</label>
+                                    <input type="password" class="form-control form-control-sm" id="apiKey" placeholder="输入API Key">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">&nbsp;</label>
+                                    <button type="button" class="btn btn-primary btn-sm d-block" id="saveConfig">
+                                        <i class="fas fa-save"></i> 保存配置
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-2">
+                                    <label class="form-label">原语言:</label>
+                                    <select class="form-select form-select-sm" id="sourceLanguage">
+                                        <option value="中文">中文</option>
+                                        <option value="英语">英语</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">目标语言:</label>
+                                    <select class="form-select form-select-sm" id="targetLanguage">
+                                        <option value="英语">英语</option>
+                                        <option value="中文">中文</option>
+                                        <option value="日语">日语</option>
+                                        <option value="韩语">韩语</option>
+                                        <option value="法语">法语</option>
+                                        <option value="德语">德语</option>
+                                        <option value="西班牙语">西班牙语</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">ASR:</label>
+                                    <select class="form-select form-select-sm" id="asrModel">
+                                        <option value="whisper-base">Whisper base</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">TTS:</label>
+                                    <select class="form-select form-select-sm" id="ttsModel">
+                                        <option value="speech-2.5-hd-preview">2.5-hd</option>
+                                        <option value="speech-02-hd">02-hd</option>
+                                        <option value="speech-01-hd">01-hd</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="form-label">ASR切分:</label>
+                                    <select class="form-select form-select-sm" id="asrSplitMode">
+                                        <option value="保守模式">保守模式</option>
+                                        <option value="平衡模式" selected>平衡模式</option>
+                                        <option value="激进模式">激进模式</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">最小时长:</label>
+                                    <select class="form-select form-select-sm" id="minDuration">
+                                        <option value="1.5" selected>1.5s</option>
+                                        <option value="2.0">2.0s</option>
+                                        <option value="2.5">2.5s</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">最大时长:</label>
+                                    <select class="form-select form-select-sm" id="maxDuration">
+                                        <option value="6">6s</option>
+                                        <option value="8" selected>8s</option>
+                                        <option value="10">10s</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">静音阈值:</label>
+                                    <select class="form-select form-select-sm" id="silenceThreshold">
+                                        <option value="0.2">0.2s</option>
+                                        <option value="0.3" selected>0.3s</option>
+                                        <option value="0.5">0.5s</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 视频处理区 -->
+        <div class="row mb-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-video"></i> 视频处理区</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card h-100">
+                                    <div class="card-header text-center">上传视频</div>
+                                    <div class="card-body text-center">
+                                        <input type="file" class="form-control mb-2" id="videoFile" accept="video/*">
+                                        <small class="text-muted d-block mb-2">限制5分钟</small>
+                                        <button type="button" class="btn btn-success" id="uploadBtn">
+                                            <i class="fas fa-upload"></i> 上传
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    <div class="card-header text-center">原视频预览</div>
+                                    <div class="card-body">
+                                        <video id="originalVideo" class="w-100" controls style="display: none;">
+                                            您的浏览器不支持视频播放
+                                        </video>
+                                        <div id="videoPlaceholder" class="text-center p-4 bg-light">
+                                            <i class="fas fa-video fa-3x text-muted"></i>
+                                            <p class="mt-2 text-muted">请上传视频文件</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="card h-100">
+                                    <div class="card-header text-center">翻译结果预览</div>
+                                    <div class="card-body">
+                                        <video id="translatedVideo" class="w-100" controls style="display: none;">
+                                            您的浏览器不支持视频播放
+                                        </video>
+                                        <div id="resultPlaceholder" class="text-center p-4 bg-light">
+                                            <i class="fas fa-language fa-3x text-muted"></i>
+                                            <p class="mt-2 text-muted">翻译完成后显示</p>
+                                        </div>
+                                        <button type="button" class="btn btn-primary btn-sm mt-2" id="downloadBtn" style="display: none;">
+                                            <i class="fas fa-download"></i> 下载视频
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 控制区 -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-play"></i> 自动翻译控制</h5>
+                    </div>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-success btn-lg mb-3" id="startProcessing">
+                            <i class="fas fa-rocket"></i> 开始自动翻译
+                        </button>
+                        <div class="mb-2">
+                            <label class="form-label">进度:</label>
+                            <div class="progress mb-1">
+                                <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%">0%</div>
+                            </div>
+                            <small id="currentStep" class="text-muted">等待开始...</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-tools"></i> 手工修正控制</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="btn-group me-2 mb-2">
+                            <button type="button" class="btn btn-outline-primary" id="importSrt">
+                                <i class="fas fa-folder-open"></i> 导入SRT
+                            </button>
+                            <button type="button" class="btn btn-outline-primary" id="exportSrt">
+                                <i class="fas fa-save"></i> 保存SRT
+                            </button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-warning" id="manualSynth">
+                                <i class="fas fa-wrench"></i> 人工合成
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" id="resetData">
+                                <i class="fas fa-clipboard-list"></i> 重置数据
+                            </button>
+                        </div>
+                        <input type="file" id="srtFileInput" accept=".srt" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据编辑区 -->
+        <div class="row mb-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-table"></i> 数据编辑区 (双击单元格直接编辑)</h5>
+                        <small class="text-muted">共 <span id="segmentCount">0</span> 个片段</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="max-height: 400px;">
+                            <table class="table table-bordered table-hover" id="segmentTable">
+                                <thead class="table-dark sticky-top">
+                                    <tr>
+                                        <th style="width: 5%">#</th>
+                                        <th style="width: 12%">时间戳</th>
+                                        <th style="width: 25%">原文本</th>
+                                        <th style="width: 25%">翻译文本</th>
+                                        <th style="width: 8%">速度</th>
+                                        <th style="width: 10%">Voice_ID</th>
+                                        <th style="width: 15%">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="segmentTableBody">
+                                    <tr>
+                                        <td colspan="7" class="text-center text-muted">暂无数据，请上传视频开始处理</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 日志区 -->
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-list"></i> 日志区</h5>
+                        <button type="button" class="btn btn-outline-secondary btn-sm" id="clearLogs">
+                            <i class="fas fa-trash"></i> 清空日志
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="logContainer" style="height: 300px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 12px; background-color: #f8f9fa; padding: 10px;">
+                            <div class="text-muted">等待操作...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <!-- 自定义JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/table-editor.js') }}"></script>
+</body>
+</html>

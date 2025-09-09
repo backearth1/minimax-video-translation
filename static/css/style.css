@@ -1,0 +1,278 @@
+/* 全局样式 */
+body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container-fluid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 卡片样式 */
+.card {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: 600;
+}
+
+/* 表格样式 */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    background-color: #343a40;
+    color: white;
+    border-color: #454d55;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table td {
+    vertical-align: middle;
+    word-wrap: break-word;
+    max-width: 200px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* 可编辑单元格样式 */
+.editable-cell {
+    cursor: pointer;
+    position: relative;
+    padding: 8px 12px;
+}
+
+.editable-cell:hover {
+    background-color: #e9ecef;
+}
+
+.editable-cell.editing {
+    padding: 4px;
+}
+
+.editable-cell input, .editable-cell textarea {
+    width: 100%;
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.editable-cell textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* 进度条样式 */
+.progress {
+    height: 20px;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    background-color: #28a745;
+    transition: width 0.6s ease;
+}
+
+/* 按钮样式 */
+.btn-group .btn {
+    margin-right: 0;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* 视频预览区样式 */
+video {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#videoPlaceholder, #resultPlaceholder {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 日志区样式 */
+#logContainer {
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    line-height: 1.4;
+}
+
+.log-entry {
+    margin-bottom: 2px;
+    padding: 2px 0;
+}
+
+.log-entry.info {
+    color: #0066cc;
+}
+
+.log-entry.error {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.log-entry.warning {
+    color: #ffc107;
+}
+
+.log-entry.api {
+    color: #6610f2;
+}
+
+.log-entry.align {
+    color: #fd7e14;
+}
+
+.log-entry.process {
+    color: #20c997;
+}
+
+/* 配置区样式 */
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 4px;
+}
+
+.form-select-sm, .form-control-sm {
+    font-size: 0.875rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 10px;
+    }
+    
+    .card-body {
+        padding: 1rem 0.5rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .btn-group .btn {
+        margin-bottom: 0.25rem;
+    }
+}
+
+/* 状态指示器 */
+.status-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.status-idle {
+    background-color: #6c757d;
+}
+
+.status-processing {
+    background-color: #ffc107;
+    animation: pulse 1.5s infinite;
+}
+
+.status-completed {
+    background-color: #28a745;
+}
+
+.status-error {
+    background-color: #dc3545;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* 加载动画 */
+.loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 工具提示样式 */
+.tooltip-inner {
+    max-width: 300px;
+    text-align: left;
+}
+
+/* 文件上传区域 */
+.file-drop-zone {
+    border: 2px dashed #007bff;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.file-drop-zone:hover,
+.file-drop-zone.dragover {
+    border-color: #0056b3;
+    background-color: #e3f2fd;
+}
+
+/* 操作按钮组 */
+.action-buttons {
+    display: flex;
+    gap: 0.25rem;
+    justify-content: center;
+}
+
+.action-buttons .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+/* 数据表格特殊样式 */
+.segment-row.processing {
+    background-color: #fff3cd;
+}
+
+.segment-row.completed {
+    background-color: #d1edff;
+}
+
+.segment-row.error {
+    background-color: #f8d7da;
+}
