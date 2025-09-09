@@ -144,15 +144,7 @@ class ProfessionalAudioProcessor:
                 # 使用环境变量或配置文件中的HuggingFace token
                 auth_token = os.getenv("HUGGINGFACE_TOKEN", None)
                 
-                # 添加超时保护
-                import signal
-                
-                def timeout_handler(signum, frame):
-                    raise TimeoutError("pyannote.audio 模型加载超时")
-                
-                signal.signal(signal.SIGALRM, timeout_handler)
-                signal.alarm(300)  # 5分钟超时
-                
+                # 直接加载模型（在线程中不使用signal超时）
                 try:
                     self.diarization_pipeline = Pipeline.from_pretrained(
                         recommended_pyannote,
@@ -160,8 +152,18 @@ class ProfessionalAudioProcessor:
                     )
                     self.diarization_pipeline = self.diarization_pipeline.to(self.device)
                     self.logger.log("INFO", "✅ pyannote.audio 模型加载成功")
-                finally:
-                    signal.alarm(0)  # 取消超时
+                except Exception as load_err:
+                    self.logger.log("WARNING", f"pyannote.audio 模型加载失败: {str(load_err)}")
+                    # 如果token有问题，尝试无token加载
+                    if "token" in str(load_err).lower() or "unauthorized" in str(load_err).lower():
+                        self.logger.log("INFO", "尝试无token加载pyannote.audio...")
+                        try:
+                            self.diarization_pipeline = Pipeline.from_pretrained(recommended_pyannote)
+                            self.diarization_pipeline = self.diarization_pipeline.to(self.device)
+                            self.logger.log("INFO", "✅ pyannote.audio 模型加载成功(无token)")
+                        except Exception as e2:
+                            self.logger.log("ERROR", f"无token加载也失败: {str(e2)}")
+                            raise load_err
                     
             except Exception as e:
                 self.logger.log("ERROR", f"pyannote.audio 加载失败: {str(e)}")
@@ -244,9 +246,9 @@ class ProfessionalAudioProcessor:
             output_dir = "./temp/demucs_output"
             os.makedirs(output_dir, exist_ok=True)
             
-            # 运行 Demucs 分离
+            # 运行 Demucs 分离 (使用UV环境)
             cmd = [
-                "python3", "-m", "demucs.separate",
+                "uv", "run", "python", "-m", "demucs.separate",
                 "--mp3",  # 输出MP3格式
                 "--mp3-bitrate", "320",  # 高质量
                 "-o", output_dir,

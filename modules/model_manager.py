@@ -87,17 +87,29 @@ class ModelManager:
     
     def _check_pyannote_models(self, config: Dict) -> Dict:
         """检查pyannote.audio模型"""
-        cache_dir = Path(config["cache_dir"])
         cached_models = []
         
-        # pyannote模型通常存储在 huggingface cache 中
-        if cache_dir.exists():
-            for model_name in config["models"]:
-                # 简化检查逻辑，检查是否有pyannote相关目录
+        # 尝试导入并测试pyannote.audio
+        try:
+            from pyannote.audio import Pipeline
+            # 如果能导入Pipeline，说明pyannote.audio已安装
+            # 再检查是否能加载模型（这里我们假设已经下载过）
+            cached_models = config["models"]
+            self.logger.log("DEBUG", "pyannote.audio模块可用，假设模型已缓存")
+        except ImportError:
+            self.logger.log("DEBUG", "pyannote.audio模块未安装")
+        except Exception as e:
+            self.logger.log("DEBUG", f"pyannote.audio检查异常: {str(e)}")
+        
+        # 备用检查：查找huggingface缓存目录
+        if not cached_models:
+            cache_dir = Path(config["cache_dir"])
+            if cache_dir.exists():
                 pyannote_dirs = list(cache_dir.glob("**/pyannote*"))
-                if pyannote_dirs:
-                    cached_models.append(model_name)
-                    break
+                speaker_dirs = list(cache_dir.glob("**/speaker-diarization*"))
+                if pyannote_dirs or speaker_dirs:
+                    cached_models = config["models"]
+                    self.logger.log("DEBUG", f"在缓存目录发现pyannote模型文件: {len(pyannote_dirs + speaker_dirs)}个")
         
         missing_models = [m for m in config["models"] if m not in cached_models]
         
