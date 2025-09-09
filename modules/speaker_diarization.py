@@ -15,41 +15,103 @@ class SpeakerDiarization:
     def __init__(self, logger_service):
         self.logger = logger_service
         self.speaker_profiles = {}  # 存储说话人特征
-        self.similarity_threshold = 0.75  # 声音相似度阈值
+        self.similarity_threshold = 0.40  # 声音相似度阈值（降低以提高说话人区分敏感度）
         
     def extract_voice_features(self, audio_path: str) -> np.ndarray:
-        """提取音频的声音特征"""
+        """提取增强的音频声纹特征"""
         try:
             # 加载音频文件
             y, sr = librosa.load(audio_path, sr=16000)
             
-            # 提取MFCC特征（梅尔频率倒谱系数）
-            mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
+            # 确保音频长度足够
+            if len(y) < sr * 0.5:  # 少于0.5秒
+                y = np.pad(y, (0, int(sr * 0.5 - len(y))), mode='constant')
+            
+            # 1. 增强的MFCC特征 (20维 + 一阶导数 + 二阶导数)
+            mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=20, n_fft=1024, hop_length=512)
+            mfcc_delta = librosa.feature.delta(mfcc)
+            mfcc_delta2 = librosa.feature.delta(mfcc, order=2)
+            
             mfcc_mean = np.mean(mfcc, axis=1)
+            mfcc_std = np.std(mfcc, axis=1)
+            mfcc_delta_mean = np.mean(mfcc_delta, axis=1)
+            mfcc_delta2_mean = np.mean(mfcc_delta2, axis=1)
             
-            # 提取音调特征
-            pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
-            pitch_mean = np.mean(pitches[pitches > 0]) if np.any(pitches > 0) else 0
+            # 2. 基频特征 (F0) - 性别识别的关键特征
+            f0 = librosa.yin(y, fmin=50, fmax=400, frame_length=1024)
+            f0_valid = f0[f0 > 0]
             
-            # 提取频谱质心
+            if len(f0_valid) > 0:
+                f0_mean = np.mean(f0_valid)
+                f0_std = np.std(f0_valid)
+                f0_min = np.min(f0_valid)
+                f0_max = np.max(f0_valid)
+                f0_range = f0_max - f0_min
+                f0_median = np.median(f0_valid)
+            else:
+                f0_mean = f0_std = f0_min = f0_max = f0_range = f0_median = 0
+            
+            # 3. 频谱特征 - 年龄和个体差异
             spectral_centroids = librosa.feature.spectral_centroid(y=y, sr=sr)
-            spectral_centroid_mean = np.mean(spectral_centroids)
-            
-            # 提取频谱带宽
             spectral_bandwidth = librosa.feature.spectral_bandwidth(y=y, sr=sr)
-            spectral_bandwidth_mean = np.mean(spectral_bandwidth)
+            spectral_rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr, roll_percent=0.85)
+            spectral_flatness = librosa.feature.spectral_flatness(y=y)
+            
+            # 4. 过零率 - 语音质量特征
+            zero_crossing_rate = librosa.feature.zero_crossing_rate(y)
+            
+            # 5. 梅尔频谱 - 额外的频谱信息
+            mel_spec = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=13)
+            mel_mean = np.mean(mel_spec, axis=1)
+            
+            # 6. 色度特征 - 音调模式
+            chroma = librosa.feature.chroma_stft(y=y, sr=sr)
+            chroma_mean = np.mean(chroma, axis=1)
+            
+            # 7. 统计特征汇总
+            spectral_features = np.array([
+                np.mean(spectral_centroids),
+                np.std(spectral_centroids),
+                np.mean(spectral_bandwidth),
+                np.std(spectral_bandwidth),
+                np.mean(spectral_rolloff),
+                np.std(spectral_rolloff),
+                np.mean(spectral_flatness),
+                np.mean(zero_crossing_rate),
+                np.std(zero_crossing_rate)
+            ])
+            
+            # 8. 能量特征
+            rms_energy = librosa.feature.rms(y=y)
+            energy_features = np.array([
+                np.mean(rms_energy),
+                np.std(rms_energy),
+                np.max(rms_energy),
+                np.min(rms_energy)
+            ])
             
             # 合并所有特征
             features = np.concatenate([
-                mfcc_mean,
-                [pitch_mean, spectral_centroid_mean, spectral_bandwidth_mean]
+                mfcc_mean,           # 20维
+                mfcc_std,            # 20维  
+                mfcc_delta_mean,     # 20维
+                mfcc_delta2_mean,    # 20维
+                [f0_mean, f0_std, f0_min, f0_max, f0_range, f0_median],  # 6维
+                spectral_features,   # 9维
+                energy_features,     # 4维
+                mel_mean,           # 13维
+                chroma_mean         # 12维
             ])
             
+            # 标准化特征
+            features = np.nan_to_num(features, nan=0.0, posinf=0.0, neginf=0.0)
+            
+            self.logger.log("DEBUG", f"提取特征维度: {len(features)}维")
             return features
             
         except Exception as e:
             self.logger.log("ERROR", f"提取音频特征失败: {str(e)}")
-            return np.zeros(16)  # 返回零向量作为备用
+            return np.zeros(124)  # 返回124维零向量作为备用
     
     def identify_speaker(self, audio_path: str, segment_id: int) -> str:
         """
@@ -71,15 +133,13 @@ class SpeakerDiarization:
                 self.logger.log("INFO", f"检测到新说话人: {speaker_id}")
                 return speaker_id
             
-            # 与现有说话人比较相似度
+            # 与现有说话人比较相似度（使用加权方法）
             best_match = None
             highest_similarity = 0
             
             for speaker_id, profile in self.speaker_profiles.items():
-                similarity = cosine_similarity(
-                    current_features.reshape(1, -1),
-                    profile["features"].reshape(1, -1)
-                )[0][0]
+                # 使用加权相似度计算
+                similarity = self._calculate_weighted_similarity(current_features, profile["features"])
                 
                 if similarity > highest_similarity:
                     highest_similarity = similarity
@@ -262,3 +322,44 @@ class SpeakerDiarization:
             
         except Exception as e:
             self.logger.log("ERROR", f"加载说话人特征档案失败: {str(e)}")
+    
+    def _calculate_weighted_similarity(self, features1: np.ndarray, features2: np.ndarray) -> float:
+        """计算加权相似度，重点关注性别和年龄相关特征"""
+        try:
+            # 特征分段权重
+            # MFCC相关: 0-79维 (权重: 0.6)
+            # 基频特征: 80-85维 (权重: 1.5 - 性别区分关键)  
+            # 频谱特征: 86-94维 (权重: 1.0)
+            # 能量特征: 95-98维 (权重: 0.8)
+            # 梅尔频谱: 99-111维 (权重: 0.7)
+            # 色度特征: 112-123维 (权重: 0.5)
+            
+            weights = np.ones(len(features1))
+            
+            # 提高基频特征权重（性别识别关键）
+            weights[80:86] = 1.5
+            
+            # 提高频谱特征权重（个体差异）
+            weights[86:95] = 1.2
+            
+            # 降低色度特征权重
+            weights[112:124] = 0.5
+            
+            # 计算加权余弦相似度
+            weighted_features1 = features1 * weights
+            weighted_features2 = features2 * weights
+            
+            similarity = cosine_similarity(
+                weighted_features1.reshape(1, -1),
+                weighted_features2.reshape(1, -1)
+            )[0][0]
+            
+            return similarity
+            
+        except Exception as e:
+            self.logger.log("ERROR", f"计算加权相似度失败: {str(e)}")
+            # fallback到标准余弦相似度
+            return cosine_similarity(
+                features1.reshape(1, -1),
+                features2.reshape(1, -1)
+            )[0][0]
