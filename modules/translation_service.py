@@ -113,7 +113,12 @@ class TranslationService:
             
             if response.status_code == 200:
                 response_data = response.json()
-                trace_id = response_data.get('trace_id', '')
+                trace_id = response_data.get('trace_id', response.headers.get('Trace-ID', ''))
+                
+                # 打印详细调试信息
+                print(f"LLM文本优化 API Response Headers: {dict(response.headers)}")
+                print(f"LLM文本优化 API Trace-ID: {trace_id}")
+                print(f"LLM文本优化 API Response: {json.dumps(response_data, ensure_ascii=False, indent=2)}")
                 
                 if 'choices' in response_data and response_data['choices']:
                     optimized_text = response_data['choices'][0]['message']['content'].strip()
