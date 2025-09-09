@@ -153,7 +153,8 @@ def start_professional_processing():
                 logger_service.log("INFO", "🎵 开始专业AI音频处理...")
                 professional_result = professional_processor.process_audio_professionally(
                     original_audio_path, 
-                    config.source_language
+                    config.source_language,
+                    project_data  # 传入project_data以便及时更新预览
                 )
                 
                 if not professional_result["success"]:
@@ -164,7 +165,7 @@ def start_professional_processing():
                 # 更新项目数据
                 segments = professional_result["segments"]
                 project_data.update_segments(segments)
-                project_data.background_audio_path = professional_result["background_path"]
+                # vocals和background路径已在处理过程中更新
                 
                 logger_service.log("INFO", f"✅ 专业音频处理完成: {len(segments)}个精确片段")
                 project_data.set_processing_status("processing", "开始逐句翻译...", 80)
@@ -277,12 +278,16 @@ def start_professional_processing():
                     project_data.set_processing_status("error", "音频拼接失败", 95)
                     return
                 
+                # 保存合成翻译人声路径
+                project_data.synthesized_audio_path = mixed_audio_path
+                logger_service.log("INFO", f"合成翻译人声已生成: {mixed_audio_path}")
+                
                 # 4.2 混合背景音乐 (96% → 98%)
                 project_data.set_processing_status("processing", "正在混合背景音乐...", 96)
                 
                 final_mixed_audio_path = "./temp/final_mixed_audio.wav"
                 if project_data.background_audio_path and os.path.exists(project_data.background_audio_path):
-                    logger_service.log("INFO", "开始混合背景音乐...")
+                    logger_service.log("INFO", f"开始混合背景音乐... 背景音文件: {project_data.background_audio_path}")
                     background_mix_result = audio_mixer.mix_with_background(
                         mixed_audio_path, 
                         project_data.background_audio_path, 
@@ -293,12 +298,20 @@ def start_professional_processing():
                     if background_mix_result["success"]:
                         logger_service.log("INFO", "背景音乐混合成功")
                         final_audio_for_video = final_mixed_audio_path
+                        # 保存最终混合音频路径
+                        project_data.final_mixed_path = final_mixed_audio_path
+                        logger_service.log("INFO", f"最终混合音频已生成: {final_mixed_audio_path}")
                     else:
                         logger_service.log("WARNING", f"背景音乐混合失败: {background_mix_result['error']}")
                         final_audio_for_video = mixed_audio_path
+                        project_data.final_mixed_path = mixed_audio_path
                 else:
-                    logger_service.log("INFO", "没有背景音频，直接使用翻译音频")
+                    if not project_data.background_audio_path:
+                        logger_service.log("INFO", "背景音频路径为空，直接使用翻译音频")
+                    else:
+                        logger_service.log("WARNING", f"背景音频文件不存在: {project_data.background_audio_path}")
                     final_audio_for_video = mixed_audio_path
+                    project_data.final_mixed_path = mixed_audio_path
                 
                 project_data.set_processing_status("processing", "正在合成最终视频...", 98)
                 
@@ -401,13 +414,36 @@ def api_data():
             return jsonify({"status": "error", "message": str(e)}), 400
     else:
         data = project_data.to_dict()
-        # 添加背景音频信息
+        # 添加人声和背景音频信息
+        if hasattr(project_data, 'vocals_audio_path') and project_data.vocals_audio_path:
+            data['vocals_audio_path'] = project_data.vocals_audio_path
+            data['vocals_audio_available'] = os.path.exists(project_data.vocals_audio_path)
+        else:
+            data['vocals_audio_path'] = None
+            data['vocals_audio_available'] = False
+            
         if hasattr(project_data, 'background_audio_path') and project_data.background_audio_path:
             data['background_audio_path'] = project_data.background_audio_path
             data['background_audio_available'] = os.path.exists(project_data.background_audio_path)
         else:
             data['background_audio_path'] = None
             data['background_audio_available'] = False
+            
+        # 添加合成翻译人声信息
+        if hasattr(project_data, 'synthesized_audio_path') and project_data.synthesized_audio_path:
+            data['synthesized_audio_path'] = project_data.synthesized_audio_path
+            data['synthesized_audio_available'] = os.path.exists(project_data.synthesized_audio_path)
+        else:
+            data['synthesized_audio_path'] = None
+            data['synthesized_audio_available'] = False
+            
+        # 添加最终混合音频信息
+        if hasattr(project_data, 'final_mixed_path') and project_data.final_mixed_path:
+            data['final_mixed_path'] = project_data.final_mixed_path
+            data['final_mixed_available'] = os.path.exists(project_data.final_mixed_path)
+        else:
+            data['final_mixed_path'] = None
+            data['final_mixed_available'] = False
         return jsonify(data)
 
 @app.route('/api/srt/export', methods=['GET'])

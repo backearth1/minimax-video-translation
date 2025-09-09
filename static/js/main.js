@@ -397,33 +397,90 @@ class VideoTranslatorApp {
         document.getElementById('segmentCount').textContent = data.segment_count || 0;
     }
     
-    // 更新背景音频预览
+    // 更新音频预览
     updateBackgroundAudio(data) {
-        const backgroundSection = document.getElementById('backgroundAudioSection');
-        const backgroundPlayer = document.getElementById('backgroundAudioPlayer');
-        const backgroundStatus = document.getElementById('backgroundAudioStatus');
+        // 更新人声预览
+        this.updateAudioPreview('vocals', data.vocals_audio_available, data.vocals_audio_path, '分离');
         
-        if (data.background_audio_available && data.background_audio_path) {
-            // 显示背景音频区域
-            backgroundSection.style.display = 'block';
+        // 更新背景音预览
+        this.updateAudioPreview('background', data.background_audio_available, data.background_audio_path, '分离');
+        
+        // 更新合成翻译人声预览
+        this.updateAudioPreview('synthesized', data.synthesized_audio_available, data.synthesized_audio_path, '合成');
+        
+        // 更新最终混合音频预览
+        this.updateAudioPreview('finalMixed', data.final_mixed_available, data.final_mixed_path, '混合');
+    }
+    
+    // 通用音频预览更新函数
+    updateAudioPreview(type, available, audioPath, actionText) {
+        const player = document.getElementById(`${type}AudioPlayer`) || document.getElementById(`${type}VocalsPlayer`) || document.getElementById(`${type}Player`);
+        const status = document.getElementById(`${type}AudioStatus`) || document.getElementById(`${type}VocalsStatus`) || document.getElementById(`${type}Status`);
+        
+        if (!player || !status) return;
+        
+        if (available && audioPath) {
+            const audioSrc = `/api/audio/${encodeURIComponent(audioPath)}`;
+            player.src = audioSrc;
+            status.innerHTML = `<span class="text-success"><i class="fas fa-check-circle"></i> 已${actionText}</span>`;
+            this.addLog('DEBUG', `${type}音频已加载: ${audioPath}`);
             
-            // 设置音频源
-            const audioSrc = `/api/audio/${encodeURIComponent(data.background_audio_path)}`;
-            backgroundPlayer.src = audioSrc;
-            
-            // 更新状态
-            backgroundStatus.innerHTML = '<span class="text-success"><i class="fas fa-check-circle"></i> 已提取</span>';
-            
-            this.addLog('DEBUG', `背景音频已加载: ${data.background_audio_path}`);
-        } else if (data.background_audio_path) {
-            // 背景音频路径存在但文件不存在
-            backgroundSection.style.display = 'block';
-            backgroundStatus.innerHTML = '<span class="text-warning"><i class="fas fa-exclamation-triangle"></i> 提取中...</span>';
+            // 绘制波形
+            this.drawWaveform(player, `${type}Waveform`);
+        } else if (audioPath) {
+            status.innerHTML = `<span class="text-warning"><i class="fas fa-exclamation-triangle"></i> ${actionText}中...</span>`;
         } else {
-            // 没有背景音频
-            backgroundSection.style.display = 'none';
-            backgroundStatus.innerHTML = '<span class="text-muted"><i class="fas fa-minus-circle"></i> 未提取</span>';
+            status.innerHTML = `<span class="text-muted"><i class="fas fa-minus-circle"></i> 未${actionText}</span>`;
         }
+    }
+    
+    // 绘制波形图
+    drawWaveform(audioElement, canvasId) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas || !audioElement.src) return;
+        
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+        
+        // 清空画布
+        ctx.clearRect(0, 0, width, height);
+        
+        // 绘制简化的波形图（模拟）
+        ctx.strokeStyle = '#007bff';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        
+        const centerY = height / 2;
+        const segments = 100;
+        
+        for (let i = 0; i < segments; i++) {
+            const x = (i / segments) * width;
+            // 生成模拟波形数据
+            const amplitude = Math.random() * 0.8 + 0.2;
+            const y = centerY + (Math.sin(i * 0.1) * amplitude * (height / 4));
+            
+            if (i === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        }
+        
+        ctx.stroke();
+        
+        // 绘制中心线
+        ctx.strokeStyle = '#e0e0e0';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(0, centerY);
+        ctx.lineTo(width, centerY);
+        ctx.stroke();
+        
+        // 添加标签
+        ctx.fillStyle = '#666';
+        ctx.font = '10px Arial';
+        ctx.fillText('音频波形', 5, 15);
     }
     
     // 更新片段表格

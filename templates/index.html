@@ -247,24 +247,60 @@
             </div>
         </div>
 
-        <!-- 背景音频预览区 -->
-        <div class="row mb-3" id="backgroundAudioSection" style="display: none;">
+        <!-- 音频预览区 -->
+        <div class="row mb-3" id="audioPreviewSection">
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h6 class="mb-0"><i class="fas fa-music"></i> 背景音频预览</h6>
+                        <h6 class="mb-0"><i class="fas fa-music"></i> 音频预览 (Demucs分离)</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
-                                <label class="form-label">提取的背景音:</label>
+                            <!-- 分离的人声 -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><i class="fas fa-microphone"></i> 分离的人声:</label>
+                                <audio id="vocalsAudioPlayer" controls style="width: 100%;">
+                                    您的浏览器不支持音频播放
+                                </audio>
+                                <canvas id="vocalsWaveform" width="400" height="60" class="border mt-2" style="width: 100%; height: 60px;"></canvas>
+                                <div id="vocalsAudioStatus" class="text-muted mt-1">未分离</div>
+                            </div>
+                            <!-- 分离的背景音 -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><i class="fas fa-volume-up"></i> 分离的背景音:</label>
                                 <audio id="backgroundAudioPlayer" controls style="width: 100%;">
                                     您的浏览器不支持音频播放
                                 </audio>
+                                <canvas id="backgroundWaveform" width="400" height="60" class="border mt-2" style="width: 100%; height: 60px;"></canvas>
+                                <div id="backgroundAudioStatus" class="text-muted mt-1">未分离</div>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">背景音状态:</label>
-                                <div id="backgroundAudioStatus" class="text-muted">未提取</div>
+                        </div>
+                        <div class="row">
+                            <!-- 合成的翻译人声 -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><i class="fas fa-language"></i> 合成的翻译人声:</label>
+                                <audio id="synthesizedVocalsPlayer" controls style="width: 100%;">
+                                    您的浏览器不支持音频播放
+                                </audio>
+                                <canvas id="synthesizedWaveform" width="400" height="60" class="border mt-2" style="width: 100%; height: 60px;"></canvas>
+                                <div id="synthesizedVocalsStatus" class="text-muted mt-1">未合成</div>
+                            </div>
+                            <!-- 最终混合音频 -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><i class="fas fa-compact-disc"></i> 最终混合音频 (翻译人声+原背景音):</label>
+                                <audio id="finalMixedPlayer" controls style="width: 100%;">
+                                    您的浏览器不支持音频播放
+                                </audio>
+                                <canvas id="finalMixedWaveform" width="400" height="60" class="border mt-2" style="width: 100%; height: 60px;"></canvas>
+                                <div id="finalMixedStatus" class="text-muted mt-1">未混合</div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <small class="text-info">
+                                    <i class="fas fa-info-circle"></i> 
+                                    使用Demucs技术分离人声和背景音，波形图显示音频内容分析
+                                </small>
                             </div>
                         </div>
                     </div>

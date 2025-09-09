@@ -201,7 +201,7 @@ class ProfessionalAudioProcessor:
         except Exception as e:
             self.logger.log("ERROR", f"专业音频处理器初始化失败: {str(e)}")
     
-    def process_audio_professionally(self, audio_path: str, source_language: str = "zh") -> Dict[str, Any]:
+    def process_audio_professionally(self, audio_path: str, source_language: str = "zh", project_data=None) -> Dict[str, Any]:
         """
         专业音频处理主流程
         
@@ -227,6 +227,13 @@ class ProfessionalAudioProcessor:
             
             vocals_path = separation_result["vocals_path"]
             background_path = separation_result["background_path"]
+            
+            # 立即更新project_data以便前端预览
+            if project_data:
+                project_data.vocals_audio_path = vocals_path
+                project_data.background_audio_path = background_path
+                project_data.set_processing_status("processing", "🎵 音频分离完成，开始说话人分析...", 30)
+                self.logger.log("INFO", "✅ Demucs分离完成，音频预览已更新")
             
             # 步骤2: pyannote.audio 说话人分离
             self.logger.log("INFO", "📊 开始说话人分离分析...")
