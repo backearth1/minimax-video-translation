@@ -71,12 +71,7 @@ class VideoTranslatorApp {
             this.uploadVideo();
         });
         
-        // 开始处理
-        document.getElementById('startProcessing').addEventListener('click', () => {
-            this.startProcessing();
-        });
-        
-        // 开始专业AI处理
+        // 开始AI翻译处理
         document.getElementById('startProfessionalProcessing').addEventListener('click', () => {
             this.startProfessionalProcessing();
         });
@@ -275,8 +270,7 @@ class VideoTranslatorApp {
                 this.addLog('INFO', '视频上传成功: ' + result.filename);
                 this.showNotification('视频上传成功', 'success');
                 
-                // 启用开始处理按钮
-                document.getElementById('startProcessing').disabled = false;
+                // 启用AI翻译按钮
                 document.getElementById('startProfessionalProcessing').disabled = false;
             } else {
                 this.addLog('ERROR', '视频上传失败: ' + result.message);
@@ -288,53 +282,6 @@ class VideoTranslatorApp {
         } finally {
             uploadBtn.innerHTML = '<i class=\"fas fa-upload\"></i> 上传';
             uploadBtn.disabled = false;
-        }
-    }
-    
-    // 开始处理
-    async startProcessing() {
-        if (this.isProcessing) {
-            this.showNotification('正在处理中，请稍候...', 'info');
-            return;
-        }
-        
-        // 验证配置
-        if (!this.config.group_id || !this.config.api_key) {
-            this.showNotification('请先配置Group ID和API Key', 'warning');
-            return;
-        }
-        
-        this.isProcessing = true;
-        const startBtn = document.getElementById('startProcessing');
-        startBtn.innerHTML = '<span class=\"loading\"></span>处理中...';
-        startBtn.disabled = true;
-        
-        try {
-            const response = await fetch('/api/process/start', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            
-            const result = await response.json();
-            if (result.status === 'success') {
-                this.addLog('INFO', '自动翻译处理已开始');
-                this.startProgressMonitoring();
-            } else {
-                this.addLog('ERROR', '处理启动失败: ' + result.message);
-                this.showNotification('处理启动失败: ' + result.message, 'error');
-                this.isProcessing = false;
-            }
-        } catch (error) {
-            this.addLog('ERROR', '处理启动异常: ' + error.message);
-            this.showNotification('处理启动异常', 'error');
-            this.isProcessing = false;
-        } finally {
-            if (!this.isProcessing) {
-                startBtn.innerHTML = '<i class=\"fas fa-rocket\"></i> 标准翻译';
-                startBtn.disabled = false;
-            }
         }
     }
     
@@ -356,8 +303,7 @@ class VideoTranslatorApp {
         startBtn.innerHTML = '<span class=\"loading\"></span>专业AI处理中...';
         startBtn.disabled = true;
         
-        // 禁用标准处理按钮
-        document.getElementById('startProcessing').disabled = true;
+        // 禁用AI翻译按钮，避免重复处理
         
         try {
             const response = await fetch('/api/process/professional', {
@@ -383,9 +329,8 @@ class VideoTranslatorApp {
             this.isProcessing = false;
         } finally {
             if (!this.isProcessing) {
-                startBtn.innerHTML = '<i class=\"fas fa-star\"></i> 专业AI翻译';
+                startBtn.innerHTML = '<i class=\"fas fa-star\"></i> 开始AI翻译';
                 startBtn.disabled = false;
-                document.getElementById('startProcessing').disabled = false;
             }
         }
     }
@@ -403,11 +348,8 @@ class VideoTranslatorApp {
                         clearInterval(progressInterval);
                         this.isProcessing = false;
                         
-                        const startBtn = document.getElementById('startProcessing');
                         const professionalBtn = document.getElementById('startProfessionalProcessing');
-                        startBtn.innerHTML = '<i class=\"fas fa-rocket\"></i> 标准翻译';
-                        startBtn.disabled = false;
-                        professionalBtn.innerHTML = '<i class=\"fas fa-star\"></i> 专业AI翻译';
+                        professionalBtn.innerHTML = '<i class=\"fas fa-star\"></i> 开始AI翻译';
                         professionalBtn.disabled = false;
                         
                         if (data.processing_status === 'completed') {

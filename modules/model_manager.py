@@ -141,21 +141,30 @@ class ModelManager:
             "description": config["description"]
         }
     
-    def get_recommended_model(self, model_type: str, available_memory_gb: float = 4.0) -> Optional[str]:
-        """根据系统资源推荐最佳模型"""
+    def get_recommended_model(self, model_type: str, available_memory_gb: float = 4.0, prioritize_quality: bool = True) -> Optional[str]:
+        """根据质量或系统资源推荐最佳模型"""
         if model_type not in self.required_models:
             return None
         
         config = self.required_models[model_type]
         
         if model_type == "whisper":
-            # 根据内存推荐Whisper模型
-            if available_memory_gb < 2:
-                return "base"  # 最轻量级
-            elif available_memory_gb < 4:
-                return "medium" if "medium" in config["models"] else "base"
+            if prioritize_quality:
+                # 专业AI翻译：优先使用最高质量模型
+                if "large-v2" in config["models"]:
+                    return "large-v2"  # 最高质量
+                elif "medium" in config["models"]:
+                    return "medium"    # 中等质量
+                else:
+                    return "base"      # 基础质量
             else:
-                return "large-v2"  # 最高质量
+                # 快速处理：根据内存推荐
+                if available_memory_gb < 2:
+                    return "base"  # 最轻量级
+                elif available_memory_gb < 4:
+                    return "medium" if "medium" in config["models"] else "base"
+                else:
+                    return "large-v2"  # 最高质量
         
         return config["priority"]
     
@@ -183,7 +192,7 @@ class ModelManager:
     def prepare_models_for_professional_processing(self) -> Dict[str, str]:
         """
         为专业音频处理准备模型
-        返回推荐的模型配置
+        返回推荐的模型配置（优先质量）
         """
         self.logger.log("INFO", "🚀 准备专业音频处理模型...")
         
@@ -200,11 +209,12 @@ class ModelManager:
         # 检查模型状态
         self.print_model_status()
         
-        # 推荐模型配置
+        # 推荐模型配置（专业处理优先质量）
         recommended_config = {}
         
         for model_type in ["whisper", "pyannote", "demucs"]:
-            recommended_model = self.get_recommended_model(model_type, available_gb)
+            # 专业处理模式：prioritize_quality=True
+            recommended_model = self.get_recommended_model(model_type, available_gb, prioritize_quality=True)
             recommended_config[model_type] = recommended_model
             
             # 检查推荐模型是否可用
@@ -212,7 +222,16 @@ class ModelManager:
             if not status[model_type]["available"]:
                 self.logger.log("WARNING", f"⚠️  {model_type} 模型需要首次下载，可能需要几分钟时间")
         
-        self.logger.log("INFO", "🎯 推荐配置:")
+        # 特别提醒Whisper模型选择
+        whisper_model = recommended_config.get("whisper", "base")
+        if whisper_model == "large-v2":
+            self.logger.log("INFO", "🎯 专业模式：使用Whisper large-v2模型确保最佳识别效果")
+        elif whisper_model == "medium":
+            self.logger.log("INFO", "🎯 专业模式：使用Whisper medium模型平衡效果与速度")
+        else:
+            self.logger.log("WARNING", "⚠️  专业模式：使用Whisper base模型，识别效果可能受限")
+        
+        self.logger.log("INFO", "🎯 专业AI处理配置（优先质量）:")
         for model_type, model_name in recommended_config.items():
             self.logger.log("INFO", f"   {model_type}: {model_name}")
         
