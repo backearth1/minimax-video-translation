@@ -1,5 +1,6 @@
 import os
 import librosa
+import soundfile as sf
 import numpy as np
 from typing import Dict, Any, List, Tuple
 from sklearn.cluster import KMeans
@@ -245,21 +246,25 @@ class SpeakerDiarization:
     
     def batch_analyze_segments(self, segments: List[Dict]) -> List[Dict]:
         """
-        批量分析所有片段的说话人身份
+        批量分析所有片段，检测并拆分包含多个说话人的片段
         """
         try:
-            self.logger.log("INFO", "开始批量说话人分析...")
+            self.logger.log("INFO", "开始批量说话人分析和片段拆分...")
             
             processed_segments = []
             for segment in segments:
                 audio_path = segment.get("original_audio_path", "")
                 if os.path.exists(audio_path):
-                    speaker_id = self.identify_speaker(audio_path, segment["sequence"])
-                    segment["speaker_id"] = speaker_id
+                    # 检测片段内是否有说话人变化
+                    sub_segments = self.detect_speaker_changes_in_segment(segment)
+                    processed_segments.extend(sub_segments)
                 else:
                     segment["speaker_id"] = f"speaker_unknown_{segment['sequence']}"
-                
-                processed_segments.append(segment)
+                    processed_segments.append(segment)
+            
+            # 重新编号片段
+            for i, seg in enumerate(processed_segments):
+                seg["sequence"] = i + 1
             
             # 打印说话人统计信息
             speaker_stats = {}
@@ -272,6 +277,8 @@ class SpeakerDiarization:
             self.logger.log("INFO", f"说话人分析完成，检测到{len(speaker_stats)}个说话人:")
             for speaker_id, count in speaker_stats.items():
                 self.logger.log("INFO", f"  {speaker_id}: {count}个片段")
+            
+            self.logger.log("INFO", f"片段拆分完成: {len(segments)}个原始片段 → {len(processed_segments)}个处理后片段")
             
             return processed_segments
             
@@ -363,3 +370,155 @@ class SpeakerDiarization:
                 features1.reshape(1, -1),
                 features2.reshape(1, -1)
             )[0][0]
+    
+    def detect_speaker_changes_in_segment(self, segment: Dict) -> List[Dict]:
+        """
+        检测单个音频片段内的说话人变化，如有变化则拆分
+        """
+        try:
+            audio_path = segment.get("original_audio_path", "")
+            if not os.path.exists(audio_path):
+                segment["speaker_id"] = "unknown"
+                return [segment]
+            
+            # 加载音频
+            y, sr = librosa.load(audio_path, sr=16000)
+            duration = len(y) / sr
+            
+            # 如果音频太短(<1秒)，不拆分
+            if duration < 1.0:
+                speaker_id = self.identify_speaker(audio_path, segment["sequence"])
+                segment["speaker_id"] = speaker_id
+                return [segment]
+            
+            # 滑动窗口分析 (每0.5秒一个窗口)
+            window_size = int(0.5 * sr)  # 0.5秒窗口
+            hop_size = int(0.25 * sr)    # 0.25秒跳跃
+            
+            features_sequence = []
+            timestamps = []
+            
+            for start_sample in range(0, len(y) - window_size, hop_size):
+                end_sample = start_sample + window_size
+                window_audio = y[start_sample:end_sample]
+                
+                # 保存窗口音频到临时文件
+                temp_window_path = f"./temp/window_{segment['sequence']}_{start_sample}.wav"
+                sf.write(temp_window_path, window_audio, sr)
+                
+                # 提取特征
+                features = self.extract_voice_features(temp_window_path)
+                features_sequence.append(features)
+                timestamps.append(start_sample / sr)
+                
+                # 清理临时文件
+                if os.path.exists(temp_window_path):
+                    os.remove(temp_window_path)
+            
+            # 检测说话人变化点
+            change_points = self.find_speaker_change_points(features_sequence)
+            
+            if len(change_points) == 0:
+                # 没有变化点，整个片段是同一个说话人
+                speaker_id = self.identify_speaker(audio_path, segment["sequence"])
+                segment["speaker_id"] = speaker_id
+                return [segment]
+            else:
+                # 有变化点，拆分片段
+                return self.split_segment_by_change_points(segment, change_points, timestamps, sr)
+                
+        except Exception as e:
+            self.logger.log("ERROR", f"检测说话人变化失败: {str(e)}")
+            # 失败时返回原片段
+            segment["speaker_id"] = "unknown"
+            return [segment]
+    
+    def find_speaker_change_points(self, features_sequence: List[np.ndarray]) -> List[int]:
+        """
+        找到说话人变化点
+        """
+        change_points = []
+        change_threshold = 0.25  # 变化阈值，低于此相似度认为是不同说话人
+        
+        for i in range(1, len(features_sequence)):
+            similarity = self._calculate_weighted_similarity(
+                features_sequence[i-1], 
+                features_sequence[i]
+            )
+            
+            if similarity < change_threshold:
+                change_points.append(i)
+                self.logger.log("DEBUG", f"检测到说话人变化点: 位置{i}, 相似度{similarity:.3f}")
+        
+        return change_points
+    
+    def split_segment_by_change_points(self, original_segment: Dict, change_points: List[int], 
+                                     timestamps: List[float], sr: int) -> List[Dict]:
+        """
+        根据变化点拆分音频片段
+        """
+        try:
+            audio_path = original_segment["original_audio_path"]
+            y, _ = librosa.load(audio_path, sr=sr)
+            
+            # 解析原始时间戳
+            timestamp_str = original_segment["timestamp"]
+            original_start, original_end = self._parse_timestamp_to_seconds(timestamp_str)
+            
+            segments = []
+            last_point = 0
+            
+            # 根据变化点拆分
+            for i, change_point in enumerate(change_points + [len(timestamps)]):
+                if change_point <= last_point:
+                    continue
+                
+                # 计算子片段的绝对时间
+                start_time = original_start + timestamps[last_point]
+                end_time = original_start + timestamps[min(change_point-1, len(timestamps)-1)] + 0.5
+                
+                # 提取子音频
+                start_sample = int(timestamps[last_point] * sr)
+                end_sample = int(min((timestamps[change_point-1] + 0.5), len(y)/sr) * sr) if change_point < len(timestamps) else len(y)
+                
+                sub_audio = y[start_sample:end_sample]
+                
+                # 保存子音频
+                sub_audio_path = f"./temp/segment_{original_segment['sequence']}_part{i+1}.wav"
+                sf.write(sub_audio_path, sub_audio, sr)
+                
+                # 识别说话人
+                speaker_id = self.identify_speaker(sub_audio_path, original_segment['sequence'])
+                
+                # 创建新片段
+                new_segment = original_segment.copy()
+                new_segment.update({
+                    "timestamp": f"{start_time:.2f}-{end_time:.2f}",
+                    "original_audio_path": sub_audio_path,
+                    "speaker_id": speaker_id,
+                    "translated_text": "",  # 重置翻译文本
+                    "translated_audio_path": "",  # 重置翻译音频
+                    "voice_id": ""  # 重置音色ID
+                })
+                
+                segments.append(new_segment)
+                last_point = change_point
+            
+            self.logger.log("INFO", f"片段{original_segment['sequence']}拆分为{len(segments)}个子片段")
+            return segments
+            
+        except Exception as e:
+            self.logger.log("ERROR", f"拆分片段失败: {str(e)}")
+            return [original_segment]
+    
+    def _parse_timestamp_to_seconds(self, timestamp: str) -> tuple:
+        """解析时间戳字符串为秒数"""
+        try:
+            parts = timestamp.split('-')
+            if len(parts) == 2:
+                start = float(parts[0])
+                end = float(parts[1])
+                return start, end
+        except:
+            pass
+        return 0.0, 3.0
