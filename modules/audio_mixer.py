@@ -9,13 +9,25 @@ class AudioMixer:
         self.logger = logger_service
         
     def concatenate_audio_segments(self, segments: List[Dict], output_path: str) -> Dict[str, Any]:
-        """拼接音频片段"""
+        """使用绝对时间戳拼接音频片段"""
         try:
-            self.logger.log("INFO", f"开始拼接{len(segments)}个音频片段...")
+            self.logger.log("INFO", f"开始按绝对时间戳拼接{len(segments)}个音频片段...")
             
             # 目标采样率
             target_sr = 44100
-            final_audio = np.array([])
+            
+            # 找到最大结束时间以确定总音频长度
+            max_end_time = 0
+            for segment in segments:
+                timestamp = segment.get('timestamp', '0-3')
+                start_time, end_time = self._parse_timestamp(timestamp)
+                max_end_time = max(max_end_time, end_time)
+            
+            # 创建总音频数组（填充静音）
+            total_samples = int(max_end_time * target_sr)
+            final_audio = np.zeros(total_samples)
+            
+            self.logger.log("INFO", f"创建总时长{max_end_time:.2f}s的音频轨道")
             
             for i, segment in enumerate(segments):
                 try:
@@ -23,42 +35,35 @@ class AudioMixer:
                     translated_audio_path = segment.get('translated_audio_path', '')
                     timestamp = segment.get('timestamp', '0-3')
                     
-                    # 解析时间戳
+                    # 解析绝对时间戳
                     start_time, end_time = self._parse_timestamp(timestamp)
-                    expected_duration = end_time - start_time
+                    start_sample = int(start_time * target_sr)
+                    end_sample = int(end_time * target_sr)
+                    expected_samples = end_sample - start_sample
                     
                     if translated_audio_path and os.path.exists(translated_audio_path):
                         # 加载翻译音频
                         audio, sr = librosa.load(translated_audio_path, sr=target_sr)
                         
                         # 调整音频长度到期望时长
-                        expected_samples = int(expected_duration * target_sr)
-                        current_samples = len(audio)
-                        
-                        if current_samples > expected_samples:
+                        if len(audio) > expected_samples:
                             # 音频太长，裁剪
                             audio = audio[:expected_samples]
-                        elif current_samples < expected_samples:
+                        elif len(audio) < expected_samples:
                             # 音频太短，填充静音
-                            padding = expected_samples - current_samples
+                            padding = expected_samples - len(audio)
                             audio = np.concatenate([audio, np.zeros(padding)])
                         
-                        self.logger.log("INFO", f"第{sequence}句音频: {current_samples/sr:.2f}s → {len(audio)/sr:.2f}s")
+                        # 将音频放置到绝对位置
+                        final_audio[start_sample:start_sample + len(audio)] = audio
+                        
+                        self.logger.log("INFO", f"第{sequence}句音频已放置到 {start_time:.2f}s-{end_time:.2f}s 位置")
                         
                     else:
-                        # 没有翻译音频，使用静音
-                        audio = np.zeros(int(expected_duration * target_sr))
-                        self.logger.log("WARNING", f"第{sequence}句使用静音: {expected_duration:.2f}s")
-                    
-                    # 拼接到最终音频
-                    final_audio = np.concatenate([final_audio, audio])
+                        self.logger.log("WARNING", f"第{sequence}句没有翻译音频，保持静音: {start_time:.2f}s-{end_time:.2f}s")
                     
                 except Exception as e:
                     self.logger.log("ERROR", f"处理第{sequence}句音频时出错: {str(e)}")
-                    # 添加静音片段
-                    silence_duration = 3.0  # 默认3秒
-                    silence = np.zeros(int(silence_duration * target_sr))
-                    final_audio = np.concatenate([final_audio, silence])
             
             # 保存最终音频
             os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -67,7 +72,7 @@ class AudioMixer:
             duration = len(final_audio) / target_sr
             file_size = os.path.getsize(output_path)
             
-            self.logger.log("INFO", f"音频拼接完成: 总时长{duration:.2f}s, 大小{file_size/1024/1024:.2f}MB")
+            self.logger.log("INFO", f"绝对时间戳音频拼接完成: 总时长{duration:.2f}s, 大小{file_size/1024/1024:.2f}MB")
             
             return {
                 "success": True,

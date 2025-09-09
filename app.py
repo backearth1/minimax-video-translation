@@ -297,12 +297,35 @@ def start_processing():
                     project_data.set_processing_status("error", "音频拼接失败", 95)
                     return
                 
+                # 4.2 混合背景音乐 (96% → 98%)
+                project_data.set_processing_status("processing", "正在混合背景音乐...", 96)
+                
+                final_mixed_audio_path = "./temp/final_mixed_audio.wav"
+                if project_data.background_audio_path and os.path.exists(project_data.background_audio_path):
+                    logger_service.log("INFO", "开始混合背景音乐...")
+                    background_mix_result = audio_mixer.mix_with_background(
+                        mixed_audio_path, 
+                        project_data.background_audio_path, 
+                        final_mixed_audio_path,
+                        background_volume=0.25  # 背景音乐音量25%
+                    )
+                    
+                    if background_mix_result["success"]:
+                        logger_service.log("INFO", "背景音乐混合成功")
+                        final_audio_for_video = final_mixed_audio_path
+                    else:
+                        logger_service.log("WARNING", f"背景音乐混合失败: {background_mix_result['error']}")
+                        final_audio_for_video = mixed_audio_path
+                else:
+                    logger_service.log("INFO", "没有背景音频，直接使用翻译音频")
+                    final_audio_for_video = mixed_audio_path
+                
                 project_data.set_processing_status("processing", "正在合成最终视频...", 98)
                 
-                # 4.2 合成最终视频
+                # 4.3 合成最终视频
                 final_video_path = "./temp/final_translated_video.mp4"
                 video_result = video_processor.merge_audio_video(
-                    project_data.video_path, mixed_audio_path, final_video_path
+                    project_data.video_path, final_audio_for_video, final_video_path
                 )
                 
                 if video_result["success"]:

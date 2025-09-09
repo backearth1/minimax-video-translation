@@ -163,7 +163,7 @@ class ASRProcessor:
         end_time = segment['end']
         text = segment['text'].strip()
         
-        # 提取音频片段
+        # 提取音频片段（纯人声，便于编辑和克隆）
         segment_audio_path = self._extract_audio_segment(
             audio_path, start_time, end_time, sequence
         )
@@ -173,7 +173,7 @@ class ASRProcessor:
             "timestamp": f"{start_time:.2f}-{end_time:.2f}",
             "original_text": text,
             "translated_text": "",
-            "original_audio_path": segment_audio_path,
+            "original_audio_path": segment_audio_path,  # 纯人声片段
             "translated_audio_path": "",
             "voice_id": "",
             "speed": 1.0
