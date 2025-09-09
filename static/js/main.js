@@ -118,6 +118,11 @@ class VideoTranslatorApp {
                 this.previewVideo(e.target.files[0]);
             }
         });
+        
+        // 下载翻译视频
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            this.downloadVideo();
+        });
     }
     
     // 绑定自动保存事件

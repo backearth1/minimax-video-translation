@@ -113,7 +113,16 @@ class ProfessionalAudioProcessor:
                             import torch
                             torch.cuda.empty_cache()  # 清理GPU缓存
                         
-                        self.whisper_model = whisper.load_model(model_name, device=self.device)
+                        # 使用项目模型目录
+                        project_model_dir = self.model_manager.models_dir
+                        whisper_model_path = os.path.join(project_model_dir, "whisper", f"{model_name}.pt")
+                        
+                        if os.path.exists(whisper_model_path):
+                            # 从项目目录加载模型
+                            self.whisper_model = whisper.load_model(whisper_model_path, device=self.device)
+                        else:
+                            # 回退到标准加载（会触发下载）
+                            self.whisper_model = whisper.load_model(model_name, device=self.device)
                         self.logger.log("INFO", f"✅ Whisper {model_name} 模型加载成功")
                         break
                     except Exception as model_err:
@@ -144,12 +153,17 @@ class ProfessionalAudioProcessor:
                 # 使用环境变量或配置文件中的HuggingFace token
                 auth_token = os.getenv("HUGGINGFACE_TOKEN", None)
                 
-                # 直接加载模型（在线程中不使用signal超时）
+                # 设置HF_HOME指向项目目录，让pyannote从项目目录加载模型
+                old_hf_home = os.environ.get("HF_HOME", None)
+                os.environ["HF_HOME"] = os.path.join(self.model_manager.models_dir, "pyannote")
+                
                 try:
+                    # 使用标准模型名加载（会从HF_HOME查找）
                     self.diarization_pipeline = Pipeline.from_pretrained(
                         recommended_pyannote,
                         use_auth_token=auth_token
                     )
+                    
                     self.diarization_pipeline = self.diarization_pipeline.to(self.device)
                     self.logger.log("INFO", "✅ pyannote.audio 模型加载成功")
                 except Exception as load_err:
@@ -164,10 +178,23 @@ class ProfessionalAudioProcessor:
                         except Exception as e2:
                             self.logger.log("ERROR", f"无token加载也失败: {str(e2)}")
                             raise load_err
+                finally:
+                    # 恢复原始HF_HOME环境变量
+                    if old_hf_home is not None:
+                        os.environ["HF_HOME"] = old_hf_home
+                    elif "HF_HOME" in os.environ:
+                        del os.environ["HF_HOME"]
                     
             except Exception as e:
                 self.logger.log("ERROR", f"pyannote.audio 加载失败: {str(e)}")
                 self.diarization_pipeline = None
+                
+                # 确保恢复环境变量
+                if 'old_hf_home' in locals():
+                    if old_hf_home is not None:
+                        os.environ["HF_HOME"] = old_hf_home
+                    elif "HF_HOME" in os.environ:
+                        del os.environ["HF_HOME"]
             
             self.logger.log("INFO", f"🚀 专业音频处理器初始化完成 (设备: {self.device})")
             
@@ -246,16 +273,24 @@ class ProfessionalAudioProcessor:
             output_dir = "./temp/demucs_output"
             os.makedirs(output_dir, exist_ok=True)
             
-            # 运行 Demucs 分离 (使用UV环境)
+            # 运行 Demucs 分离 (使用UV环境，指定项目模型)
+            # 设置环境变量指向项目模型目录
+            env = os.environ.copy()
+            env["TORCH_HOME"] = os.path.join(self.model_manager.models_dir, "demucs")
+            
             cmd = [
                 "uv", "run", "python", "-m", "demucs.separate",
+                "-n", "htdemucs",  # 使用高质量htdemucs模型
                 "--mp3",  # 输出MP3格式
                 "--mp3-bitrate", "320",  # 高质量
                 "-o", output_dir,
                 audio_path
             ]
             
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+            # 对于32秒音频，增加超时时间到600秒(10分钟)
+            self.logger.log("INFO", f"执行Demucs命令: {' '.join(cmd)}")
+            self.logger.log("INFO", f"使用模型目录: {env['TORCH_HOME']}")
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=600, env=env)
             
             if result.returncode != 0:
                 return {"success": False, "error": f"Demucs 分离失败: {result.stderr}"}
@@ -377,8 +412,13 @@ class ProfessionalAudioProcessor:
                 self.whisper_model,
                 vocals_path,
                 language=whisper_lang,
-                word_timestamps=True,
-                vad=True  # 启用语音活动检测
+                vad=True,  # 启用语音活动检测，减少幻觉
+                compute_word_confidence=True,  # 计算词汇置信度
+                refine_whisper_precision=0.5,  # 优化时间戳精度到0.5秒
+                min_word_duration=0.02,  # 最小词汇持续时间20ms
+                remove_empty_words=True,  # 移除可能的幻觉空词
+                detect_disfluencies=False,  # 暂时关闭不流畅检测
+                trust_whisper_timestamps=True  # 信任Whisper的时间戳作为基础
             )
             
             self.logger.log("INFO", f"Whisper 识别完成: {len(result.get('segments', []))} 个段落")
@@ -393,17 +433,30 @@ class ProfessionalAudioProcessor:
         try:
             aligned_segments = []
             
+            # 调试信息
+            self.logger.log("DEBUG", f"说话人片段数量: {len(speaker_segments)}")
+            self.logger.log("DEBUG", f"Whisper结果包含segments: {'segments' in word_result if word_result else False}")
+            
             if not word_result or "segments" not in word_result:
+                self.logger.log("WARNING", "Whisper结果为空或没有segments字段")
                 return []
             
+            # 统计词汇数量
+            total_words = 0
             for segment in word_result["segments"]:
+                if "words" in segment:
+                    total_words += len(segment["words"])
+            
+            self.logger.log("DEBUG", f"Whisper识别出总词汇数: {total_words}")
+            
+            for i, segment in enumerate(word_result["segments"]):
                 if "words" not in segment:
                     continue
                 
                 for word_info in segment["words"]:
                     word_start = word_info.get("start", 0)
                     word_end = word_info.get("end", 0)
-                    word_text = word_info.get("word", "").strip()
+                    word_text = word_info.get("text", "").strip()  # 修复：使用'text'而不是'word'
                     
                     if not word_text:
                         continue
@@ -417,6 +470,8 @@ class ProfessionalAudioProcessor:
                         "text": word_text,
                         "speaker": speaker
                     })
+            
+            self.logger.log("DEBUG", f"对齐后词汇数量: {len(aligned_segments)}")
             
             # 将连续的相同说话人的词组合成句子
             grouped_segments = self._group_consecutive_words(aligned_segments)

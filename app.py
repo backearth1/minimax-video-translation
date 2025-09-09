@@ -14,13 +14,11 @@ from utils.rate_limiter import RateLimiter
 from utils.error_handler import ErrorHandler
 from modules.logger_service import LoggerService
 from modules.video_processor import VideoProcessor
-from modules.asr_processor import ASRProcessor
 from modules.translation_service import TranslationService
 from modules.voice_clone_service import VoiceCloneService
 from modules.tts_service import TTSService
 from modules.alignment_optimizer import AlignmentOptimizer
 from modules.audio_mixer import AudioMixer
-from modules.audio_preprocessor import AudioPreprocessor
 from modules.speaker_diarization import SpeakerDiarization
 from modules.professional_audio_processor import ProfessionalAudioProcessor
 
@@ -38,8 +36,6 @@ logger_service = LoggerService()
 
 # 初始化处理模块
 video_processor = VideoProcessor(logger_service)
-audio_preprocessor = AudioPreprocessor(logger_service)
-asr_processor = ASRProcessor(config, logger_service)
 translation_service = TranslationService(config, rate_limiter, logger_service)
 voice_clone_service = VoiceCloneService(config, rate_limiter, logger_service)
 tts_service = TTSService(config, rate_limiter, logger_service)
@@ -197,152 +193,7 @@ def start_professional_processing():
                         translated_text = translation_result["translated_text"]
                         segment["translated_text"] = translated_text
                         
-                        # 音色克隆和TTS（使用现有逻辑）
-                        # ... 保持原有的TTS和对齐逻辑
-                        
-                        # 更新项目数据
-                        segment_update = {k: v for k, v in segment.items() if k != 'sequence'}
-                        project_data.update_segment(sequence, **segment_update)
-                        
-                    except Exception as e:
-                        logger_service.log("ERROR", f"第{sequence}句处理异常: {str(e)}")
-                        continue
-                
-                # 步骤4: 视频合成 (95% → 100%)
-                # ... 保持原有的视频合成逻辑
-                
-                project_data.set_processing_status("completed", "专业AI处理完成", 100)
-                logger_service.log("INFO", "🎉 专业AI视频翻译处理完成!")
-                
-            except Exception as e:
-                error_msg = f"专业处理过程中发生异常: {str(e)}"
-                logger_service.log("ERROR", error_msg)
-                project_data.set_processing_status("error", "专业处理失败", project_data.progress)
-        
-        # 在后台线程中运行专业处理
-        thread = threading.Thread(target=professional_processing)
-        thread.daemon = True
-        thread.start()
-        
-        return jsonify({"status": "success", "message": "专业AI处理开始", "task_id": str(uuid.uuid4())})
-        
-    except Exception as e:
-        error_msg = error_handler.handle_error(e, "开始专业处理")
-        return jsonify({"status": "error", "message": error_msg}), 500
-
-@app.route('/api/process/start', methods=['POST'])
-def start_processing():
-    try:
-        if not project_data.video_path:
-            return jsonify({"status": "error", "message": "请先上传视频文件"}), 400
-        
-        logger_service.log("INFO", "开始自动翻译处理...")
-        
-        # 设置处理状态
-        project_data.set_processing_status("processing", "开始处理视频...", 5)
-        
-        # 真实的视频处理流程
-        import threading
-        def real_video_processing():
-            try:
-                # 步骤1: 提取音频 (5% → 15%)
-                logger_service.log("INFO", "正在从视频中提取音频...")
-                audio_result = video_processor.extract_audio(project_data.video_path)
-                
-                if not audio_result["success"]:
-                    logger_service.log("ERROR", f"音频提取失败: {audio_result['error']}")
-                    project_data.set_processing_status("error", "音频提取失败", 5)
-                    return
-                
-                original_audio_path = audio_result["audio_path"]
-                
-                # 步骤1.5: 人声分离 (15% → 25%)
-                logger_service.log("INFO", "正在进行人声背景音分离...")
-                project_data.set_processing_status("processing", "人声背景音分离中...", 15)
-                
-                # 检查是否启用人声分离功能
-                if config.enable_voice_extraction:
-                    # 分析音频内容，判断是否需要人声分离
-                    analysis_result = audio_preprocessor.analyze_audio_content(original_audio_path)
-                    
-                    if analysis_result["success"] and analysis_result.get("needs_voice_extraction", False):
-                        logger_service.log("INFO", f"检测到需要人声分离: {', '.join(analysis_result['reasons'])}")
-                        
-                        # 执行人声背景音分离
-                        separation_result = audio_preprocessor.extract_voice(original_audio_path)
-                        
-                        if separation_result["success"]:
-                            # 使用分离出的人声进行后续处理
-                            audio_path = separation_result["voice_path"]
-                            project_data.background_audio_path = separation_result["background_path"]  # 保存背景音路径
-                            logger_service.log("INFO", f"人声分离成功，人声文件: {audio_path}")
-                            logger_service.log("INFO", f"背景音文件: {separation_result['background_path']}")
-                        else:
-                            logger_service.log("WARNING", f"人声分离失败: {separation_result['error']}，使用原始音频")
-                            audio_path = original_audio_path
-                            project_data.background_audio_path = None
-                    else:
-                        logger_service.log("INFO", "音频无需人声分离，直接使用原始音频")
-                        audio_path = original_audio_path
-                        project_data.background_audio_path = None
-                else:
-                    logger_service.log("INFO", "人声分离功能已禁用，直接使用原始音频")
-                    audio_path = original_audio_path
-                    project_data.background_audio_path = None
-                
-                project_data.set_processing_status("processing", "ASR语音识别中...", 25)
-                
-                # 步骤2: ASR识别和切分 (25% → 40%)
-                logger_service.log("INFO", "正在进行ASR语音识别和智能切分...")
-                segments = asr_processor.process_audio(audio_path)
-                
-                if not segments:
-                    logger_service.log("ERROR", "ASR处理失败，未检测到语音片段")
-                    project_data.set_processing_status("error", "ASR处理失败", 25)
-                    return
-                
-                project_data.update_segments(segments)
-                
-                # 步骤2.5: 说话人分离 (40% → 42%)
-                project_data.set_processing_status("processing", "说话人身份识别中...", 40)
-                logger_service.log("INFO", "开始说话人身份识别...")
-                
-                # 执行说话人分离分析
-                segments_with_speakers = speaker_diarization.batch_analyze_segments(segments)
-                project_data.update_segments(segments_with_speakers)
-                
-                # 保存说话人特征档案
-                speaker_diarization.save_speaker_profiles()
-                
-                project_data.set_processing_status("processing", "开始逐句翻译...", 42)
-                
-                # 步骤3: 逐句处理 (42% → 95%)
-                total_segments = len(segments_with_speakers)
-                segments = segments_with_speakers  # 使用包含说话人信息的片段
-                for i, segment in enumerate(segments):
-                    try:
-                        sequence = segment["sequence"]
-                        original_text = segment["original_text"]
-                        original_audio_path = segment["original_audio_path"]
-                        
-                        # 更新进度
-                        progress = 42 + int((i / total_segments) * 53)
-                        speaker_id = segment.get("speaker_id", "unknown")
-                        project_data.set_processing_status("processing", f"处理第{sequence}句({speaker_id})...", progress)
-                        
-                        # 3.1 翻译
-                        logger_service.log("INFO", f"第{sequence}句: 开始翻译")
-                        translation_result = translation_service.translate_text(original_text)
-                        
-                        if not translation_result["success"]:
-                            logger_service.log("ERROR", f"第{sequence}句翻译失败: {translation_result['error']}")
-                            continue
-                        
-                        translated_text = translation_result["translated_text"]
-                        segment["translated_text"] = translated_text
-                        
                         # 3.2 智能音色克隆（基于说话人身份）
-                        speaker_id = segment.get("speaker_id", "unknown")
                         logger_service.log("INFO", f"第{sequence}句({speaker_id}): 开始智能音色克隆")
                         
                         # 为当前说话人获取最佳代表音频
@@ -463,27 +314,28 @@ def start_processing():
                     logger_service.log("INFO", f"最终视频已生成: {final_video_path}")
                     
                     # 完成
-                    project_data.set_processing_status("completed", "处理完成", 100)
-                    logger_service.log("INFO", "🎉 视频翻译处理完成!")
+                    project_data.set_processing_status("completed", "专业AI处理完成", 100)
+                    logger_service.log("INFO", "🎉 专业AI视频翻译处理完成!")
                 else:
                     logger_service.log("ERROR", f"视频合成失败: {video_result['error']}")
                     project_data.set_processing_status("error", "视频合成失败", 98)
                 
             except Exception as e:
-                error_msg = f"处理过程中发生异常: {str(e)}"
+                error_msg = f"专业处理过程中发生异常: {str(e)}"
                 logger_service.log("ERROR", error_msg)
-                project_data.set_processing_status("error", "处理失败", project_data.progress)
+                project_data.set_processing_status("error", "专业处理失败", project_data.progress)
         
-        # 在后台线程中运行真实处理
-        thread = threading.Thread(target=real_video_processing)
+        # 在后台线程中运行专业处理
+        thread = threading.Thread(target=professional_processing)
         thread.daemon = True
         thread.start()
         
-        return jsonify({"status": "success", "message": "处理开始", "task_id": str(uuid.uuid4())})
+        return jsonify({"status": "success", "message": "专业AI处理开始", "task_id": str(uuid.uuid4())})
         
     except Exception as e:
-        error_msg = error_handler.handle_error(e, "开始处理")
+        error_msg = error_handler.handle_error(e, "开始专业处理")
         return jsonify({"status": "error", "message": error_msg}), 500
+
 
 def parse_timestamp(timestamp: str) -> tuple:
     """解析时间戳"""

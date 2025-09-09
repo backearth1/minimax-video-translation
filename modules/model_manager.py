@@ -14,14 +14,18 @@ class ModelManager:
     def __init__(self, logger_service):
         self.logger = logger_service
         
-        # 定义项目需要的所有模型
+        # 项目根目录
+        self.project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.models_dir = os.path.join(self.project_root, "models")
+        
+        # 定义项目需要的所有模型 - 使用统一的项目模型目录
         self.required_models = {
             # Whisper ASR模型 (优先级从高到低)
             "whisper": {
                 "models": ["base", "medium", "large-v2"],
-                "priority": "base",  # 默认使用base模型
+                "priority": "large-v2",  # 专业处理优先使用large-v2模型
                 "description": "语音识别模型",
-                "cache_dir": os.path.expanduser("~/.cache/whisper")
+                "cache_dir": os.path.join(self.models_dir, "whisper")
             },
             
             # pyannote.audio 说话人分离模型
@@ -29,15 +33,15 @@ class ModelManager:
                 "models": ["pyannote/speaker-diarization-3.1"],
                 "priority": "pyannote/speaker-diarization-3.1",
                 "description": "说话人分离模型",
-                "cache_dir": os.path.expanduser("~/.cache/huggingface")
+                "cache_dir": os.path.join(self.models_dir, "pyannote")
             },
             
             # Demucs 音频源分离模型
             "demucs": {
-                "models": ["htdemucs"],
-                "priority": "htdemucs", 
+                "models": ["955717e8-8726e21a.th"],  # 直接使用文件名
+                "priority": "955717e8-8726e21a.th", 
                 "description": "音频源分离模型",
-                "cache_dir": os.path.expanduser("~/.cache/torch/hub")
+                "cache_dir": os.path.join(self.models_dir, "demucs", "checkpoints")  # 使用checkpoints子目录
             }
         }
     
@@ -87,29 +91,18 @@ class ModelManager:
     
     def _check_pyannote_models(self, config: Dict) -> Dict:
         """检查pyannote.audio模型"""
+        cache_dir = Path(config["cache_dir"])
         cached_models = []
         
-        # 尝试导入并测试pyannote.audio
-        try:
-            from pyannote.audio import Pipeline
-            # 如果能导入Pipeline，说明pyannote.audio已安装
-            # 再检查是否能加载模型（这里我们假设已经下载过）
-            cached_models = config["models"]
-            self.logger.log("DEBUG", "pyannote.audio模块可用，假设模型已缓存")
-        except ImportError:
-            self.logger.log("DEBUG", "pyannote.audio模块未安装")
-        except Exception as e:
-            self.logger.log("DEBUG", f"pyannote.audio检查异常: {str(e)}")
-        
-        # 备用检查：查找huggingface缓存目录
-        if not cached_models:
-            cache_dir = Path(config["cache_dir"])
-            if cache_dir.exists():
-                pyannote_dirs = list(cache_dir.glob("**/pyannote*"))
-                speaker_dirs = list(cache_dir.glob("**/speaker-diarization*"))
-                if pyannote_dirs or speaker_dirs:
-                    cached_models = config["models"]
-                    self.logger.log("DEBUG", f"在缓存目录发现pyannote模型文件: {len(pyannote_dirs + speaker_dirs)}个")
+        if cache_dir.exists():
+            # 检查已下载的模型目录
+            for model_name in config["models"]:
+                # pyannote模型以特殊格式存储
+                model_dir_name = f"models--{model_name.replace('/', '--')}"
+                model_dir = cache_dir / model_dir_name
+                if model_dir.exists():
+                    cached_models.append(model_name)
+                    self.logger.log("DEBUG", f"找到pyannote模型: {model_dir}")
         
         missing_models = [m for m in config["models"] if m not in cached_models]
         
@@ -123,15 +116,17 @@ class ModelManager:
     
     def _check_demucs_models(self, config: Dict) -> Dict:
         """检查Demucs模型"""
-        # Demucs模型通常在首次使用时自动下载
-        # 这里我们假设如果demucs包已安装，模型就可用
-        try:
-            import demucs
-            cached_models = config["models"]
-            missing_models = []
-        except ImportError:
-            cached_models = []
-            missing_models = config["models"]
+        cache_dir = Path(config["cache_dir"])
+        cached_models = []
+        
+        if cache_dir.exists():
+            # 检查已下载的模型文件
+            for model_name in config["models"]:
+                model_file = cache_dir / model_name
+                if model_file.exists():
+                    cached_models.append(model_name)
+        
+        missing_models = [m for m in config["models"] if m not in cached_models]
         
         return {
             "available": len(cached_models) > 0,
