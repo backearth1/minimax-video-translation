@@ -659,81 +659,62 @@ class ProfessionalAudioProcessor:
         return closest_speaker
     
     def _create_semantic_segments(self, word_result: Dict) -> List[Dict]:
-        """基于VAD和停顿创建语义片段"""
+        """基于Whisper段落边界的智能语义切分"""
         try:
             if not word_result or "segments" not in word_result:
                 self.logger.log("WARNING", "Whisper结果为空或没有segments字段")
                 return []
             
+            whisper_segments = word_result["segments"]
+            self.logger.log("INFO", f"📝 Whisper提供了{len(whisper_segments)}个原始段落")
+            
             semantic_segments = []
             
-            # 提取所有词汇及其时间戳
-            all_words = []
-            for segment in word_result["segments"]:
-                if "words" in segment:
-                    for word_info in segment["words"]:
-                        if word_info.get("text", "").strip():
-                            all_words.append({
-                                "start": word_info.get("start", 0),
-                                "end": word_info.get("end", 0),
-                                "text": word_info.get("text", "").strip(),
-                                "confidence": word_info.get("confidence", 0.0)
-                            })
-            
-            if not all_words:
-                return []
-            
-            # 基于停顿分析创建语义片段
-            current_segment = {
-                "start": all_words[0]["start"],
-                "end": all_words[0]["end"],
-                "text": all_words[0]["text"],
-                "word_count": 1,
-                "avg_confidence": all_words[0]["confidence"]
-            }
-            
-            for i in range(1, len(all_words)):
-                current_word = all_words[i]
-                prev_word = all_words[i-1]
+            for i, segment in enumerate(whisper_segments):
+                # 提取基本信息
+                start_time = segment.get("start", 0)
+                end_time = segment.get("end", 0)
+                text = segment.get("text", "").strip()
                 
-                # 计算停顿时间
-                pause_duration = current_word["start"] - prev_word["end"]
+                if not text or end_time <= start_time:
+                    continue
                 
-                # 语义切分条件（更智能的停顿检测）
-                should_split = self._should_split_segment(
-                    current_segment, current_word, pause_duration, prev_word
-                )
+                # 计算段落统计信息
+                word_count = len(segment.get("words", []))
+                duration = end_time - start_time
                 
-                if should_split:
-                    # 保存当前段落
-                    semantic_segments.append(current_segment.copy())
-                    
-                    # 开始新段落
-                    current_segment = {
-                        "start": current_word["start"],
-                        "end": current_word["end"],
-                        "text": current_word["text"],
-                        "word_count": 1,
-                        "avg_confidence": current_word["confidence"]
-                    }
+                # 计算置信度
+                avg_confidence = 0.0
+                if "words" in segment and segment["words"]:
+                    confidences = [w.get("confidence", 0.0) for w in segment["words"] if "confidence" in w]
+                    avg_confidence = sum(confidences) / len(confidences) if confidences else 0.0
+                
+                # 检查是否需要进一步切分（仅对过长的段落）
+                if self._should_split_long_segment(segment, duration):
+                    # 对过长段落进行词级切分
+                    sub_segments = self._split_long_segment(segment)
+                    semantic_segments.extend(sub_segments)
+                    self.logger.log("INFO", f"🔪 段落{i+1}过长({duration:.2f}s)，切分为{len(sub_segments)}个子段落")
                 else:
-                    # 合并到当前段落
-                    current_segment["end"] = current_word["end"]
-                    current_segment["text"] += current_word["text"]
-                    current_segment["word_count"] += 1
-                    current_segment["avg_confidence"] = (
-                        current_segment["avg_confidence"] + current_word["confidence"]
-                    ) / 2
+                    # 保持原始段落
+                    semantic_segments.append({
+                        "start": start_time,
+                        "end": end_time,
+                        "text": text,
+                        "word_count": word_count,
+                        "avg_confidence": avg_confidence,
+                        "duration": duration,
+                        "whisper_segment_id": i + 1
+                    })
             
-            # 添加最后一个段落
-            if current_segment:
-                semantic_segments.append(current_segment)
-            
-            self.logger.log("INFO", f"✂️ 语义切分完成: {len(semantic_segments)}个片段")
+            self.logger.log("INFO", f"✂️ 智能语义切分完成: {len(whisper_segments)}个原始段落 → {len(semantic_segments)}个语义片段")
             
             # 记录切分统计信息
-            avg_duration = sum(seg["end"] - seg["start"] for seg in semantic_segments) / len(semantic_segments)
-            self.logger.log("DEBUG", f"平均片段时长: {avg_duration:.2f}秒")
+            if semantic_segments:
+                avg_duration = sum(seg["duration"] for seg in semantic_segments) / len(semantic_segments)
+                max_duration = max(seg["duration"] for seg in semantic_segments)
+                min_duration = min(seg["duration"] for seg in semantic_segments)
+                self.logger.log("DEBUG", f"片段时长统计: 平均{avg_duration:.2f}s, 最长{max_duration:.2f}s, 最短{min_duration:.2f}s")
             
             return semantic_segments
             
@@ -741,38 +722,89 @@ class ProfessionalAudioProcessor:
             self.logger.log("ERROR", f"语义切分失败: {str(e)}")
             return []
     
-    def _should_split_segment(self, current_segment: Dict, current_word: Dict, 
-                             pause_duration: float, prev_word: Dict) -> bool:
-        """判断是否应该在此处切分段落"""
-        
-        # 规则1: 长停顿 (>1.5秒) 必须切分
-        if pause_duration > 1.5:
+    def _should_split_long_segment(self, segment: Dict, duration: float) -> bool:
+        """判断段落是否过长需要切分"""
+        # 只切分明显过长的段落
+        if duration > 15.0:  # 超过15秒必须切分
             return True
         
-        # 规则2: 中等停顿 (0.8-1.5秒) + 其他条件
-        if pause_duration > 0.8:
-            # 当前段落已经比较长 (>8秒或>15个词)
-            segment_duration = current_segment["end"] - current_segment["start"]
-            if segment_duration > 8.0 or current_segment["word_count"] > 15:
+        # 10-15秒的段落，如果词汇数量过多也切分
+        if duration > 10.0:
+            word_count = len(segment.get("words", []))
+            if word_count > 20:  # 超过20个词
                 return True
-            
-            # 低置信度词汇前的停顿
-            if current_word["confidence"] < 0.7:
-                return True
-        
-        # 规则3: 短停顿 (0.4-0.8秒) + 段落过长
-        if pause_duration > 0.4:
-            segment_duration = current_segment["end"] - current_segment["start"]
-            # 段落过长 (>12秒或>20个词) 强制切分
-            if segment_duration > 12.0 or current_segment["word_count"] > 20:
-                return True
-        
-        # 规则4: 极长段落 (>15秒) 无论如何都要切分
-        segment_duration = current_segment["end"] - current_segment["start"]
-        if segment_duration > 15.0:
-            return True
         
         return False
+    
+    def _split_long_segment(self, segment: Dict) -> List[Dict]:
+        """切分过长的段落"""
+        if "words" not in segment or not segment["words"]:
+            # 没有词级信息，无法切分，返回原段落
+            return [{
+                "start": segment.get("start", 0),
+                "end": segment.get("end", 0),
+                "text": segment.get("text", "").strip(),
+                "word_count": 0,
+                "avg_confidence": 0.0,
+                "duration": segment.get("end", 0) - segment.get("start", 0)
+            }]
+        
+        words = segment["words"]
+        sub_segments = []
+        current_segment = {
+            "start": words[0].get("start", 0),
+            "end": words[0].get("end", 0),
+            "text": words[0].get("text", "").strip(),
+            "word_count": 1,
+            "total_confidence": words[0].get("confidence", 0.0)
+        }
+        
+        for i in range(1, len(words)):
+            word = words[i]
+            prev_word = words[i-1]
+            
+            # 计算停顿时间
+            pause_duration = word.get("start", 0) - prev_word.get("end", 0)
+            current_duration = current_segment["end"] - current_segment["start"]
+            
+            # 切分条件：长停顿或段落已经很长
+            should_split = (
+                pause_duration > 2.0 or  # 长停顿（2秒）
+                (pause_duration > 1.0 and current_duration > 8.0) or  # 中等停顿+长段落
+                current_duration > 12.0  # 强制切分超长段落
+            )
+            
+            if should_split:
+                # 完成当前段落
+                current_segment["duration"] = current_segment["end"] - current_segment["start"]
+                current_segment["avg_confidence"] = current_segment["total_confidence"] / current_segment["word_count"]
+                del current_segment["total_confidence"]
+                sub_segments.append(current_segment)
+                
+                # 开始新段落
+                current_segment = {
+                    "start": word.get("start", 0),
+                    "end": word.get("end", 0),
+                    "text": word.get("text", "").strip(),
+                    "word_count": 1,
+                    "total_confidence": word.get("confidence", 0.0)
+                }
+            else:
+                # 合并到当前段落
+                current_segment["end"] = word.get("end", 0)
+                current_segment["text"] += word.get("text", "").strip()
+                current_segment["word_count"] += 1
+                current_segment["total_confidence"] += word.get("confidence", 0.0)
+        
+        # 添加最后一个段落
+        if current_segment:
+            current_segment["duration"] = current_segment["end"] - current_segment["start"]
+            current_segment["avg_confidence"] = current_segment["total_confidence"] / current_segment["word_count"]
+            del current_segment["total_confidence"]
+            sub_segments.append(current_segment)
+        
+        return sub_segments
+    
     
     def _group_consecutive_words(self, word_segments: List[Dict]) -> List[Dict]:
         """将连续的相同说话人的词组合成句子 (已废弃，由语义切分替代)"""
