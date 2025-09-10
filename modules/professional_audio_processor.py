@@ -235,17 +235,29 @@ class ProfessionalAudioProcessor:
                 project_data.set_processing_status("processing", "🎵 音频分离完成，开始说话人分析...", 30)
                 self.logger.log("INFO", "✅ Demucs分离完成，音频预览已更新")
             
-            # 步骤2: pyannote.audio 说话人分离
+            # 步骤2: 智能语音识别+VAD切分 (30% -> 60%)
+            if project_data:
+                project_data.set_processing_status("processing", "🗣️ 智能语音识别和切分...", 30)
+            self.logger.log("INFO", "📝 开始智能语音识别...")
+            word_timestamps = self._transcribe_with_timestamps(vocals_path, source_language)
+            
+            # 步骤3: 基于停顿的语义切分 (60% -> 70%)
+            if project_data:
+                project_data.set_processing_status("processing", "✂️ 智能语义片段切分...", 60)
+            self.logger.log("INFO", "✂️ 创建语义片段...")
+            semantic_segments = self._create_semantic_segments(word_timestamps)
+            
+            # 步骤4: 说话人分离分析 (70% -> 80%)
+            if project_data:
+                project_data.set_processing_status("processing", "🎭 分析说话人分布...", 70)
             self.logger.log("INFO", "📊 开始说话人分离分析...")
             speaker_segments = self._analyze_speakers(vocals_path)
             
-            # 步骤3: whisper-timestamped 字级别ASR
-            self.logger.log("INFO", "📝 开始字级别语音识别...")
-            word_timestamps = self._transcribe_with_timestamps(vocals_path, source_language)
-            
-            # 步骤4: 结果对齐和分组
-            self.logger.log("INFO", "🔗 开始说话人与文字对齐...")
-            aligned_segments = self._align_speakers_with_words(speaker_segments, word_timestamps)
+            # 步骤5: 片段级说话人检测 (80% -> 90%)
+            if project_data:
+                project_data.set_processing_status("processing", "🔍 检测多说话人片段...", 80)
+            self.logger.log("INFO", "🔍 检测多说话人片段...")
+            aligned_segments = self._detect_multi_speaker_segments(semantic_segments, speaker_segments)
             
             # 步骤5: 生成最终片段
             final_segments = self._generate_audio_segments(vocals_path, aligned_segments)
@@ -473,8 +485,105 @@ class ProfessionalAudioProcessor:
             self.logger.log("ERROR", f"Whisper 转录失败: {str(e)}")
             return {}
     
+    def _detect_multi_speaker_segments(self, semantic_segments: List[Dict], speaker_segments: List[Dict]) -> List[Dict]:
+        """为每个语义片段检测说话人信息"""
+        try:
+            enhanced_segments = []
+            
+            self.logger.log("DEBUG", f"语义片段数量: {len(semantic_segments)}")
+            self.logger.log("DEBUG", f"说话人片段数量: {len(speaker_segments)}")
+            
+            for i, segment in enumerate(semantic_segments):
+                segment_start = segment["start"]
+                segment_end = segment["end"]
+                
+                # 分析此片段内的说话人分布
+                speakers_in_segment = self._analyze_speakers_in_segment(
+                    segment_start, segment_end, speaker_segments
+                )
+                
+                # 增强片段信息
+                enhanced_segment = segment.copy()
+                enhanced_segment.update({
+                    "speakers": speakers_in_segment["speakers"],
+                    "primary_speaker": speakers_in_segment["primary_speaker"],
+                    "speaker_count": len(speakers_in_segment["speakers"]),
+                    "multi_speaker": len(speakers_in_segment["speakers"]) > 1,
+                    "speaker_confidence": speakers_in_segment["confidence"],
+                    "segment_id": i + 1
+                })
+                
+                enhanced_segments.append(enhanced_segment)
+                
+                # 记录多说话人片段
+                if enhanced_segment["multi_speaker"]:
+                    self.logger.log("INFO", f"🔍 片段{i+1}检测到多说话人: {enhanced_segment['speakers']}")
+            
+            # 统计信息
+            multi_speaker_count = sum(1 for seg in enhanced_segments if seg["multi_speaker"])
+            self.logger.log("INFO", f"🔍 多说话人检测完成: {multi_speaker_count}/{len(enhanced_segments)} 个片段包含多说话人")
+            
+            return enhanced_segments
+            
+        except Exception as e:
+            self.logger.log("ERROR", f"多说话人检测失败: {str(e)}")
+            return semantic_segments  # 返回原始片段作为后备
+    
+    def _analyze_speakers_in_segment(self, segment_start: float, segment_end: float, 
+                                   speaker_segments: List[Dict]) -> Dict:
+        """分析特定时间段内的说话人分布"""
+        speakers_info = {}
+        
+        for speaker_seg in speaker_segments:
+            speaker = speaker_seg["speaker"]
+            spk_start = speaker_seg["start"]
+            spk_end = speaker_seg["end"]
+            
+            # 计算重叠时间
+            overlap_start = max(segment_start, spk_start)
+            overlap_end = min(segment_end, spk_end)
+            
+            if overlap_start < overlap_end:  # 有重叠
+                overlap_duration = overlap_end - overlap_start
+                
+                if speaker not in speakers_info:
+                    speakers_info[speaker] = {
+                        "total_duration": 0,
+                        "segments": []
+                    }
+                
+                speakers_info[speaker]["total_duration"] += overlap_duration
+                speakers_info[speaker]["segments"].append({
+                    "start": overlap_start,
+                    "end": overlap_end,
+                    "duration": overlap_duration
+                })
+        
+        # 计算主要说话人和置信度
+        if speakers_info:
+            total_duration = segment_end - segment_start
+            primary_speaker = max(speakers_info.keys(), 
+                                key=lambda s: speakers_info[s]["total_duration"])
+            
+            primary_duration = speakers_info[primary_speaker]["total_duration"]
+            confidence = primary_duration / total_duration if total_duration > 0 else 0.0
+            
+            return {
+                "speakers": list(speakers_info.keys()),
+                "primary_speaker": primary_speaker,
+                "confidence": confidence,
+                "speaker_durations": {s: info["total_duration"] for s, info in speakers_info.items()}
+            }
+        else:
+            return {
+                "speakers": ["SPEAKER_UNKNOWN"],
+                "primary_speaker": "SPEAKER_UNKNOWN", 
+                "confidence": 0.0,
+                "speaker_durations": {"SPEAKER_UNKNOWN": segment_end - segment_start}
+            }
+    
     def _align_speakers_with_words(self, speaker_segments: List[Dict], word_result: Dict) -> List[Dict]:
-        """将说话人信息与文字时间戳对齐"""
+        """将说话人信息与文字时间戳对齐 (已废弃，由多说话人检测替代)"""
         try:
             aligned_segments = []
             
@@ -549,8 +658,124 @@ class ProfessionalAudioProcessor:
         
         return closest_speaker
     
+    def _create_semantic_segments(self, word_result: Dict) -> List[Dict]:
+        """基于VAD和停顿创建语义片段"""
+        try:
+            if not word_result or "segments" not in word_result:
+                self.logger.log("WARNING", "Whisper结果为空或没有segments字段")
+                return []
+            
+            semantic_segments = []
+            
+            # 提取所有词汇及其时间戳
+            all_words = []
+            for segment in word_result["segments"]:
+                if "words" in segment:
+                    for word_info in segment["words"]:
+                        if word_info.get("text", "").strip():
+                            all_words.append({
+                                "start": word_info.get("start", 0),
+                                "end": word_info.get("end", 0),
+                                "text": word_info.get("text", "").strip(),
+                                "confidence": word_info.get("confidence", 0.0)
+                            })
+            
+            if not all_words:
+                return []
+            
+            # 基于停顿分析创建语义片段
+            current_segment = {
+                "start": all_words[0]["start"],
+                "end": all_words[0]["end"],
+                "text": all_words[0]["text"],
+                "word_count": 1,
+                "avg_confidence": all_words[0]["confidence"]
+            }
+            
+            for i in range(1, len(all_words)):
+                current_word = all_words[i]
+                prev_word = all_words[i-1]
+                
+                # 计算停顿时间
+                pause_duration = current_word["start"] - prev_word["end"]
+                
+                # 语义切分条件（更智能的停顿检测）
+                should_split = self._should_split_segment(
+                    current_segment, current_word, pause_duration, prev_word
+                )
+                
+                if should_split:
+                    # 保存当前段落
+                    semantic_segments.append(current_segment.copy())
+                    
+                    # 开始新段落
+                    current_segment = {
+                        "start": current_word["start"],
+                        "end": current_word["end"],
+                        "text": current_word["text"],
+                        "word_count": 1,
+                        "avg_confidence": current_word["confidence"]
+                    }
+                else:
+                    # 合并到当前段落
+                    current_segment["end"] = current_word["end"]
+                    current_segment["text"] += current_word["text"]
+                    current_segment["word_count"] += 1
+                    current_segment["avg_confidence"] = (
+                        current_segment["avg_confidence"] + current_word["confidence"]
+                    ) / 2
+            
+            # 添加最后一个段落
+            if current_segment:
+                semantic_segments.append(current_segment)
+            
+            self.logger.log("INFO", f"✂️ 语义切分完成: {len(semantic_segments)}个片段")
+            
+            # 记录切分统计信息
+            avg_duration = sum(seg["end"] - seg["start"] for seg in semantic_segments) / len(semantic_segments)
+            self.logger.log("DEBUG", f"平均片段时长: {avg_duration:.2f}秒")
+            
+            return semantic_segments
+            
+        except Exception as e:
+            self.logger.log("ERROR", f"语义切分失败: {str(e)}")
+            return []
+    
+    def _should_split_segment(self, current_segment: Dict, current_word: Dict, 
+                             pause_duration: float, prev_word: Dict) -> bool:
+        """判断是否应该在此处切分段落"""
+        
+        # 规则1: 长停顿 (>1.5秒) 必须切分
+        if pause_duration > 1.5:
+            return True
+        
+        # 规则2: 中等停顿 (0.8-1.5秒) + 其他条件
+        if pause_duration > 0.8:
+            # 当前段落已经比较长 (>8秒或>15个词)
+            segment_duration = current_segment["end"] - current_segment["start"]
+            if segment_duration > 8.0 or current_segment["word_count"] > 15:
+                return True
+            
+            # 低置信度词汇前的停顿
+            if current_word["confidence"] < 0.7:
+                return True
+        
+        # 规则3: 短停顿 (0.4-0.8秒) + 段落过长
+        if pause_duration > 0.4:
+            segment_duration = current_segment["end"] - current_segment["start"]
+            # 段落过长 (>12秒或>20个词) 强制切分
+            if segment_duration > 12.0 or current_segment["word_count"] > 20:
+                return True
+        
+        # 规则4: 极长段落 (>15秒) 无论如何都要切分
+        segment_duration = current_segment["end"] - current_segment["start"]
+        if segment_duration > 15.0:
+            return True
+        
+        return False
+    
     def _group_consecutive_words(self, word_segments: List[Dict]) -> List[Dict]:
-        """将连续的相同说话人的词组合成句子"""
+        """将连续的相同说话人的词组合成句子 (已废弃，由语义切分替代)"""
         if not word_segments:
             return []
         
@@ -586,40 +811,73 @@ class ProfessionalAudioProcessor:
         
         return grouped
     
-    def _generate_audio_segments(self, vocals_path: str, aligned_segments: List[Dict]) -> List[Dict]:
-        """生成最终的音频片段"""
+    def _generate_audio_segments(self, vocals_path: str, enhanced_segments: List[Dict]) -> List[Dict]:
+        """生成最终的音频片段（兼容新的语义切分数据结构）"""
         try:
             final_segments = []
             
             # 加载人声音频
             y, sr = librosa.load(vocals_path, sr=16000)
             
-            for i, segment in enumerate(aligned_segments):
+            for i, segment in enumerate(enhanced_segments):
                 start_time = segment["start"]
                 end_time = segment["end"]
                 text = segment["text"].strip()
-                speaker = segment["speaker"]
+                
+                # 使用新的说话人信息
+                primary_speaker = segment.get("primary_speaker", "SPEAKER_UNKNOWN")
+                speakers = segment.get("speakers", [primary_speaker])
+                multi_speaker = segment.get("multi_speaker", False)
+                speaker_confidence = segment.get("speaker_confidence", 1.0)
                 
                 # 提取音频片段
                 start_sample = int(start_time * sr)
                 end_sample = int(end_time * sr)
                 audio_segment = y[start_sample:end_sample]
                 
-                # 保存音频片段
-                segment_path = f"./temp/professional_segment_{i+1}.wav"
+                # 生成文件名（包含多说话人标识）
+                speaker_label = f"multi_{len(speakers)}" if multi_speaker else primary_speaker
+                segment_path = f"./temp/professional_segment_{i+1}_{speaker_label}.wav"
                 sf.write(segment_path, audio_segment, sr)
                 
-                final_segments.append({
+                # 生成增强的片段信息
+                final_segment = {
                     "sequence": i + 1,
                     "timestamp": f"{start_time:.2f}-{end_time:.2f}",
                     "original_text": text,
                     "original_audio_path": segment_path,
-                    "speaker_id": f"speaker_{speaker}",
                     "translated_text": "",
                     "translated_audio_path": "",
                     "voice_id": "",
-                    "speed": 1.0
-                })
+                    "speed": 1.0,
+                    
+                    # 新的说话人信息
+                    "primary_speaker": primary_speaker,
+                    "speakers": speakers,
+                    "speaker_count": len(speakers),
+                    "multi_speaker": multi_speaker,
+                    "speaker_confidence": speaker_confidence,
+                    "speaker_durations": segment.get("speaker_durations", {}),
+                    
+                    # 兼容性字段
+                    "speaker_id": f"speaker_{primary_speaker}",
+                    
+                    # 语义切分信息
+                    "word_count": segment.get("word_count", 0),
+                    "avg_confidence": segment.get("avg_confidence", 0.0),
+                    "segment_duration": end_time - start_time
+                }
+                
+                final_segments.append(final_segment)
+                
+                # 记录多说话人片段
+                if multi_speaker:
+                    self.logger.log("INFO", f"🎯 片段{i+1}: 多说话人 {speakers} (主要: {primary_speaker}, 置信度: {speaker_confidence:.2f})")
+            
+            # 统计信息
+            multi_count = sum(1 for seg in final_segments if seg["multi_speaker"])
+            avg_duration = sum(seg["segment_duration"] for seg in final_segments) / len(final_segments)
+            self.logger.log("INFO", f"🎯 音频片段生成完成: {len(final_segments)}个片段, {multi_count}个多说话人, 平均时长{avg_duration:.2f}秒")
             
             return final_segments
             
