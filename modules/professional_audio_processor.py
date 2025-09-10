@@ -496,6 +496,9 @@ class ProfessionalAudioProcessor:
             for i, segment in enumerate(semantic_segments):
                 segment_start = segment["start"]
                 segment_end = segment["end"]
+                segment_text = segment.get("text", "").strip()
+                
+                self.logger.log("INFO", f"📝 分析片段{i+1}: 【{segment_text}】 ({segment_start:.2f}s-{segment_end:.2f}s)")
                 
                 # 分析此片段内的说话人分布
                 speakers_in_segment = self._analyze_speakers_in_segment(
@@ -514,17 +517,19 @@ class ProfessionalAudioProcessor:
                         "segment_id": len(final_segments) + 1
                     })
                     final_segments.append(enhanced_segment)
-                    self.logger.log("DEBUG", f"片段{i+1}: 单说话人 {speakers_in_segment['primary_speaker']}")
+                    self.logger.log("INFO", f"✅ 片段{i+1}: 单说话人 {speakers_in_segment['primary_speaker']} → 保持原样【{segment_text}】")
                 
                 else:
                     # 多说话人片段，需要基于说话人变化进一步切分
-                    self.logger.log("INFO", f"🔍 片段{i+1}检测到多说话人 {speakers_in_segment['speakers']}，开始基于说话人切分")
+                    self.logger.log("INFO", f"🔍 片段{i+1}检测到多说话人 {speakers_in_segment['speakers']}，开始智能切分")
+                    self.logger.log("DEBUG", f"原始文本: 【{segment_text}】")
                     
                     sub_segments = self._split_by_speaker_changes(segment, speaker_segments)
                     for j, sub_seg in enumerate(sub_segments):
                         sub_seg["segment_id"] = len(final_segments) + 1
                         final_segments.append(sub_seg)
-                        self.logger.log("INFO", f"🔪 片段{i+1}.{j+1}: {sub_seg['primary_speaker']} ({sub_seg['start']:.2f}s-{sub_seg['end']:.2f}s)")
+                        sub_text = sub_seg.get("text", "").strip()
+                        self.logger.log("INFO", f"🔪 片段{i+1}.{j+1}: {sub_seg['primary_speaker']} ({sub_seg['start']:.2f}s-{sub_seg['end']:.2f}s) → 【{sub_text}】")
             
             # 统计信息
             original_multi = sum(1 for i, seg in enumerate(semantic_segments) 
@@ -540,65 +545,208 @@ class ProfessionalAudioProcessor:
             return semantic_segments  # 返回原始片段作为后备
     
     def _split_by_speaker_changes(self, segment: Dict, speaker_segments: List[Dict]) -> List[Dict]:
-        """根据说话人变化切分片段"""
+        """根据说话人变化智能切分片段（保护句子完整性）"""
         try:
             words = segment.get("words", [])
             if not words:
                 # 没有词级信息，无法精确切分，返回原片段
                 return [self._create_single_speaker_segment(segment, speaker_segments)]
             
-            sub_segments = []
-            current_speaker = None
-            current_start = segment["start"]
-            current_words = []
-            current_text = ""
-            
+            # 首先为每个词分配说话人
+            word_speakers = []
             for word in words:
                 word_start = word.get("start", 0)
                 word_end = word.get("end", 0)
                 word_text = word.get("text", "").strip()
-                
-                if not word_text:
-                    continue
-                
-                # 找到此词对应的说话人
                 word_speaker = self._find_speaker_at_time(speaker_segments, word_start, word_end)
                 
-                # 如果说话人变化，切分片段
-                if current_speaker is not None and word_speaker != current_speaker:
-                    # 完成当前片段
-                    if current_words:
-                        sub_segment = self._create_speaker_segment(
-                            current_start, current_words[-1].get("end", word_start),
-                            current_text.strip(), current_speaker, current_words
-                        )
-                        sub_segments.append(sub_segment)
-                    
-                    # 开始新片段
-                    current_start = word_start
-                    current_words = [word]
-                    current_text = word_text
-                    current_speaker = word_speaker
-                else:
-                    # 继续当前片段
-                    current_words.append(word)
-                    current_text += word_text
-                    if current_speaker is None:
-                        current_speaker = word_speaker
+                word_speakers.append({
+                    "word": word,
+                    "text": word_text,
+                    "speaker": word_speaker,
+                    "start": word_start,
+                    "end": word_end
+                })
+                
+                self.logger.log("DEBUG", f"词级分析: 【{word_text}】 → {word_speaker} ({word_start:.2f}s)")
             
-            # 添加最后一个片段
-            if current_words:
-                sub_segment = self._create_speaker_segment(
-                    current_start, current_words[-1].get("end", segment["end"]),
-                    current_text.strip(), current_speaker, current_words
-                )
-                sub_segments.append(sub_segment)
+            # 查找智能切分点（说话人变化 + 标点保护）
+            split_points = self._find_smart_split_points(word_speakers)
+            
+            if not split_points:
+                # 没有合适的切分点，返回原片段
+                self.logger.log("INFO", f"未找到合适切分点，保持原片段")
+                return [self._create_single_speaker_segment(segment, speaker_segments)]
+            
+            # 根据切分点创建子片段
+            sub_segments = []
+            current_start_idx = 0
+            
+            for split_idx in split_points + [len(word_speakers)]:  # 加上结尾
+                if split_idx > current_start_idx:
+                    segment_words = word_speakers[current_start_idx:split_idx]
+                    if segment_words:
+                        sub_segment = self._create_segment_from_words(segment_words)
+                        sub_segments.append(sub_segment)
+                        
+                        segment_text = sub_segment["text"]
+                        primary_speaker = sub_segment["primary_speaker"]
+                        self.logger.log("INFO", f"📋 创建子片段: {primary_speaker} → 【{segment_text}】")
+                
+                current_start_idx = split_idx
             
             return sub_segments if sub_segments else [self._create_single_speaker_segment(segment, speaker_segments)]
             
         except Exception as e:
             self.logger.log("ERROR", f"说话人切分失败: {str(e)}")
             return [self._create_single_speaker_segment(segment, speaker_segments)]
+    
+    def _find_smart_split_points(self, word_speakers: List[Dict]) -> List[int]:
+        """找到智能切分点（说话人变化 + 标点保护）"""
+        split_points = []
+        
+        for i in range(1, len(word_speakers)):
+            current_word = word_speakers[i]
+            prev_word = word_speakers[i-1]
+            
+            # 说话人是否变化
+            speaker_changed = current_word["speaker"] != prev_word["speaker"]
+            
+            if speaker_changed:
+                # 检查是否可以安全切分（标点保护）
+                can_split = self._can_split_at_position(word_speakers, i)
+                
+                if can_split:
+                    split_points.append(i)
+                    self.logger.log("DEBUG", f"切分点: 位置{i}, 说话人变化 {prev_word['speaker']} → {current_word['speaker']}")
+                else:
+                    self.logger.log("DEBUG", f"跳过切分: 位置{i}, 说话人变化但会破坏句子完整性")
+        
+        return split_points
+    
+    def _can_split_at_position(self, word_speakers: List[Dict], position: int) -> bool:
+        """检查是否可以在指定位置安全切分（不破坏句子）"""
+        if position <= 0 or position >= len(word_speakers):
+            return False
+        
+        # 检查前一个词是否以标点结尾
+        prev_word = word_speakers[position - 1]
+        prev_text = prev_word["text"].strip()
+        
+        # 句子结束标点
+        sentence_enders = {'.', '!', '?', '。', '！', '？', '，', ',', ';', '；'}
+        
+        # 如果前一个词以标点结尾，可以安全切分
+        if prev_text and prev_text[-1] in sentence_enders:
+            return True
+        
+        # 检查是否有明显的停顿（>1秒）
+        current_word = word_speakers[position]
+        pause_duration = current_word["start"] - prev_word["end"]
+        
+        if pause_duration > 1.0:  # 1秒以上停顿可以切分
+            return True
+        
+        # 检查文本特征：是否像是连续无空格的文本
+        if self._is_continuous_text(word_speakers, position):
+            return False  # 连续文本不切分
+        
+        return True  # 其他情况允许切分
+    
+    def _is_continuous_text(self, word_speakers: List[Dict], position: int) -> bool:
+        """检查是否是连续无空格的文本（不应该切分）"""
+        # 检查前后几个词，看是否都没有空格且没有标点
+        start_idx = max(0, position - 2)
+        end_idx = min(len(word_speakers), position + 2)
+        
+        continuous_chars = 0
+        total_chars = 0
+        
+        for i in range(start_idx, end_idx):
+            word_text = word_speakers[i]["text"].strip()
+            if word_text:
+                total_chars += len(word_text)
+                # 检查是否包含字母但没有空格
+                if word_text.isalnum() and ' ' not in word_text:
+                    continuous_chars += len(word_text)
+        
+        # 如果大部分是连续字符，可能是识别错误的连续文本
+        if total_chars > 0 and continuous_chars / total_chars > 0.8:
+            return True
+        
+        return False
+    
+    def _create_segment_from_words(self, segment_words: List[Dict]) -> Dict:
+        """从词汇列表创建片段"""
+        if not segment_words:
+            return None
+        
+        start_time = segment_words[0]["start"]
+        end_time = segment_words[-1]["end"]
+        
+        # 智能文本拼接（处理空格问题）
+        text_parts = []
+        for word_info in segment_words:
+            word_text = word_info["text"].strip()
+            if word_text:
+                text_parts.append(word_text)
+        
+        # 拼接文本（自动处理空格）
+        full_text = self._smart_text_join(text_parts)
+        
+        # 统计说话人分布
+        speaker_counts = {}
+        for word_info in segment_words:
+            speaker = word_info["speaker"]
+            speaker_counts[speaker] = speaker_counts.get(speaker, 0) + 1
+        
+        # 找到主要说话人
+        primary_speaker = max(speaker_counts.keys(), key=lambda s: speaker_counts[s])
+        
+        return {
+            "start": start_time,
+            "end": end_time,
+            "text": full_text,
+            "word_count": len(segment_words),
+            "avg_confidence": sum(w["word"].get("confidence", 0.0) for w in segment_words) / len(segment_words),
+            "duration": end_time - start_time,
+            "words": [w["word"] for w in segment_words],
+            "speakers": list(speaker_counts.keys()),
+            "primary_speaker": primary_speaker,
+            "speaker_count": len(speaker_counts),
+            "multi_speaker": len(speaker_counts) > 1,
+            "speaker_confidence": speaker_counts[primary_speaker] / len(segment_words)
+        }
+    
+    def _smart_text_join(self, text_parts: List[str]) -> str:
+        """智能文本拼接（处理空格和标点）"""
+        if not text_parts:
+            return ""
+        
+        result = text_parts[0]
+        
+        for i in range(1, len(text_parts)):
+            current = text_parts[i]
+            prev = text_parts[i-1]
+            
+            # 检查是否需要添加空格
+            need_space = True
+            
+            # 如果前一个词以标点结尾，或当前词以标点开始，不需要空格
+            if (prev and prev[-1] in '.,;:!?。，；：！？') or \
+               (current and current[0] in '.,;:!?。，；：！？'):
+                need_space = False
+            
+            # 如果是连续的字母数字，可能需要空格
+            if prev and current and prev[-1].isalnum() and current[0].isalnum():
+                need_space = True
+            
+            if need_space and not prev.endswith(' ') and not current.startswith(' '):
+                result += " " + current
+            else:
+                result += current
+        
+        return result.strip()
     
     def _create_speaker_segment(self, start: float, end: float, text: str, speaker: str, words: List[Dict]) -> Dict:
         """创建单说话人片段"""
