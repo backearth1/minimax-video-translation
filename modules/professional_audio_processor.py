@@ -625,33 +625,46 @@ class ProfessionalAudioProcessor:
         return split_points
     
     def _can_split_at_position(self, word_speakers: List[Dict], position: int) -> bool:
-        """检查是否可以在指定位置安全切分（不破坏句子）"""
+        """检查是否可以在指定位置安全切分（严格保护句子完整性）"""
         if position <= 0 or position >= len(word_speakers):
             return False
         
-        # 检查前一个词是否以标点结尾
         prev_word = word_speakers[position - 1]
+        current_word = word_speakers[position]
         prev_text = prev_word["text"].strip()
         
-        # 句子结束标点
-        sentence_enders = {'.', '!', '?', '。', '！', '？', '，', ',', ';', '；'}
+        # 强化的句子结束标点（只有真正的句子结束才允许切分）
+        strong_sentence_enders = {'.', '!', '?', '。', '！', '？'}
+        weak_punctuation = {'，', ',', ';', '；', ':', '：'}
         
-        # 如果前一个词以标点结尾，可以安全切分
-        if prev_text and prev_text[-1] in sentence_enders:
-            return True
+        # 优先级1: 强句子结束标点 + 明显停顿
+        if prev_text and prev_text[-1] in strong_sentence_enders:
+            pause_duration = current_word["start"] - prev_word["end"]
+            if pause_duration > 0.5:  # 句号后有0.5秒停顿才切分
+                return True
         
-        # 检查是否有明显的停顿（>1秒）
-        current_word = word_speakers[position]
+        # 优先级2: 非常明显的停顿（>2秒）
         pause_duration = current_word["start"] - prev_word["end"]
-        
-        if pause_duration > 1.0:  # 1秒以上停顿可以切分
+        if pause_duration > 2.0:  # 提高停顿阈值到2秒
             return True
+        
+        # 优先级3: 弱标点 + 长停顿 + 说话人置信度检查
+        if prev_text and prev_text[-1] in weak_punctuation:
+            if pause_duration > 1.5:  # 弱标点需要更长停顿
+                # 额外检查：说话人变化是否足够明显
+                if self._is_speaker_change_confident(word_speakers, position):
+                    return True
+        
+        # 检查是否在句子中间（强制保护）
+        if self._is_in_middle_of_sentence(word_speakers, position):
+            self.logger.log("DEBUG", f"拒绝切分: 位置{position}处于句子中间")
+            return False
         
         # 检查文本特征：是否像是连续无空格的文本
         if self._is_continuous_text(word_speakers, position):
             return False  # 连续文本不切分
         
-        return True  # 其他情况允许切分
+        return False  # 默认不切分，更保守
     
     def _is_continuous_text(self, word_speakers: List[Dict], position: int) -> bool:
         """检查是否是连续无空格的文本（不应该切分）"""
@@ -672,6 +685,60 @@ class ProfessionalAudioProcessor:
         
         # 如果大部分是连续字符，可能是识别错误的连续文本
         if total_chars > 0 and continuous_chars / total_chars > 0.8:
+            return True
+        
+        return False
+    
+    def _is_speaker_change_confident(self, word_speakers: List[Dict], position: int) -> bool:
+        """检查说话人变化是否足够明显（降低敏感度）"""
+        if position <= 0 or position >= len(word_speakers):
+            return False
+        
+        # 检查前后几个词的说话人一致性
+        prev_speaker = word_speakers[position - 1]["speaker"]
+        current_speaker = word_speakers[position]["speaker"]
+        
+        # 向前检查2-3个词，确认前面确实是同一个说话人
+        consistent_prev = 0
+        for i in range(max(0, position - 3), position):
+            if word_speakers[i]["speaker"] == prev_speaker:
+                consistent_prev += 1
+        
+        # 向后检查2-3个词，确认后面也是同一个说话人
+        consistent_next = 0
+        for i in range(position, min(len(word_speakers), position + 3)):
+            if word_speakers[i]["speaker"] == current_speaker:
+                consistent_next += 1
+        
+        # 只有前后都有足够一致性才认为是可信的说话人变化
+        return consistent_prev >= 2 and consistent_next >= 2
+    
+    def _is_in_middle_of_sentence(self, word_speakers: List[Dict], position: int) -> bool:
+        """检查是否在句子中间（不应该切分）"""
+        if position <= 0 or position >= len(word_speakers):
+            return False
+        
+        # 向前查找最近的句子开始或结束标记
+        sentence_markers = {'.', '!', '?', '。', '！', '？'}
+        
+        # 检查前面几个词，看是否有句子结束标记
+        found_sentence_end = False
+        for i in range(position - 1, max(-1, position - 8), -1):  # 向前检查最多8个词
+            word_text = word_speakers[i]["text"].strip()
+            if word_text and word_text[-1] in sentence_markers:
+                found_sentence_end = True
+                break
+        
+        # 检查后面几个词，看是否有句子结束标记
+        found_sentence_end_after = False
+        for i in range(position, min(len(word_speakers), position + 8)):  # 向后检查最多8个词
+            word_text = word_speakers[i]["text"].strip()
+            if word_text and word_text[-1] in sentence_markers:
+                found_sentence_end_after = True
+                break
+        
+        # 如果前面没有句子结束，后面有句子结束，则当前位置在句子中间
+        if not found_sentence_end and found_sentence_end_after:
             return True
         
         return False
