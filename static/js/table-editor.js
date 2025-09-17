@@ -93,9 +93,17 @@ class TableEditor {
             return;
         }
         
-        const newValue = inputElement.value.trim();
+        let newValue = inputElement.value.trim();
         const field = cell.dataset.field;
         const id = parseInt(cell.dataset.id);
+        
+        // 对speed字段进行精度处理
+        if (field === 'speed') {
+            const speedValue = parseFloat(newValue);
+            if (!isNaN(speedValue)) {
+                newValue = speedValue.toFixed(2);
+            }
+        }
         
         // 恢复单元格显示
         cell.classList.remove('editing');
@@ -140,6 +148,8 @@ class TableEditor {
             if (value < 0.5 || value > 2.0) {
                 throw new Error('速度参数必须在0.5-2.0之间');
             }
+            // 保留2位小数
+            value = parseFloat(value.toFixed(2));
         } else if (field === 'sequence') {
             value = parseInt(value) || 1;
         }
@@ -233,7 +243,8 @@ class TableEditor {
             <td class="editable-cell" data-field="translated_text" data-id="${newSequence}"></td>
             <td class="audio-cell"><span class="text-muted">-</span></td>
             <td class="audio-cell"><span class="text-muted">-</span></td>
-            <td class="editable-cell" data-field="speed" data-id="${newSequence}">1.0</td>
+            <td class="audio-cell"><span class="text-muted">-</span></td>
+            <td class="editable-cell" data-field="speed" data-id="${newSequence}">1.00</td>
             <td class="editable-cell" data-field="voice_id" data-id="${newSequence}"></td>
             <td class="action-buttons">
                 <button class="btn btn-sm btn-outline-primary" onclick="app.regenerateSegment(${newSequence})">

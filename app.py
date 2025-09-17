@@ -209,7 +209,8 @@ def start_professional_processing():
                         )
                         
                         if clone_result["success"]:
-                            # 音色克隆成功，使用克隆的voice_id进行TTS
+                            # 音色克隆成功，保存clone音频路径
+                            segment["clone_audio_path"] = clone_result.get("processed_audio_path")
                             logger_service.log("INFO", f"第{sequence}句音色克隆成功，开始TTS合成")
                             
                             tts_output_path = f"./temp/segment_{sequence}_translated.mp3"
@@ -251,6 +252,7 @@ def start_professional_processing():
                             segment["translated_audio_path"] = alignment_result["audio_path"]
                             segment["speed"] = alignment_result["speed"]
                             segment["translated_text"] = alignment_result.get("optimized_text", translated_text)
+                            segment["ratio"] = alignment_result.get("ratio", 1.0)
                             logger_service.log("INFO", f"第{sequence}句对齐优化成功")
                         else:
                             logger_service.log("WARNING", f"第{sequence}句对齐优化失败，使用原始音频")
@@ -292,7 +294,7 @@ def start_professional_processing():
                         mixed_audio_path, 
                         project_data.background_audio_path, 
                         final_mixed_audio_path,
-                        background_volume=0.25  # 背景音乐音量25%
+                        background_volume=1.0  # 背景音乐音量保持原音量
                     )
                     
                     if background_mix_result["success"]:

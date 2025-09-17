@@ -80,7 +80,7 @@ class VoiceCloneService:
         payload = {
             "file_id": file_id,
             "voice_id": voice_id,
-            "need_noise_reduction": True
+            "need_volumn_normalization": True
         }
         
         headers = {
@@ -154,6 +154,7 @@ class VoiceCloneService:
             # 合并结果
             clone_result["upload_trace_id"] = upload_result["trace_id"]
             clone_result["file_id"] = file_id
+            clone_result["processed_audio_path"] = processed_audio_path  # 保存处理后的音频路径
             
         return clone_result
     

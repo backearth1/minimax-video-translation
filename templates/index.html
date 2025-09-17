@@ -83,11 +83,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">TTS:</label>
-                                    <select class="form-select form-select-sm" id="ttsModel">
-                                        <option value="speech-2.5-hd-preview">2.5-hd</option>
-                                        <option value="speech-02-hd">02-hd</option>
-                                        <option value="speech-01-hd">01-hd</option>
-                                    </select>
+                                    <input type="text" class="form-control form-control-sm" id="ttsModel" value="speech-02-hd" placeholder="输入TTS模型">
                                 </div>
                             </div>
                         </form>
@@ -121,32 +117,32 @@
                                 <div class="card h-100">
                                     <div class="card-header text-center">原视频预览</div>
                                     <div class="card-body">
-                                        <video id="originalVideo" class="w-100" controls style="display: none;">
+                                        <video id="originalVideo" class="w-100" controls style="display: none; height: 200px; object-fit: contain;">
                                             您的浏览器不支持视频播放
                                         </video>
-                                        <div id="videoPlaceholder" class="text-center p-4 bg-light">
+                                        <div id="videoPlaceholder" class="text-center p-4 bg-light" style="height: 200px; display: flex; flex-direction: column; justify-content: center;">
                                             <i class="fas fa-video fa-3x text-muted"></i>
                                             <p class="mt-2 text-muted">请上传视频文件</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <div class="card h-100">
                                     <div class="card-header text-center">翻译结果预览</div>
                                     <div class="card-body">
-                                        <video id="translatedVideo" class="w-100" controls style="display: none;">
+                                        <video id="translatedVideo" class="w-100" controls style="display: none; height: 200px; object-fit: contain;">
                                             您的浏览器不支持视频播放
                                         </video>
-                                        <div id="resultPlaceholder" class="text-center p-4 bg-light">
+                                        <div id="resultPlaceholder" class="text-center p-4 bg-light" style="height: 200px; display: flex; flex-direction: column; justify-content: center;">
                                             <i class="fas fa-language fa-3x text-muted"></i>
                                             <p class="mt-2 text-muted">翻译完成后显示</p>
                                         </div>
-                                        <button type="button" class="btn btn-primary btn-sm mt-2" id="downloadBtn" style="display: none;">
-                                            <i class="fas fa-download"></i> 下载视频
-                                        </button>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-4">
+                                <!-- 空白区域保持布局平衡 -->
                             </div>
                         </div>
                     </div>
@@ -166,11 +162,6 @@
                             <button type="button" class="btn btn-primary" id="startProfessionalProcessing">
                                 <i class="fas fa-star"></i> 开始AI翻译
                             </button>
-                        </div>
-                        <div class="mb-2">
-                            <small class="text-muted">
-                                <strong>AI翻译:</strong> 使用专业AI模型，确保最佳翻译质量
-                            </small>
                         </div>
                         <div class="mb-2">
                             <label class="form-label">进度:</label>
@@ -228,7 +219,7 @@
                                 <audio id="vocalsAudioPlayer" controls style="width: 100%;">
                                     您的浏览器不支持音频播放
                                 </audio>
-                                <canvas id="vocalsWaveform" width="400" height="60" class="border mt-2" style="width: 100%; height: 60px;"></canvas>
+                                <canvas id="vocalsWaveform" width="400" height="120" class="border mt-2" style="width: 100%; height: 120px;"></canvas>
                                 <div id="vocalsAudioStatus" class="text-muted mt-1">未分离</div>
                             </div>
                             <!-- 分离的背景音 -->
@@ -237,7 +228,7 @@
                                 <audio id="backgroundAudioPlayer" controls style="width: 100%;">
                                     您的浏览器不支持音频播放
                                 </audio>
-                                <canvas id="backgroundWaveform" width="400" height="60" class="border mt-2" style="width: 100%; height: 60px;"></canvas>
+                                <canvas id="backgroundWaveform" width="400" height="120" class="border mt-2" style="width: 100%; height: 120px;"></canvas>
                                 <div id="backgroundAudioStatus" class="text-muted mt-1">未分离</div>
                             </div>
                         </div>
@@ -248,7 +239,7 @@
                                 <audio id="synthesizedVocalsPlayer" controls style="width: 100%;">
                                     您的浏览器不支持音频播放
                                 </audio>
-                                <canvas id="synthesizedWaveform" width="400" height="60" class="border mt-2" style="width: 100%; height: 60px;"></canvas>
+                                <canvas id="synthesizedWaveform" width="400" height="120" class="border mt-2" style="width: 100%; height: 120px;"></canvas>
                                 <div id="synthesizedVocalsStatus" class="text-muted mt-1">未合成</div>
                             </div>
                             <!-- 最终混合音频 -->
@@ -257,7 +248,7 @@
                                 <audio id="finalMixedPlayer" controls style="width: 100%;">
                                     您的浏览器不支持音频播放
                                 </audio>
-                                <canvas id="finalMixedWaveform" width="400" height="60" class="border mt-2" style="width: 100%; height: 60px;"></canvas>
+                                <canvas id="finalMixedWaveform" width="400" height="120" class="border mt-2" style="width: 100%; height: 120px;"></canvas>
                                 <div id="finalMixedStatus" class="text-muted mt-1">未混合</div>
                             </div>
                         </div>
@@ -280,20 +271,22 @@
                                 <thead class="table-dark sticky-top">
                                     <tr>
                                         <th style="width: 4%">#</th>
-                                        <th style="width: 9%">时间戳</th>
-                                        <th style="width: 8%">说话人</th>
-                                        <th style="width: 18%">原文本</th>
-                                        <th style="width: 18%">翻译文本</th>
-                                        <th style="width: 9%">原始音频</th>
-                                        <th style="width: 9%">合成音频</th>
-                                        <th style="width: 5%">速度</th>
-                                        <th style="width: 8%">Voice_ID</th>
+                                        <th style="width: 8%">时间戳</th>
+                                        <th style="width: 7%">说话人</th>
+                                        <th style="width: 17%">原文本</th>
+                                        <th style="width: 17%">翻译文本</th>
+                                        <th style="width: 7%">原始音频</th>
+                                        <th style="width: 7%">合成音频</th>
+                                        <th style="width: 7%">Clone音频</th>
+                                        <th style="width: 4%">速度</th>
+                                        <th style="width: 4%">比值</th>
+                                        <th style="width: 7%">Voice_ID</th>
                                         <th style="width: 12%">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody id="segmentTableBody">
                                     <tr>
-                                        <td colspan="10" class="text-center text-muted">暂无数据，请上传视频开始处理</td>
+                                        <td colspan="12" class="text-center text-muted">暂无数据，请上传视频开始处理</td>
                                     </tr>
                                 </tbody>
                             </table>

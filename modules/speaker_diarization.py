@@ -6,6 +6,11 @@ from typing import Dict, Any, List, Tuple
 from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_similarity
 import json
+import torch
+from pyannote.audio import Pipeline
+from pyannote.core import Segment, Timeline
+import warnings
+warnings.filterwarnings("ignore")
 
 class SpeakerDiarization:
     """
@@ -16,7 +21,75 @@ class SpeakerDiarization:
     def __init__(self, logger_service):
         self.logger = logger_service
         self.speaker_profiles = {}  # 存储说话人特征
-        self.similarity_threshold = 0.40  # 声音相似度阈值（降低以提高说话人区分敏感度）
+        self.similarity_threshold = 0.30  # 声音相似度阈值（降低以提高说话人区分敏感度）
+        
+        # 初始化pyannote.audio管道
+        self.pipeline = None
+        self._initialize_pipeline()
+    
+    def _initialize_pipeline(self):
+        """初始化pyannote.audio说话人分离管道"""
+        try:
+            self.logger.log("INFO", "正在初始化pyannote.audio说话人分离模型...")
+            
+            # HuggingFace 访问令牌 - 从环境变量读取
+            auth_token = os.getenv("HUGGINGFACE_TOKEN", "")
+            
+            # 尝试多个可用的预训练模型
+            model_options = [
+                ("pyannote/speaker-diarization-3.1", True),   # 最新模型，需要认证
+                ("pyannote/speaker-diarization", False),      # 旧版公开模型
+            ]
+            
+            for model_name, needs_auth in model_options:
+                try:
+                    self.logger.log("INFO", f"尝试加载模型: {model_name}")
+                    
+                    if needs_auth:
+                        self.pipeline = Pipeline.from_pretrained(
+                            model_name,
+                            use_auth_token=auth_token
+                        )
+                    else:
+                        self.pipeline = Pipeline.from_pretrained(model_name)
+                    
+                    # 设置设备
+                    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                    self.pipeline = self.pipeline.to(device)
+                    
+                    self.logger.log("INFO", f"pyannote.audio初始化成功，模型: {model_name}, 设备: {device}")
+                    return
+                    
+                except Exception as model_error:
+                    self.logger.log("WARNING", f"模型 {model_name} 加载失败: {str(model_error)}")
+                    continue
+            
+            # 如果所有模型都失败，尝试使用本地组件构建管道
+            self.logger.log("INFO", "尝试使用本地组件构建说话人分离管道...")
+            self._initialize_local_pipeline()
+            
+        except Exception as e:
+            self.logger.log("ERROR", f"pyannote.audio初始化失败: {str(e)}")
+            self.logger.log("WARNING", "将回退使用传统特征提取方法")
+            self.pipeline = None
+    
+    def _initialize_local_pipeline(self):
+        """使用本地组件初始化说话人分离管道"""
+        try:
+            from pyannote.audio.pipelines import SpeakerDiarization as SpeakerDiarizationPipeline
+            
+            # 创建基础的说话人分离管道
+            pipeline = SpeakerDiarizationPipeline()
+            
+            # 设置设备
+            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            self.pipeline = pipeline.to(device)
+            
+            self.logger.log("INFO", f"本地pyannote.audio管道初始化成功，设备: {device}")
+            
+        except Exception as e:
+            self.logger.log("ERROR", f"本地管道初始化失败: {str(e)}")
+            self.pipeline = None
         
     def extract_voice_features(self, audio_path: str) -> np.ndarray:
         """提取增强的音频声纹特征"""
@@ -343,11 +416,11 @@ class SpeakerDiarization:
             
             weights = np.ones(len(features1))
             
-            # 提高基频特征权重（性别识别关键）
-            weights[80:86] = 1.5
+            # 大幅提高基频特征权重（性别识别关键）
+            weights[80:86] = 2.0
             
             # 提高频谱特征权重（个体差异）
-            weights[86:95] = 1.2
+            weights[86:95] = 1.5
             
             # 降低色度特征权重
             weights[112:124] = 0.5
@@ -374,12 +447,92 @@ class SpeakerDiarization:
     def detect_speaker_changes_in_segment(self, segment: Dict) -> List[Dict]:
         """
         检测单个音频片段内的说话人变化，如有变化则拆分
+        使用pyannote.audio进行精确的说话人分离
         """
         try:
             audio_path = segment.get("original_audio_path", "")
             if not os.path.exists(audio_path):
                 segment["speaker_id"] = "unknown"
                 return [segment]
+            
+            # 如果pyannote.audio可用，使用专业说话人分离
+            if self.pipeline is not None:
+                return self._detect_with_pyannote(segment)
+            else:
+                # 回退到传统方法
+                return self._detect_with_traditional_method(segment)
+                
+        except Exception as e:
+            self.logger.log("ERROR", f"检测说话人变化失败: {str(e)}")
+            segment["speaker_id"] = "unknown"
+            return [segment]
+    
+    def _detect_with_pyannote(self, segment: Dict) -> List[Dict]:
+        """使用pyannote.audio进行说话人分离"""
+        try:
+            audio_path = segment.get("original_audio_path", "")
+            
+            # 获取音频时长
+            y, sr = librosa.load(audio_path, sr=None)
+            duration = len(y) / sr
+            
+            # 对于很短的音频，不拆分
+            if duration < 1.0:
+                speaker_id = f"speaker_{segment['sequence']}"
+                segment["speaker_id"] = speaker_id
+                return [segment]
+            
+            self.logger.log("DEBUG", f"使用pyannote.audio分析片段{segment['sequence']}...")
+            
+            # 运行说话人分离
+            diarization = self.pipeline(audio_path)
+            
+            # 解析原始时间戳
+            timestamp_str = segment["timestamp"]
+            original_start, original_end = self._parse_timestamp_to_seconds(timestamp_str)
+            
+            # 分析说话人分离结果
+            speaker_segments = []
+            current_speakers = {}
+            
+            for turn, _, speaker in diarization.itertracks(yield_label=True):
+                # turn是Segment对象，包含start和end时间
+                start_time = original_start + turn.start
+                end_time = original_start + turn.end
+                
+                # 确保时间范围在原始片段内
+                start_time = max(start_time, original_start)
+                end_time = min(end_time, original_end)
+                
+                if end_time > start_time:  # 有效时间段
+                    speaker_segments.append({
+                        "start": start_time,
+                        "end": end_time,
+                        "speaker": speaker,
+                        "duration": end_time - start_time
+                    })
+            
+            # 如果没有检测到说话人或只有一个说话人，不拆分
+            unique_speakers = set(seg["speaker"] for seg in speaker_segments)
+            if len(unique_speakers) <= 1:
+                speaker_id = f"speaker_{list(unique_speakers)[0] if unique_speakers else 'unknown'}"
+                segment["speaker_id"] = speaker_id
+                return [segment]
+            
+            # 多个说话人，拆分片段
+            self.logger.log("INFO", f"片段{segment['sequence']}检测到{len(unique_speakers)}个说话人，开始拆分...")
+            
+            return self._split_segment_by_pyannote_result(segment, speaker_segments, y, sr)
+            
+        except Exception as e:
+            self.logger.log("ERROR", f"pyannote.audio分析失败: {str(e)}")
+            # 回退到传统方法
+            return self._detect_with_traditional_method(segment)
+    
+    def _detect_with_traditional_method(self, segment: Dict) -> List[Dict]:
+        """传统特征提取方法（作为备用）"""
+        try:
+            audio_path = segment.get("original_audio_path", "")
             
             # 加载音频
             y, sr = librosa.load(audio_path, sr=16000)
@@ -391,9 +544,9 @@ class SpeakerDiarization:
                 segment["speaker_id"] = speaker_id
                 return [segment]
             
-            # 滑动窗口分析 (每0.5秒一个窗口)
-            window_size = int(0.5 * sr)  # 0.5秒窗口
-            hop_size = int(0.25 * sr)    # 0.25秒跳跃
+            # 滑动窗口分析 (更精细的窗口)
+            window_size = int(0.3 * sr)  # 0.3秒窗口（更小，更敏感）
+            hop_size = int(0.15 * sr)    # 0.15秒跳跃（更密集采样）
             
             features_sequence = []
             timestamps = []
@@ -428,8 +581,7 @@ class SpeakerDiarization:
                 return self.split_segment_by_change_points(segment, change_points, timestamps, sr)
                 
         except Exception as e:
-            self.logger.log("ERROR", f"检测说话人变化失败: {str(e)}")
-            # 失败时返回原片段
+            self.logger.log("ERROR", f"传统方法检测说话人变化失败: {str(e)}")
             segment["speaker_id"] = "unknown"
             return [segment]
     
@@ -438,7 +590,7 @@ class SpeakerDiarization:
         找到说话人变化点
         """
         change_points = []
-        change_threshold = 0.25  # 变化阈值，低于此相似度认为是不同说话人
+        change_threshold = 0.20  # 变化阈值，低于此相似度认为是不同说话人
         
         for i in range(1, len(features_sequence)):
             similarity = self._calculate_weighted_similarity(
@@ -510,6 +662,184 @@ class SpeakerDiarization:
         except Exception as e:
             self.logger.log("ERROR", f"拆分片段失败: {str(e)}")
             return [original_segment]
+    
+    def _split_segment_by_pyannote_result(self, original_segment: Dict, speaker_segments: List[Dict], 
+                                        audio_data: np.ndarray, sample_rate: int) -> List[Dict]:
+        """根据pyannote.audio结果拆分音频片段和对应文字"""
+        try:
+            result_segments = []
+            
+            # 按时间排序说话人片段
+            speaker_segments.sort(key=lambda x: x["start"])
+            
+            # 获取原始片段的开始时间和总时长
+            original_start, original_end = self._parse_timestamp_to_seconds(original_segment["timestamp"])
+            original_duration = original_end - original_start
+            original_text = original_segment.get("original_text", "")
+            
+            self.logger.log("INFO", f"开始拆分文字: '{original_text}' (时长: {original_duration:.2f}s)")
+            
+            for i, spk_seg in enumerate(speaker_segments):
+                # 计算相对于音频文件开始的采样位置
+                relative_start = spk_seg["start"] - original_start
+                relative_end = spk_seg["end"] - original_start
+                
+                start_sample = int(relative_start * sample_rate)
+                end_sample = int(relative_end * sample_rate)
+                
+                # 确保不超出音频范围
+                start_sample = max(0, start_sample)
+                end_sample = min(len(audio_data), end_sample)
+                
+                if end_sample <= start_sample:
+                    continue
+                
+                # 提取子音频
+                sub_audio = audio_data[start_sample:end_sample]
+                
+                # 保存子音频文件
+                sub_audio_path = f"./temp/segment_{original_segment['sequence']}_pyannote_part{i+1}.wav"
+                sf.write(sub_audio_path, sub_audio, sample_rate)
+                
+                # 计算文字分配 - 根据时间比例分配原始文字
+                segment_duration = spk_seg["end"] - spk_seg["start"]
+                segment_start_ratio = (spk_seg["start"] - original_start) / original_duration
+                segment_end_ratio = (spk_seg["end"] - original_start) / original_duration
+                
+                # 按比例分配文字
+                text_start_pos = int(len(original_text) * segment_start_ratio)
+                text_end_pos = int(len(original_text) * segment_end_ratio)
+                
+                # 确保在合理范围内
+                text_start_pos = max(0, min(text_start_pos, len(original_text)))
+                text_end_pos = max(text_start_pos, min(text_end_pos, len(original_text)))
+                
+                # 尝试在词边界分割（中文按字符，英文按单词）
+                segment_text = self._smart_text_split(original_text, text_start_pos, text_end_pos, i, len(speaker_segments))
+                
+                self.logger.log("INFO", f"片段{i+1}文字: '{segment_text}' (时间: {spk_seg['start']:.2f}-{spk_seg['end']:.2f}s)")
+                
+                # 创建新片段
+                new_segment = original_segment.copy()
+                new_segment.update({
+                    "timestamp": f"{spk_seg['start']:.2f}-{spk_seg['end']:.2f}",
+                    "original_audio_path": sub_audio_path,
+                    "original_text": segment_text,  # 分配对应的文字片段
+                    "speaker_id": f"speaker_{spk_seg['speaker']}",
+                    "translated_text": "",  # 重置翻译文本
+                    "translated_audio_path": "",  # 重置翻译音频
+                    "voice_id": ""  # 重置音色ID
+                })
+                
+                result_segments.append(new_segment)
+            
+            self.logger.log("INFO", f"pyannote.audio拆分完成: {len(speaker_segments)}个子片段，文字已按时间分配")
+            return result_segments
+            
+        except Exception as e:
+            self.logger.log("ERROR", f"pyannote.audio结果拆分失败: {str(e)}")
+            return [original_segment]
+    
+    def _smart_text_split(self, original_text: str, start_pos: int, end_pos: int, 
+                         segment_index: int, total_segments: int) -> str:
+        """智能文字分割，基于语义和标点符号边界"""
+        try:
+            if not original_text:
+                return ""
+            
+            # 如果只有一个片段，返回全部文字
+            if total_segments == 1:
+                return original_text
+            
+            # 更智能的分割策略
+            text_len = len(original_text)
+            
+            # 计算理想的分割点
+            ideal_start = max(0, int(text_len * segment_index / total_segments))
+            ideal_end = min(text_len, int(text_len * (segment_index + 1) / total_segments))
+            
+            # 如果是第一个片段
+            if segment_index == 0:
+                end_boundary = self._find_text_boundary(original_text, ideal_end, direction='backward')
+                return original_text[:end_boundary]
+            
+            # 如果是最后一个片段
+            elif segment_index == total_segments - 1:
+                start_boundary = self._find_text_boundary(original_text, ideal_start, direction='forward')
+                return original_text[start_boundary:]
+            
+            # 中间片段
+            else:
+                start_boundary = self._find_text_boundary(original_text, ideal_start, direction='forward')
+                end_boundary = self._find_text_boundary(original_text, ideal_end, direction='backward')
+                
+                # 确保边界合理
+                if start_boundary >= end_boundary:
+                    # 回退到按字符均分
+                    char_per_seg = text_len // total_segments
+                    start_boundary = segment_index * char_per_seg
+                    end_boundary = min(text_len, (segment_index + 1) * char_per_seg)
+                
+                return original_text[start_boundary:end_boundary]
+            
+        except Exception as e:
+            self.logger.log("ERROR", f"智能文字分割失败: {str(e)}")
+            # 回退到简单的等分方法
+            chars_per_segment = len(original_text) // total_segments
+            segment_start = segment_index * chars_per_segment
+            segment_end = (segment_index + 1) * chars_per_segment if segment_index < total_segments - 1 else len(original_text)
+            return original_text[segment_start:segment_end]
+    
+    def _find_text_boundary(self, text: str, position: int, direction: str = 'forward') -> int:
+        """寻找合适的文字分割边界"""
+        try:
+            text_len = len(text)
+            position = max(0, min(position, text_len - 1))
+            
+            # 定义边界符号的优先级
+            sentence_delims = ['。', '！', '？', '.', '!', '?']  # 句子分隔符
+            clause_delims = ['，', ',', '；', ';']  # 子句分隔符
+            pause_delims = [' ', '\n', '\t']  # 暂停符号
+            
+            search_range = min(20, text_len // 10)  # 搜索范围
+            
+            if direction == 'forward':
+                # 向前搜索最佳分割点
+                for i in range(search_range):
+                    pos = position + i
+                    if pos >= text_len:
+                        return text_len
+                    
+                    char = text[pos]
+                    if char in sentence_delims:
+                        return pos + 1
+                    elif char in clause_delims:
+                        return pos + 1
+                    elif char in pause_delims:
+                        return pos + 1
+                
+                return min(position + search_range, text_len)
+            
+            else:  # backward
+                # 向后搜索最佳分割点
+                for i in range(search_range):
+                    pos = position - i
+                    if pos <= 0:
+                        return 0
+                    
+                    char = text[pos - 1]  # 检查前一个字符
+                    if char in sentence_delims:
+                        return pos
+                    elif char in clause_delims:
+                        return pos
+                    elif char in pause_delims:
+                        return pos
+                
+                return max(0, position - search_range)
+            
+        except Exception as e:
+            self.logger.log("WARNING", f"寻找文字边界失败: {str(e)}")
+            return position
     
     def _parse_timestamp_to_seconds(self, timestamp: str) -> tuple:
         """解析时间戳字符串为秒数"""

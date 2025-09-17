@@ -77,42 +77,88 @@ class AudioPreprocessor:
             return {"success": False, "error": error_msg}
     
     def _extract_center_channel(self, input_path: str, output_path: str) -> Dict[str, Any]:
-        """提取中央声道（人声）"""
+        """提取中央声道（人声）- 增强版"""
         try:
-            # 使用中央声道提取技术分离人声
+            # 使用更强的人声分离算法
             cmd = [
                 'ffmpeg', '-i', input_path,
-                '-af', 'pan=mono|c0=0.5*c0+0.5*c1,highpass=f=80,lowpass=f=8000,dynaudnorm=f=500:g=3:r=0.3',
-                # pan=mono: 将立体声混合为单声道，保留中央部分（通常是人声）
-                # highpass=f=80: 去除80Hz以下的低频噪音
-                # lowpass=f=8000: 去除8000Hz以上的高频噪音
-                # dynaudnorm: 动态标准化，增强人声
-                '-ar', '16000',  # 采样率16kHz，适合语音识别
+                '-af', '''
+                    [0:a]channelsplit=channel_layout=stereo[left][right];
+                    [left][right]amerge=inputs=2[stereo];
+                    [stereo]extrastereo=m=2.5,
+                    highpass=f=100,
+                    lowpass=f=7000,
+                    compand=0.02,0.05:-60/-60,-30/-15,-20/-10,-5/-5,0/-3:6:0:-3,
+                    dynaudnorm=f=500:g=3:r=0.3:s=9,
+                    volume=1.5
+                '''.replace('\n', '').replace(' ', ''),
+                # extrastereo: 增强立体声分离，突出中央人声
+                # highpass/lowpass: 人声频率范围100-7000Hz
+                # compand: 动态压缩，减少背景音噪声
+                # dynaudnorm: 动态标准化
+                # volume: 适当增强音量
+                '-ar', '16000',  # 采样率16kHz
                 '-ac', '1',      # 单声道
                 '-y', output_path
             ]
             
-            self.logger.log("INFO", "开始提取人声...")
+            self.logger.log("INFO", "开始增强人声提取...")
             result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
             
             if result.returncode == 0:
                 return {"success": True, "output_path": output_path}
             else:
-                return {"success": False, "error": f"人声提取失败: {result.stderr}"}
+                # 如果增强算法失败，回退到简单方法
+                self.logger.log("WARNING", f"增强人声提取失败，尝试简单方法: {result.stderr}")
+                return self._extract_center_channel_simple(input_path, output_path)
                 
         except subprocess.TimeoutExpired:
             return {"success": False, "error": "人声提取超时"}
         except Exception as e:
-            return {"success": False, "error": f"人声提取异常: {str(e)}"}
+            self.logger.log("WARNING", f"增强人声提取异常，尝试简单方法: {str(e)}")
+            return self._extract_center_channel_simple(input_path, output_path)
+    
+    def _extract_center_channel_simple(self, input_path: str, output_path: str) -> Dict[str, Any]:
+        """简单人声提取（备用方法）"""
+        try:
+            cmd = [
+                'ffmpeg', '-i', input_path,
+                '-af', 'pan=mono|c0=0.5*c0+0.5*c1,highpass=f=80,lowpass=f=8000,dynaudnorm=f=500:g=3:r=0.3',
+                '-ar', '16000',
+                '-ac', '1',
+                '-y', output_path
+            ]
+            
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+            
+            if result.returncode == 0:
+                return {"success": True, "output_path": output_path}
+            else:
+                return {"success": False, "error": f"简单人声提取失败: {result.stderr}"}
+                
+        except Exception as e:
+            return {"success": False, "error": f"简单人声提取异常: {str(e)}"}
     
     def _extract_background(self, original_path: str, voice_path: str, output_path: str) -> Dict[str, Any]:
-        """提取背景音（原音频减去人声）"""
+        """提取背景音（原音频减去人声）- 增强版"""
         try:
-            # 使用karaoke滤镜提取背景音乐
+            # 使用多种技术提取背景音
             cmd = [
                 'ffmpeg', '-i', original_path,
-                '-af', 'pan=mono|c0=0.5*c0+-0.5*c1',
-                # 使用相位抵消技术去除中央声道（人声），保留左右声道差异（通常是背景音乐）
+                '-af', '''
+                    [0:a]channelsplit=channel_layout=stereo[left][right];
+                    [left][right]amerge=inputs=2,
+                    pan=mono|c0=0.5*c0+-0.5*c1,
+                    highpass=f=20,
+                    lowpass=f=15000,
+                    compand=0.02,0.05:-60/-60,-40/-25,-20/-15,-10/-8,0/-5:6:0:-5,
+                    volume=0.8
+                '''.replace('\n', '').replace(' ', ''),
+                # 相位抵消技术去除中央人声
+                # 保留更宽的频率范围以保持背景音质量
+                # 适度压缩和音量调整
+                '-ar', '44100',  # 保持较高采样率用于背景音
+                '-ac', '2',      # 立体声
                 '-y', output_path
             ]
             
@@ -122,12 +168,34 @@ class AudioPreprocessor:
             if result.returncode == 0:
                 return {"success": True, "output_path": output_path}
             else:
-                return {"success": False, "error": f"背景音提取失败: {result.stderr}"}
+                # 回退到简单方法
+                self.logger.log("WARNING", f"增强背景音提取失败，尝试简单方法: {result.stderr}")
+                return self._extract_background_simple(original_path, output_path)
                 
         except subprocess.TimeoutExpired:
             return {"success": False, "error": "背景音提取超时"}
         except Exception as e:
-            return {"success": False, "error": f"背景音提取异常: {str(e)}"}
+            self.logger.log("WARNING", f"增强背景音提取异常，尝试简单方法: {str(e)}")
+            return self._extract_background_simple(original_path, output_path)
+    
+    def _extract_background_simple(self, original_path: str, output_path: str) -> Dict[str, Any]:
+        """简单背景音提取（备用方法）"""
+        try:
+            cmd = [
+                'ffmpeg', '-i', original_path,
+                '-af', 'pan=mono|c0=0.5*c0+-0.5*c1',
+                '-y', output_path
+            ]
+            
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+            
+            if result.returncode == 0:
+                return {"success": True, "output_path": output_path}
+            else:
+                return {"success": False, "error": f"简单背景音提取失败: {result.stderr}"}
+                
+        except Exception as e:
+            return {"success": False, "error": f"简单背景音提取异常: {str(e)}"}
     
     def _get_audio_duration(self, audio_path: str) -> float:
         """获取音频时长"""
@@ -184,17 +252,22 @@ class AudioPreprocessor:
                     channels = int(audio_stream.get('channels', 0))
                     duration = float(data['format'].get('duration', 0))
                     
-                    # 简单的音频内容评估逻辑
-                    needs_voice_extraction = False
+                    # 更积极的音频内容评估逻辑
+                    needs_voice_extraction = True  # 默认启用人声分离
                     reasons = []
                     
                     if channels > 1:
-                        needs_voice_extraction = True
-                        reasons.append("立体声音频，可能包含背景音乐")
+                        reasons.append("立体声音频，进行人声背景音分离")
+                    else:
+                        reasons.append("单声道音频，进行人声增强处理")
                     
-                    if duration > 10:
-                        needs_voice_extraction = True
-                        reasons.append("音频较长，建议分离背景音")
+                    if duration > 5:
+                        reasons.append("音频时长超过5秒，进行人声分离优化")
+                    
+                    # 只有非常短的音频才跳过处理
+                    if duration < 2:
+                        needs_voice_extraction = False
+                        reasons = ["音频过短，跳过人声分离"]
                     
                     return {
                         "success": True,

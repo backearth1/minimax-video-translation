@@ -9,6 +9,22 @@ class AlignmentOptimizer:
         self.tts_service = tts_service
         self.logger = logger_service
         
+    def _get_trimmed_duration(self, audio_path: str, segment_id: int, step: str) -> float:
+        """获取去除静音后的音频时长"""
+        # 先尝试静音裁剪
+        trimmed_path = f"./temp/segment_{segment_id}_{step}_trimmed.mp3"
+        trim_result = self.tts_service.trim_silence(audio_path, trimmed_path)
+        
+        if trim_result["success"]:
+            trimmed_duration = trim_result["trimmed_duration"]
+            self.logger.log("DEBUG", f"音频静音裁剪成功: {audio_path} -> {trimmed_duration:.2f}s")
+            return trimmed_duration
+        else:
+            # 如果裁剪失败，使用原始时长
+            original_duration = self.tts_service.get_audio_duration(audio_path)
+            self.logger.log("WARNING", f"音频静音裁剪失败，使用原始时长: {original_duration:.2f}s")
+            return original_duration
+
     def optimize_segment(self, segment: Dict[str, Any], target_duration: float) -> Dict[str, Any]:
         """5步时间戳对齐优化算法"""
         segment_id = segment.get('sequence', 0)
@@ -76,7 +92,8 @@ class AlignmentOptimizer:
                     "audio_path": existing_audio_path,
                     "duration": current_duration,
                     "speed": 1.0,
-                    "optimized_text": segment['translated_text']
+                    "optimized_text": segment['translated_text'],
+                    "ratio": round(ratio, 2)
                 }
         else:
             # 没有现有音频，需要先生成
@@ -103,7 +120,7 @@ class AlignmentOptimizer:
                 )
                 return {"success": False, "error": tts_result['error'], "step": 1}
             
-            current_duration = self.tts_service.get_audio_duration(tts_result["audio_path"])
+            current_duration = self._get_trimmed_duration(tts_result["audio_path"], segment_id, "step1")
             ratio = current_duration / target_duration if target_duration > 0 else 999.0
             
             self.logger.log_alignment_step(
@@ -126,7 +143,8 @@ class AlignmentOptimizer:
                     "duration": current_duration,
                     "speed": 1.0,
                     "optimized_text": segment['translated_text'],
-                    "trace_id": tts_result.get("trace_id")
+                    "trace_id": tts_result.get("trace_id"),
+                    "ratio": round(ratio, 2)
                 }
             
             existing_audio_path = tts_result["audio_path"]
@@ -165,7 +183,8 @@ class AlignmentOptimizer:
                     "audio_path": trim_result["output_path"],
                     "duration": trimmed_duration,
                     "speed": 1.0,
-                    "optimized_text": segment['translated_text']
+                    "optimized_text": segment['translated_text'],
+                    "ratio": round(new_ratio, 2)
                 }
             else:
                 current_duration = trimmed_duration
@@ -240,8 +259,8 @@ class AlignmentOptimizer:
             )
             return {"success": False, "error": tts_result['error'], "step": 2}
         
-        # 检查优化后的时长
-        actual_duration = self.tts_service.get_audio_duration(tts_result["audio_path"])
+        # 检查优化后的时长（去除静音）
+        actual_duration = self._get_trimmed_duration(tts_result["audio_path"], segment_id, "step2")
         new_ratio = actual_duration / target_duration if target_duration > 0 else 999.0
         
         self.logger.log_alignment_step(
@@ -271,7 +290,8 @@ class AlignmentOptimizer:
                 "speed": 1.0,
                 "optimized_text": optimized_text,
                 "optimization_trace_id": optimization_trace_id,
-                "tts_trace_id": tts_result.get("trace_id")
+                "tts_trace_id": tts_result.get("trace_id"),
+                "ratio": round(new_ratio, 2)
             }
         else:
             self.logger.log_alignment_step(
@@ -300,8 +320,8 @@ class AlignmentOptimizer:
         current_ratio = current_duration / target_duration if target_duration > 0 else 999.0
         optimized_text = getattr(self, '_last_optimized_text', segment['translated_text'])
         
-        # 计算需要的速度
-        speed = min(2.0, current_duration / target_duration + 0.2)
+        # 计算需要的速度，保留2位小数
+        speed = round(min(2.0, current_duration / target_duration + 0.2), 2)
         
         self.logger.log_alignment_step(
             segment_id, 3, "首次速度调整",
@@ -324,7 +344,7 @@ class AlignmentOptimizer:
             )
             return {"success": False, "error": tts_result['error'], "step": 3}
         
-        actual_duration = self.tts_service.get_audio_duration(tts_result["audio_path"])
+        actual_duration = self._get_trimmed_duration(tts_result["audio_path"], segment_id, "step3")
         new_ratio = actual_duration / target_duration if target_duration > 0 else 999.0
         
         self.logger.log_alignment_step(
@@ -347,7 +367,8 @@ class AlignmentOptimizer:
                 "duration": actual_duration,
                 "speed": speed,
                 "optimized_text": optimized_text,
-                "trace_id": tts_result.get("trace_id")
+                "trace_id": tts_result.get("trace_id"),
+                "ratio": round(new_ratio, 2)
             }
         else:
             self.logger.log_alignment_step(
@@ -356,7 +377,7 @@ class AlignmentOptimizer:
             )
         
         # 存储信息供下一步使用
-        self._last_speed = speed
+        self._last_speed = round(speed, 2)
         self._last_duration = actual_duration
         
         return {"success": False, "step": 3, "actual_duration": actual_duration, "speed": speed}
@@ -372,7 +393,7 @@ class AlignmentOptimizer:
         optimized_text = getattr(self, '_last_optimized_text', segment['translated_text'])
         
         # 递增速度重试
-        speeds_to_try = [last_speed + 0.5, 2.0]
+        speeds_to_try = [round(last_speed + 0.5, 2), 2.0]
         
         self.logger.log_alignment_step(
             segment_id, 4, "速度递增重试",
@@ -384,6 +405,7 @@ class AlignmentOptimizer:
         for speed in speeds_to_try:
             if speed > 2.0:
                 speed = 2.0
+            speed = round(speed, 2)
                 
             self.logger.log_alignment_step(
                 segment_id, 4, "速度递增重试",
@@ -398,7 +420,7 @@ class AlignmentOptimizer:
             )
             
             if tts_result["success"]:
-                actual_duration = self.tts_service.get_audio_duration(tts_result["audio_path"])
+                actual_duration = self._get_trimmed_duration(tts_result["audio_path"], segment_id, f"step4_{speed:.1f}")
                 new_ratio = actual_duration / target_duration if target_duration > 0 else 999.0
                 
                 self.logger.log_alignment_step(
@@ -421,13 +443,21 @@ class AlignmentOptimizer:
                         "duration": actual_duration,
                         "speed": speed,
                         "optimized_text": optimized_text,
-                        "trace_id": tts_result.get("trace_id")
+                        "trace_id": tts_result.get("trace_id"),
+                        "ratio": round(new_ratio, 2)
                     }
+                else:
+                    # 保存最后一次尝试的时长供step 5使用
+                    self._last_duration = actual_duration
+        
+        # 获取最后一次尝试的实际时长（去除静音后）
+        last_duration = getattr(self, '_last_duration', current_duration)
+        last_ratio = last_duration / target_duration if target_duration > 0 else 999.0
         
         self.logger.log_alignment_step(
             segment_id, 4, "速度递增重试", 
-            f"所有速度尝试均失败 - 当前声音时长: {current_duration:.2f}s, 目标时长: {target_duration:.2f}s, "
-            f"当前比例: {current_ratio:.2f}, 比例<1: {current_ratio < 1.0}, "
+            f"所有速度尝试均失败 - 当前声音时长: {last_duration:.2f}s, 目标时长: {target_duration:.2f}s, "
+            f"当前比例: {last_ratio:.2f}, 比例<1: {last_ratio < 1.0}, "
             f"下一步措施: 设为静音"
         )
         
